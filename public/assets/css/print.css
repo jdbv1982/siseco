@@ -1,0 +1,65 @@
+table.datos{
+    font-size: 6px;
+}
+
+td{
+    border: 1px solid #cccccc;
+}
+
+h1{
+    font-size: 10px;
+}
+
+img{
+    display: inline-block;
+}
+
+
+
+.titulo {
+    font-family: times;
+    font-size: 9px;
+    display: inline-block;
+}
+
+.titulo1 {
+    font-family: times;
+    font-size: 9px;
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.titulo3 {
+    font-family: times;
+    font-size: 9px;
+    font-weight: bold
+}
+
+.text-center{
+    text-align: center;
+}
+
+.negrita{
+    font-weight: bold;
+}
+
+.xlg{
+    width: 70%;
+}
+
+.lg{
+    width: 55%;
+}
+
+.md{
+    width: 17%;
+}
+
+.sm{
+    width: 13%;
+}
+
+.xs{
+    width: 5%;
+}
