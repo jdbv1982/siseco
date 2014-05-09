@@ -51,10 +51,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             $this->fill($data);
             // Guardamos el usuario
             $this->save();
-            
+
             return true;
         }
-        
+
         return false;
     }
 
@@ -72,6 +72,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->password;
 	}
 
+	public function getRememberToken()
+	{
+		return $this->remember_token;
+	}
+
+	public function setRememberToken($value)
+	{
+		$this->remember_token = $value;
+	}
+
+	public function getRememberTokenName()
+	{
+		return 'remember_token';
+	}
+
 	public function getReminderEmail()
 	{
 		return $this->email;
@@ -84,7 +99,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			->where('visible','=',1,'AND')
 			->get();
 
-		
+
 		if(empty($permiso)){
 			return 'false';
 		}
@@ -101,7 +116,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 				));
 
 		if ($cantidad[0]->cantidad > 0){
-			return $cantidad[0]->cantidad;			
+			return $cantidad[0]->cantidad;
 		}
 		return '';
 	}
