@@ -2,6 +2,8 @@
 
 use Auth, Input, Redirect, View, User, Hash, App;
 
+use App\Modules\Auth\Models\Loginlog;
+
 class AuthController extends \BaseController {
 
     protected $layout = "layouts.layout";
@@ -20,13 +22,20 @@ class AuthController extends \BaseController {
 
         if (Auth::attempt($credentials))
         {
-            return Redirect::intended('inicio');
+                $datosLogin = array(
+                        'idusuario' => Auth::user()->id,
+                        'ipfisica' => $this->GetUserIP()
+                    );
+                $log = new Loginlog;
+                $log->validAndSave($datosLogin);
+
+                    return Redirect::intended('inicio');
         }
 
         return Redirect::to('auth/login')->with('error_login', true);
     }
 
-    
+
     public function getLogout()
     {
         Auth::logout();
@@ -38,7 +47,7 @@ class AuthController extends \BaseController {
         if(is_null($usuario)){
             App::abort(404);
         }
-        $this->layout->contenido = View::make('Auth::cambiar')->with('usuario', $usuario);     
+        $this->layout->contenido = View::make('Auth::cambiar')->with('usuario', $usuario);
     }
 
     public function postCambiar($id){
@@ -49,7 +58,7 @@ class AuthController extends \BaseController {
 
         $usuario->password = Input::get('nuevopass');
         $usuario->save();
-        
+
     }
 
     public function Autorizar(){
@@ -65,6 +74,28 @@ class AuthController extends \BaseController {
 
         return 'false';
     }
+
+   public function GetUserIP() {
+
+    if (isset($_SERVER)) {
+
+        if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
+            return $_SERVER["HTTP_X_FORWARDED_FOR"];
+
+        if (isset($_SERVER["HTTP_CLIENT_IP"]))
+            return $_SERVER["HTTP_CLIENT_IP"];
+
+        return $_SERVER["REMOTE_ADDR"];
+    }
+
+    if (getenv('HTTP_X_FORWARDED_FOR'))
+        return getenv('HTTP_X_FORWARDED_FOR');
+
+    if (getenv('HTTP_CLIENT_IP'))
+        return getenv('HTTP_CLIENT_IP');
+
+    return getenv('REMOTE_ADDR');
+}
 }
 
 
