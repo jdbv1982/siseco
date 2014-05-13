@@ -32,6 +32,8 @@ class CreateAdministracionTable extends Migration {
 			$table->date('fcheque')->nullable();
 			$table->double('montopagado')->nullable();
 			$table->double('amort_cred_pte')->nullable();
+			$table->integer('idtipo')->nullable();
+			$table->integer('idnivel')->nullable();
 			$table->timestamps();
 		});
 	}

@@ -15,11 +15,22 @@ class AdministracionController extends \BaseController{
 
 	public function getNuevo($id){
 		$planeacion = Planeacion::find($id);
+		$tipos = array("1"=>"ESTATAL","2"=>"FEDERAL");
+		$tclc = array("1"=>"ADMINISTRACION DIRECTA","2"=>"CONTRATO","3"=>"ANTICIPO");
+		$fianzas = DB::table('fianzas')
+			->select('numfianza')
+			->where('idobra','=',$id)
+			->get();
+			$numfianzas = '';
+			for ($i=0; $i < count($fianzas) ; $i++) {
+				$numfianzas .= $fianzas[$i]->numfianza .',';
+			}
+			$numfianzas = substr($numfianzas, 0, -1);
 		if(is_null($planeacion)){
 			App::abort(404);
 		}
 
-		$this->layout->contenido = View::make('Administracion::nuevo', compact('planeacion'));
+		$this->layout->contenido = View::make('Administracion::nuevo', compact('planeacion','tipos','tclc','numfianzas'));
 	}
 
 	public function setNuevo(){
@@ -30,16 +41,27 @@ class AdministracionController extends \BaseController{
 			return Redirect::to('administracion/listado/'.Input::get('idobra'));
 		}else{
 			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($administracion->errores)->withInput();
-		}	
+		}
 	}
 
 	public function getAdministracion($id){
 		$administracion = Administracion::find($id);
+		$tipos = array("1"=>"ESTATAL","2"=>"FEDERAL");
+		$tclc = array("1"=>"ADMINISTRACION DIRECTA","2"=>"CONTRATO","3"=>"ANTICIPO");
+		$fianzas = DB::table('fianzas')
+			->select('numfianza')
+			->where('idobra','=',$administracion->idobra)
+			->get();
+			$numfianzas = '';
+			for ($i=0; $i < count($fianzas) ; $i++) {
+				$numfianzas .= $fianzas[$i]->numfianza .',';
+			}
+			$numfianzas = substr($numfianzas, 0, -1);
 		if(is_null($administracion)){
 			App::abort(404);
 		}
 
-		$this->layout->contenido = View::make('Administracion::editar', compact('administracion'));
+		$this->layout->contenido = View::make('Administracion::editar', compact('administracion','tipos','tclc','numfianzas'));
 	}
 
 	public function updateAdministracion($id){
@@ -53,6 +75,6 @@ class AdministracionController extends \BaseController{
 			return Redirect::to('administracion/listado/'.$administracion->idobra);
 		}else{
 			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($administracion->errores)->withInput();
-		}	
+		}
 	}
 }

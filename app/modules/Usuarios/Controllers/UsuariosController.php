@@ -22,7 +22,7 @@ class UsuariosController extends \BaseController{
 		$usuario = new User;
 
 		if($usuario->validAndSave(Input::all())){
-			return Redirect::to('usuarios/listado');			
+			return Redirect::to('usuarios/listado');
 		}else{
 			return Redirect::to('usuarios/nuevo')->withErrors($usuario->errores)->withInput();
 		}
