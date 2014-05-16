@@ -1,4 +1,4 @@
-<div class="boxContenido">	
+<div class="boxContenido">
 	<p>
 		<a class="btn btn-primary" href="{{ URL::to('planeacion/nuevo') }}"><span class="glyphicon glyphicon-book"></span>  Nueva Obra</a>
 	</p>
@@ -16,13 +16,13 @@
 					<th>Nombre</th>
 					<th>Ftto</th>
 					<th>Contrato</th>
-					<th>Region</th>					
+					<th>Region</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($obras as $obra)
-					<tr>						
+					<tr>
 						<td>{{$obra->id}}</td>
 						<td class="upper">{{$obra->numerooficio}}</td>
 						<td><p>{{$obra->nombreobra}}<p></td>
@@ -32,7 +32,7 @@
 						<td class="text-center">
 								@if(Auth::user()->verificaPermiso(Auth::user()->id, 1) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
 									<a class="btn btn-primary" href="{{ URL::to('documentacion/nuevo/'.$obra->id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-								@endif								
+								@endif
 
 								@if(Auth::user()->verificaPermiso(Auth::user()->id, 2) == 'true') {{--PERMISO PARA CAMBIAR EL STATUS DE LA OBRA--}}
 									<a class="btn btn-primary" href="{{ URL::to('obras/estatus/'.$obra->id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -51,8 +51,11 @@
 								@endif
 								@if(Auth::user()->verificaPermiso(Auth::user()->id, 6) == 'true') {{--PERMISO PARA CAMBIAR EL STATUS DE LA OBRA--}}
 									<a class="btn btn-primary" href="{{ URL::to('avance/nuevo/'.$obra->id) }}"><span class="glyphicon glyphicon-road"></span></a>
-									<a class="btn btn-primary" href="{{ URL::to('avance/timeline/'.$obra->id) }}"><span class="glyphicon glyphicon-random"></span></a>	
-								@endif								
+									<a class="btn btn-primary" href="{{ URL::to('avance/timeline/'.$obra->id) }}"><span class="glyphicon glyphicon-random"></span></a>
+								@endif
+								@if(Auth::user()->verificaPermiso(Auth::user()->id, 32) == 'true') {{--PERMISO PARA IMPRIMIR EL ANEXO VI--}}
+									<a class="btn btn-primary" href="{{ URL::to('reportes/anexovi/'.$obra->id) }}">VI</a>
+								@endif
 						</td>
 					</tr>
 				@endforeach

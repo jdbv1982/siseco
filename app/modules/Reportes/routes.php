@@ -14,5 +14,7 @@ Route::group(array('before'=>'auth'), function(){
 
 	Route::get('reportes/informacion', array('uses'=>'App\Modules\Reportes\Controllers\CompletasController@informacion'));
 
+	Route::get('reportes/anexovi/{id}', array('uses'=>'App\Modules\Reportes\Controllers\SeguimientoController@AnexoVI'));
+
 
 });
