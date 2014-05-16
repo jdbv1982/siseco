@@ -142,6 +142,9 @@ $(document).ready(function() {
 	$('#l_fecha').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 	$('#fechaconvenio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
+	$('#finicio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+	$('#ffinal').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+
 	$( "body" ).on( "click", "#addfianza", function(e) {
 		e.preventDefault();
 	  	guardaFianza($('#idobra').val());

@@ -1,5 +1,5 @@
 <div class="col-xs-10 col-xs-offset-1">
-@include('layouts/errores')	
+@include('layouts/errores')
 {{ Form::model($licitacion, array('url'=> array('licitaciones/editar', $licitacion->id),'method'=>'POST')) }}
 <input type="hidden" name="id" id="id" value="{{ $id }}">
 <input type="hidden" name="idfuente_" id="id" value="{{ $planeacion->idfgeneral }}">
@@ -64,14 +64,14 @@
 		<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 			{{ Form::label('l_finicio','Fecha de Inicio') }}
 			<div class="controls">
-				{{ Form::text('l_finicio',null,array('class'=>'form-control')) }}					
+				{{ Form::text('l_finicio',null,array('class'=>'form-control')) }}
 			</div>
 		</div>
 
 		<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 			{{ Form::label('l_ffinal','Fecha Final') }}
 			<div class="controls">
-				{{ Form::text('l_ffinal',null,array('class'=>'form-control')) }}					
+				{{ Form::text('l_ffinal',null,array('class'=>'form-control')) }}
 			</div>
 		</div>
 
@@ -124,6 +124,7 @@
 					<th>Tipo</th>
 					<th># Factura</th>
 					<th>Monto</th>
+					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -136,7 +137,11 @@
 					<td>{{ $fianza->nombre }}</td>
 					<td>{{ $fianza->numfactura }}</td>
 					<td>{{ $fianza->montofactura }}</td>
-
+					<td>
+						@if(Auth::user()->verificaPermiso(Auth::user()->id, 34) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
+							<a class="btn btn-primary" href="{{ URL::to('licitaciones/editarfianza/'.$fianza->id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+						@endif
+					</td>
 				</tr>
 				@endforeach
 			</tbody>
@@ -150,20 +155,30 @@
 		<table cellpadding="0" cellspacing="0" border="0" id="tbconvenios" class="datatable table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th># Convenio</th>					
+					<th># Convenio</th>
 					<th>Fecha</th>
 					<th>Tipo</th>
 					<th>Cantidad</th>
+					<th>F. Inicio</th>
+					<th>F. Termino</th>
+					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				@foreach ($convenios as $convenio)
 				<tr>
-					<td>{{ $convenio->numconvenio }}</td>					
+					<td>{{ $convenio->numconvenio }}</td>
 					<td>{{ date("d/m/Y",strtotime($convenio->fechaconvenio)) }}</td>
 					<td>{{ $convenio->nombre }}</td>
 					<td>{{ $convenio->cantidad }}</td>
+					<td>{{ $convenio->finicio }}</td>
+					<td>{{ $convenio->ffinal }}</td>
+					<td>
+						@if(Auth::user()->verificaPermiso(Auth::user()->id, 33) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
+							<a class="btn btn-primary" href="{{ URL::to('licitaciones/editarconvenio/'.$convenio->id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+						@endif
+					</td>
 				</tr>
 				@endforeach
 			</tbody>
@@ -177,9 +192,9 @@
 		<table cellpadding="0" cellspacing="0" border="0" id="tbadendos" class="datatable table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>Nombre</th>					
+					<th>Nombre</th>
 					<th>Descripcion</th>
-					<th>Observaciones</th>					
+					<th>Observaciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -208,13 +223,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         	<div class="modal-header">
-                <div class="alert alert-danger alert-dismissable alerta oculto">                  
+                <div class="alert alert-danger alert-dismissable alerta oculto">
                   <strong>Error!</strong> Corregir los siguientes Errores:.
                   <p class="mensage"></p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Agregar Fianza</h4>
-            </div>            
+            </div>
             <div class="modal-body">
             	<div class="row">
             		<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -262,7 +277,7 @@
                         </div>
                     </div>
             	</div>
-            </div>           
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="addfianza" class="btn btn-primary">Guardar</button>
@@ -278,13 +293,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         	<div class="modal-header">
-                <div class="alert alert-danger alert-dismissable alerta oculto">                  
+                <div class="alert alert-danger alert-dismissable alerta oculto">
                   <strong>Error!</strong> Corregir los siguientes Errores:.
                   <p class="mensage"></p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Agregar Convenio</h4>
-            </div>            
+            </div>
             <div class="modal-body">
             	<div class="row">
             		<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -311,8 +326,20 @@
                             {{ Form::text('cantidad',null,array('class'=>'form-control', 'required')) }}
                         </div>
                     </div>
+                    <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        {{ Form::label('finicio','Fecha Inicio') }}
+                        <div class="controls">
+                            {{ Form::text('finicio',null,array('class'=>'form-control', 'required')) }}
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        {{ Form::label('ffinal','Fecha Termino') }}
+                        <div class="controls">
+                            {{ Form::text('ffinal',null,array('class'=>'form-control', 'required')) }}
+                        </div>
+                    </div>
             	</div>
-            </div>           
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="addconvenio" class="btn btn-primary">Guardar</button>
@@ -328,13 +355,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         	<div class="modal-header">
-                <div class="alert alert-danger alert-dismissable alerta oculto">                  
+                <div class="alert alert-danger alert-dismissable alerta oculto">
                   <strong>Error!</strong> Corregir los siguientes Errores:.
                   <p class="mensage"></p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Agregar Addendum</h4>
-            </div>            
+            </div>
             <div class="modal-body">
             	<div class="row">
             		<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -347,17 +374,17 @@
                     	{{ Form::label('descadendo','Descripcion') }}
                     	<div class="controls">
                     		{{ Form::textarea('descadendo', null, array('class'=>'form-control','rows'=>'3','required') ) }}
-                    	</div>            
+                    	</div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     	{{ Form::label('obsadendo','Observaciones') }}
                     	<div class="controls">
                     		{{ Form::textarea('obsadendo', null, array('class'=>'form-control','rows'=>'3','required') ) }}
-                    	</div>            
+                    	</div>
                     </div>
 
             	</div>
-            </div>           
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="addadendo" class="btn btn-primary">Guardar</button>
@@ -374,13 +401,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="alert alert-danger alert-dismissable alerta oculto">                  
+                <div class="alert alert-danger alert-dismissable alerta oculto">
                   <strong>Error!</strong> Corregir los siguientes Errores:.
                   <p class="mensage"></p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Agregar Contratista</h4>
-            </div>            
+            </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -430,8 +457,8 @@
                             {{ Form::text('celular',null,array('class'=>'form-control')) }}
                         </div>
                     </div>
-                   
-                </div>           
+
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="setcontratista" class="btn btn-primary">Guardar</button>

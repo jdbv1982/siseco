@@ -20,6 +20,8 @@ class CreateConveniosTable extends Migration {
 			$table->date('fechaconvenio');
 			$table->integer('tipoconvenio');
 			$table->double('cantidad')->nullable();
+			$table->date('finicio')->nullable();
+			$table->date('ffinal')->nullable();
 			$table->timestamps();
 		});
 	}

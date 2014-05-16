@@ -19,115 +19,120 @@ class Completas{
 		$objDrawing->setHeight(45);
 		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
 
-		$objPHPExcel->getActiveSheet()->mergeCells('B1:G1');
+		$objPHPExcel->getActiveSheet()->mergeCells('B1:BO1');
 		$objPHPExcel->getActiveSheet()->setCellValue('B1', 'REPORTE DE OBRAS CON LA INFORMACION DE TODOS LOS DEPARTAMENTOS');
 		$objPHPExcel->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
 		$objPHPExcel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		$objPHPExcel->getActiveSheet()->mergeCells('B2:AI2');
-		$objPHPExcel->getActiveSheet()->setCellValue('B2', 'INFORMACION DE PLANEACION');
-		$objPHPExcel->getActiveSheet()->mergeCells('AJ2:AU2');
-		$objPHPExcel->getActiveSheet()->setCellValue('AJ2', 'INFORMACION DE LICITACIONES');
-		$objPHPExcel->getActiveSheet()->mergeCells('AV2:AX2');
-		$objPHPExcel->getActiveSheet()->setCellValue('AV2', 'INFORMACION DE OBRAS');
-		$objPHPExcel->getActiveSheet()->mergeCells('AY2:BN2');
-		$objPHPExcel->getActiveSheet()->setCellValue('AY2', 'INFORMACION DE ADMINISTRACION');
 
-		$objPHPExcel->getActiveSheet()->getStyle('B2')->applyFromArray($styleArray);
-		$objPHPExcel->getActiveSheet()->getStyle('B2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		$objPHPExcel->getActiveSheet()->getStyle('AJ2')->applyFromArray($styleArray);
-		$objPHPExcel->getActiveSheet()->getStyle('AJ2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		$objPHPExcel->getActiveSheet()->getStyle('AV2')->applyFromArray($styleArray);
-		$objPHPExcel->getActiveSheet()->getStyle('AV2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		$objPHPExcel->getActiveSheet()->getStyle('AY2')->applyFromArray($styleArray);
-		$objPHPExcel->getActiveSheet()->getStyle('AY2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+		$objPHPExcel->getActiveSheet()->mergeCells('B3:AI3');
+		$objPHPExcel->getActiveSheet()->setCellValue('B3', 'INFORMACION DE PLANEACION');
+		$objPHPExcel->getActiveSheet()->mergeCells('AJ3:AV3');
+		$objPHPExcel->getActiveSheet()->setCellValue('AJ3', 'INFORMACION DE LICITACIONES');
+		$objPHPExcel->getActiveSheet()->mergeCells('AW3:AZ3');
+		$objPHPExcel->getActiveSheet()->setCellValue('AW3', 'INFORMACION DE FONDEN');
+		$objPHPExcel->getActiveSheet()->mergeCells('BA3:BQ3');
+		$objPHPExcel->getActiveSheet()->setCellValue('BA3', 'INFORMACION DE ADMINISTRACION');
+
+		$objPHPExcel->getActiveSheet()->getStyle('B3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$objPHPExcel->getActiveSheet()->getStyle('AJ3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle('AJ3')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$objPHPExcel->getActiveSheet()->getStyle('AW3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle('AW3')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$objPHPExcel->getActiveSheet()->getStyle('BA3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle('BA3')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 		$objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(15);
 		$objPHPExcel->getActiveSheet()->getRowDimension(2)->setRowHeight(15);
 		$objPHPExcel->getActiveSheet()->getRowDimension(3)->setRowHeight(15);
 
-		$objPHPExcel->getActiveSheet()->getStyle('B2:AI2')->getFill()
+		$objPHPExcel->getActiveSheet()->getStyle('B3:AI3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FFCCFFCC');
-		$objPHPExcel->getActiveSheet()->getStyle('AJ2:AU2')->getFill()
+		$objPHPExcel->getActiveSheet()->getStyle('AJ3:AU3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FFFFFF00');
-		$objPHPExcel->getActiveSheet()->getStyle('AV2:AX2')->getFill()
+		$objPHPExcel->getActiveSheet()->getStyle('AW3:AZ3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FF00CCFF');
-		$objPHPExcel->getActiveSheet()->getStyle('AY2:BN2')->getFill()
+		$objPHPExcel->getActiveSheet()->getStyle('BA3:BQ3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FFFF9900');
 
 
 
 		$objPHPExcel->getActiveSheet()
-		            ->setCellValue('A3', 'NUMERO')
-		            ->setCellValue('B3','PPI')
-		            ->setCellValue('C3','NOMBRE PPI')
-		            ->setCellValue('D3','REGION')
-		            ->setCellValue('E3','DISTRITO')
-		            ->setCellValue('F3','MUNICIPIO')
-		            ->setCellValue('G3','LOCALIDAD')
-		           ->setCellValue('H3','PROGRAMA')
-		            ->setCellValue('I3','SUBPROGRAMA')
-		            ->setCellValue('J3','TIPO')
-		            ->setCellValue('K3','NUMERO DE OBRA')
-		            ->setCellValue('L3','NOMBRE DE LA OBRA')
-		            ->setCellValue('M3','FUENTE')
-		            ->setCellValue('N3','SUBFUENTE')
-		            ->setCellValue('O3','ORIGEN')
-		            ->setCellValue('P3','SUBORIGEN')
-		            ->setCellValue('Q3','CLASIFICACION SUBORIGEN')
-		            ->setCellValue('R3','FINANCIAMIENTO')
-		            ->setCellValue('S3','EJERCICIO')
-		            ->setCellValue('T3','SITUACION')
-		            ->setCellValue('U3','NOMBRE ACCION')
-		            ->setCellValue('V3','UNIDAD DE MEDIDA')
-		            ->setCellValue('W3','META')
-		           ->setCellValue('X3','CANTIDAD')
-		           ->setCellValue('Y3','POBLACION')
-		            ->setCellValue('Z3','MUJERES')
-		            ->setCellValue('AA3','HOMBRES')
-		            ->setCellValue('AB3','CARACTERISTICAS')
-		            ->setCellValue('AC3','MODALIDAD')
-		            ->setCellValue('AD3','COMENTARIOS')
-		            ->setCellValue('AE3','CONCEPTOS A EJECUTAR')
-		            ->setCellValue('AF3','OBSERVACIONES')
-		            ->setCellValue('AG3','CODIGO DE ACCION')
-		            ->setCellValue('AH3','OBSERVACIONES DE SEGUIMIENTO')
-		            ->setCellValue('AI3','FUENTE GENERAL')
-		            ->setCellValue('AJ3','PROCEDIMIENTO')
-		            ->setCellValue('AK3','CONTRATO')
-		            ->setCellValue('AL3','FUENTE GENERAL')
-		            ->setCellValue('AM3','ANTICIPO')
-		            ->setCellValue('AN3','FECHA')
-		            ->setCellValue('AO3','DIAS DE EJECUCION')
-		            ->setCellValue('AP3','FECHA DE INICIO')
-		            ->setCellValue('AQ3','FECHA FINAL')
-		            ->setCellValue('AR3','CONTRATISTA')
-		            ->setCellValue('AS3','ENTIDAD FEDERATIVA')
-		            ->setCellValue('AT3','CMIC')
-		            ->setCellValue('AU3','MODALIDAD DE CONTRATACION')
-		            ->setCellValue('AV3','POA')
-		            ->setCellValue('AW3','EVENTO')
-		            ->setCellValue('AX3','OBSERVACIONES')
-		            ->setCellValue('AY3','CLC')
-		            ->setCellValue('AZ3','FECHA DE ELABORACION')
-		            ->setCellValue('BA3','FECHA DE RECEPCION')
-		            ->setCellValue('BB3','NUMERO FACTURA')
-		            ->setCellValue('BC3','CONCEPTO')
-		            ->setCellValue('BD3','FIANZA')
-		            ->setCellValue('BE3','SPEI')
-		            ->setCellValue('BF3','MINISTRADO')
-		            ->setCellValue('BG3','5 %')
-		            ->setCellValue('BH3','2 %')
-		            ->setCellValue('BI3','RADICADO')
-		            ->setCellValue('BJ3','ORDEN')
-		            ->setCellValue('BK3','NUMERO DE CHEQUE')
-		            ->setCellValue('BL3','FECHA CHEQUE')
-		            ->setCellValue('BM3','MONTO PAGADO')
-		            ->setCellValue('BN3','AMORTIZACION DE CREDITO PUENTE');
-			$i=4;
+		            ->setCellValue('A4', 'NUMERO')
+		            ->setCellValue('B4','PPI')
+		            ->setCellValue('C4','NOMBRE PPI')
+		            ->setCellValue('D4','REGION')
+		            ->setCellValue('E4','DISTRITO')
+		            ->setCellValue('F4','MUNICIPIO')
+		            ->setCellValue('G4','LOCALIDAD')
+		           ->setCellValue('H4','PROGRAMA')
+		            ->setCellValue('I4','SUBPROGRAMA')
+		            ->setCellValue('J4','TIPO')
+		            ->setCellValue('K4','NUMERO DE OBRA')
+		            ->setCellValue('L4','NOMBRE DE LA OBRA')
+		            ->setCellValue('M4','FUENTE')
+		            ->setCellValue('N4','SUBFUENTE')
+		            ->setCellValue('O4','ORIGEN')
+		            ->setCellValue('P4','SUBORIGEN')
+		            ->setCellValue('Q4','CLASIFICACION SUBORIGEN')
+		            ->setCellValue('R4','FINANCIAMIENTO')
+		            ->setCellValue('S4','EJERCICIO')
+		            ->setCellValue('T4','SITUACION')
+		            ->setCellValue('U4','NOMBRE ACCION')
+		            ->setCellValue('V4','UNIDAD DE MEDIDA')
+		            ->setCellValue('W4','META')
+		           ->setCellValue('X4','CANTIDAD')
+		           ->setCellValue('Y4','POBLACION')
+		            ->setCellValue('Z4','MUJERES')
+		            ->setCellValue('AA4','HOMBRES')
+		            ->setCellValue('AB4','TOTAL')
+		            ->setCellValue('AC4','CARACTERISTICAS')
+		            ->setCellValue('AD4','MODALIDAD')
+		            ->setCellValue('AR4','COMENTARIOS')
+		            ->setCellValue('AF4','CONCEPTOS A EJECUTAR')
+		            ->setCellValue('AG4','OBSERVACIONES')
+		            ->setCellValue('AH4','CODIGO DE ACCION')
+		            ->setCellValue('AI4','OBSERVACIONES DE SEGUIMIENTO')
+		            ->setCellValue('AJ4','FUENTE GENERAL')
+		            ->setCellValue('AK4','PROCEDIMIENTO')
+		            ->setCellValue('AL4','CONTRATO')
+		            ->setCellValue('AM4','FUENTE GENERAL')
+		            ->setCellValue('AN4','ANTICIPO')
+		            ->setCellValue('AO4','FECHA')
+		            ->setCellValue('AP4','DIAS DE EJECUCION')
+		            ->setCellValue('AQ4','FECHA DE INICIO')
+		            ->setCellValue('AR4','FECHA FINAL')
+		            ->setCellValue('AS4','CONTRATISTA')
+		            ->setCellValue('AT4','ENTIDAD FEDERATIVA')
+		            ->setCellValue('AU4','CMIC')
+		            ->setCellValue('AV4','MODALIDAD DE CONTRATACION')
+		            ->setCellValue('AW4','POA')
+		            ->setCellValue('AX4','EVENTO')
+		            ->setCellValue('AY4','OBSERVACIONES')
+		            ->setCellValue('AZ4','AVANCE FISICO')
+		            ->setCellValue('BA4','CLC')
+		            ->setCellValue('BB4','FECHA DE ELABORACION')
+		            ->setCellValue('BC4','FECHA DE RECEPCION')
+		            ->setCellValue('BD4','NUMERO FACTURA')
+		            ->setCellValue('BE4','CONCEPTO')
+		            ->setCellValue('BF4','FIANZA')
+		            ->setCellValue('BG4','MINISTRADO')
+		            ->setCellValue('BH4','5 %')
+		            ->setCellValue('BI4','2 %')
+		            ->setCellValue('BJ4','RADICADO')
+		            ->setCellValue('BK4','ORDEN')
+		            ->setCellValue('BL4','SPEI')
+		            ->setCellValue('BM4','NUMERO DE CHEQUE')
+		            ->setCellValue('BN4','FECHA CHEQUE')
+		            ->setCellValue('BO4','MONTO PAGADO')
+		            ->setCellValue('BP4','AMORTIZACION DE CREDITO PUENTE')
+		            ->setCellValue('BQ4','AVANCE FINANCIERO');
+			$i=5;
 			foreach ($datos as $key => $dato) {
 				$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $dato->id);
 				$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $dato->ppi);
@@ -156,45 +161,59 @@ class Completas{
 				$objPHPExcel->getActiveSheet()->setCellValue('Y'.$i, $dato->nombrepoblacion);
 				$objPHPExcel->getActiveSheet()->setCellValue('Z'.$i, $dato->bmujeres);
 				$objPHPExcel->getActiveSheet()->setCellValue('AA'.$i, $dato->bhombres);
-				$objPHPExcel->getActiveSheet()->setCellValue('AB'.$i, $dato->caracteristicas);
-				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$i, $dato->nombremodalidad);
-				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$i, $dato->comentarios);
-				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$i, $dato->concejecutar);
-				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$i, $dato->observaciones);
-				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$i, $dato->codigoaccion);
-				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$i, $dato->observacionesseg);
-				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$i, $dato->fuentegeneral);
-				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$i, $dato->l_procedimiento);
-				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$i, $dato->l_contrato);
-				$objPHPExcel->getActiveSheet()->setCellValue('AL'.$i, $dato->l_montocontratado);
-				$objPHPExcel->getActiveSheet()->setCellValue('AM'.$i, $dato->l_anticipo);
-				$objPHPExcel->getActiveSheet()->setCellValue('AN'.$i, $dato->l_fecha);
-				$objPHPExcel->getActiveSheet()->setCellValue('AO'.$i, $dato->l_ndias);
-				$objPHPExcel->getActiveSheet()->setCellValue('AP'.$i, $dato->l_finicio);
-				$objPHPExcel->getActiveSheet()->setCellValue('AQ'.$i, $dato->l_ffinal);
-				$objPHPExcel->getActiveSheet()->setCellValue('AR'.$i, $dato->razsoc);
-				$objPHPExcel->getActiveSheet()->setCellValue('AS'.$i, $dato->estado);
-				$objPHPExcel->getActiveSheet()->setCellValue('AT'.$i, $dato->l_cmic);
-				$objPHPExcel->getActiveSheet()->setCellValue('AU'.$i, $dato->l_modcontrato);
-				$objPHPExcel->getActiveSheet()->setCellValue('AV'.$i, $dato->poa);
-				$objPHPExcel->getActiveSheet()->setCellValue('AW'.$i, $dato->evento);
-				$objPHPExcel->getActiveSheet()->setCellValue('AX'.$i, $dato->observaciones);
-				$objPHPExcel->getActiveSheet()->setCellValue('AY'.$i, $dato->clc);
-				$objPHPExcel->getActiveSheet()->setCellValue('AZ'.$i, $dato->felab);
-				$objPHPExcel->getActiveSheet()->setCellValue('BA'.$i, $dato->frecp);
-				$objPHPExcel->getActiveSheet()->setCellValue('BB'.$i, $dato->numfactura);
-				$objPHPExcel->getActiveSheet()->setCellValue('BC'.$i, $dato->concepto);
-				$objPHPExcel->getActiveSheet()->setCellValue('BD'.$i, $dato->fianza);
-				$objPHPExcel->getActiveSheet()->setCellValue('BE'.$i, $dato->spei);
-				$objPHPExcel->getActiveSheet()->setCellValue('BF'.$i, $dato->ministrado);
-				$objPHPExcel->getActiveSheet()->setCellValue('BG'.$i, $dato->porc5);
-				$objPHPExcel->getActiveSheet()->setCellValue('BH'.$i, $dato->porc2);
-				$objPHPExcel->getActiveSheet()->setCellValue('BI'.$i, $dato->radicado);
-				$objPHPExcel->getActiveSheet()->setCellValue('BJ'.$i, $dato->orden);
-				$objPHPExcel->getActiveSheet()->setCellValue('BK'.$i, $dato->numcheque);
-				$objPHPExcel->getActiveSheet()->setCellValue('BL'.$i, $dato->fcheque);
-				$objPHPExcel->getActiveSheet()->setCellValue('BM'.$i, $dato->montopagado);
-				$objPHPExcel->getActiveSheet()->setCellValue('BN'.$i, $dato->amort_cred_pte);
+				$objPHPExcel->getActiveSheet()->setCellValue('AB'.$i, $dato->bhombres+ $dato->bmujeres);
+				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$i, $dato->caracteristicas);
+				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$i, $dato->nombremodalidad);
+				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$i, $dato->comentarios);
+				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$i, $dato->concejecutar);
+				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$i, $dato->observaciones);
+				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$i, $dato->codigoaccion);
+				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$i, $dato->observacionesseg);
+				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$i, $dato->fuentegeneral);
+				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$i, $dato->l_procedimiento);
+				$objPHPExcel->getActiveSheet()->setCellValue('AL'.$i, $dato->l_contrato);
+				$objPHPExcel->getActiveSheet()->setCellValue('AM'.$i, $dato->l_montocontratado);
+				$objPHPExcel->getActiveSheet()->setCellValue('AN'.$i, $dato->l_anticipo);
+				$objPHPExcel->getActiveSheet()->setCellValue('AO'.$i, $dato->l_fecha);
+				$objPHPExcel->getActiveSheet()->setCellValue('AP'.$i, $dato->l_ndias);
+				$objPHPExcel->getActiveSheet()->setCellValue('AQ'.$i, $dato->l_finicio);
+				$objPHPExcel->getActiveSheet()->setCellValue('AR'.$i, $dato->l_ffinal);
+				$objPHPExcel->getActiveSheet()->setCellValue('AS'.$i, $dato->razsoc);
+				$objPHPExcel->getActiveSheet()->setCellValue('AT'.$i, $dato->estado);
+				$objPHPExcel->getActiveSheet()->setCellValue('AU'.$i, $dato->l_cmic);
+				$objPHPExcel->getActiveSheet()->setCellValue('AV'.$i, $dato->l_modcontrato);
+				$objPHPExcel->getActiveSheet()->setCellValue('AW'.$i, $dato->poa);
+				$objPHPExcel->getActiveSheet()->setCellValue('AX'.$i, $dato->evento);
+				$objPHPExcel->getActiveSheet()->setCellValue('AY'.$i, $dato->observaciones);
+				$objPHPExcel->getActiveSheet()->setCellValue('AZ'.$i, $dato->afisico.'%');
+				$objPHPExcel->getActiveSheet()->setCellValue('BA'.$i, $dato->clc);
+				$objPHPExcel->getActiveSheet()->setCellValue('BB'.$i, $dato->felab);
+				$objPHPExcel->getActiveSheet()->setCellValue('BC'.$i, $dato->frecp);
+				$objPHPExcel->getActiveSheet()->setCellValue('BD'.$i, $dato->numfactura);
+				$objPHPExcel->getActiveSheet()->setCellValue('BE'.$i, $dato->concepto);
+				$objPHPExcel->getActiveSheet()->setCellValue('BF'.$i, $dato->fianza);
+				$objPHPExcel->getActiveSheet()->setCellValue('BG'.$i, $dato->ministrado);
+				$objPHPExcel->getActiveSheet()->setCellValue('BH'.$i, $dato->porc5);
+				$objPHPExcel->getActiveSheet()->setCellValue('BI'.$i, $dato->porc2);
+				$objPHPExcel->getActiveSheet()->setCellValue('BJ'.$i, $dato->radicado);
+				$objPHPExcel->getActiveSheet()->setCellValue('BK'.$i, $dato->orden);
+				$objPHPExcel->getActiveSheet()->setCellValue('BL'.$i, $dato->spei);
+				$objPHPExcel->getActiveSheet()->setCellValue('BM'.$i, $dato->numcheque);
+				$objPHPExcel->getActiveSheet()->setCellValue('BN'.$i, $dato->fcheque);
+				$objPHPExcel->getActiveSheet()->setCellValue('BO'.$i, $dato->montopagado);
+				$objPHPExcel->getActiveSheet()->setCellValue('BP'.$i, $dato->amort_cred_pte);
+				$objPHPExcel->getActiveSheet()->setCellValue('BQ'.$i, $dato->afinanciero.'%');
+
+				$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+
+				$objPHPExcel->getActiveSheet()->getStyle('AM'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('AN'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BG'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BH'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BI'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BJ'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BN'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BO'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
 				$i++;
 		}
 

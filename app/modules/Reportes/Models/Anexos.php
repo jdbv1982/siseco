@@ -11,7 +11,7 @@ class Anexos extends \Eloquent{
 			(SELECT nombrefinanciamiento FROM financiamiento WHERE id = p.idcvefin) AS nombrefinanciamiento,
 			(SELECT UPPER(numerooficio) FROM oficios WHERE idobra = p.id AND nombreoficio = 'AUTORIZACION') AS numerooficio
 			FROM planeacion AS p
-			INNER JOIN licitaciones AS l ON p.id = l.id
+			LEFT JOIN licitaciones AS l ON p.id = l.id
 			WHERE p.id =$id") );
 
 		return $datos[0];

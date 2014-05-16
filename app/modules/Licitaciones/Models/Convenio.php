@@ -4,7 +4,7 @@ use Validator;
 
 class Convenio extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idobra','numconvenio','fechaconvenio','tipoconvenio','cantidad');
+	protected $fillable = array('idobra','numconvenio','fechaconvenio','tipoconvenio','cantidad','finicio','ffinal');
 	protected $table = 'convenios';
 
 	public function isValid($data){

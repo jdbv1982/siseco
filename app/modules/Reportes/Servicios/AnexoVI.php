@@ -13,6 +13,9 @@ class AnexoVI{
 			),
 		);
 
+		 $cadena = explode(' ',$datos->nombreobra);
+		 $concepto = $cadena[0];
+
 
 		setlocale (LC_TIME,"spanish");
 		$f = new Funciones;
@@ -87,7 +90,11 @@ class AnexoVI{
 		$f->mergeCelda($objPHPExcel,'E18','H18',$datos->l_montocontratado,'','','','','','$');
 		$f->mergeCelda($objPHPExcel,'B19','B19','ANTICIPO','FFC0C0C0');
 		$f->mergeCelda($objPHPExcel,'C19','F19',$datos->l_anticipo,'','','','','','$');
-		$porc_anticipo = round($datos->l_anticipo * 100 / $datos->l_montocontratado);
+		if($datos->l_montocontratado == 0){
+			$porc_anticipo = 0;
+		}else{
+			$porc_anticipo = round($datos->l_anticipo * 100 / $datos->l_montocontratado);
+		}
 		$f->mergeCelda($objPHPExcel,'G19','H19',$porc_anticipo.' %','FFC0C0C0','CENTER');
 		$f->mergeCelda($objPHPExcel,'B20','D20','FECHA PAGADO','FFC0C0C0');
 		$f->mergeCelda($objPHPExcel,'E20','H20','');//fecha de pago de Administracion
@@ -139,7 +146,7 @@ class AnexoVI{
 		$f->mergeCelda($objPHPExcel,'M33','N33','EJECUTADO','FFC0C0C0','CENTER');
 		$f->mergeCelda($objPHPExcel,'O33','P33','POR EJECUTAR','FFC0C0C0','CENTER');
 
-		$f->mergeCelda($objPHPExcel,'B34','H34','','','CENTER','',120);
+		$f->mergeCelda($objPHPExcel,'B34','H34',$concepto,'','CENTER','',120);
 		$f->mergeCelda($objPHPExcel,'I34','J34','100 %','','CENTER');
 		$f->mergeCelda($objPHPExcel,'K34','L34','100 %','','CENTER');
 		$f->mergeCelda($objPHPExcel,'M34','N34',$fisico[11].'%','','CENTER');
@@ -171,65 +178,65 @@ class AnexoVI{
 
 		$f->mergeCelda($objPHPExcel,'B39','B40','FISICO','FFC0C0C0','CENTER');
 		$f->mergeCelda($objPHPExcel,'C39','C39','PROG','FFC0C0C0','CENTER');
-		$f->mergeCelda($objPHPExcel,'D39','D39',$programado[0].'%');
-		$f->mergeCelda($objPHPExcel,'E39','E39',$programado[1].'%');
-		$f->mergeCelda($objPHPExcel,'F39','F39',$programado[2].'%');
-		$f->mergeCelda($objPHPExcel,'G39','G39',$programado[3].'%');
-		$f->mergeCelda($objPHPExcel,'H39','H39',$programado[4].'%');
-		$f->mergeCelda($objPHPExcel,'I39','I39',$programado[5].'%');
-		$f->mergeCelda($objPHPExcel,'J39','J39',$programado[6].'%');
-		$f->mergeCelda($objPHPExcel,'K39','K39',$programado[7].'%');
-		$f->mergeCelda($objPHPExcel,'L39','L39',$programado[8].'%');
-		$f->mergeCelda($objPHPExcel,'M39','M39',$programado[9].'%');
-		$f->mergeCelda($objPHPExcel,'N39','N39',$programado[10].'%');
-		$f->mergeCelda($objPHPExcel,'O39','O39',$programado[11].'%');
-		$f->mergeCelda($objPHPExcel,'P39','P39',$programado[12].'%','FFC0C0C0','CENTER');
+		$f->mergeCelda($objPHPExcel,'D39','D39',round($programado[0]).'%');
+		$f->mergeCelda($objPHPExcel,'E39','E39',round($programado[1]).'%');
+		$f->mergeCelda($objPHPExcel,'F39','F39',round($programado[2]).'%');
+		$f->mergeCelda($objPHPExcel,'G39','G39',round($programado[3]).'%');
+		$f->mergeCelda($objPHPExcel,'H39','H39',round($programado[4]).'%');
+		$f->mergeCelda($objPHPExcel,'I39','I39',round($programado[5]).'%');
+		$f->mergeCelda($objPHPExcel,'J39','J39',round($programado[6]).'%');
+		$f->mergeCelda($objPHPExcel,'K39','K39',round($programado[7]).'%');
+		$f->mergeCelda($objPHPExcel,'L39','L39',round($programado[8]).'%');
+		$f->mergeCelda($objPHPExcel,'M39','M39',round($programado[9]).'%');
+		$f->mergeCelda($objPHPExcel,'N39','N39',round($programado[10]).'%');
+		$f->mergeCelda($objPHPExcel,'O39','O39',round($programado[11]).'%');
+		$f->mergeCelda($objPHPExcel,'P39','P39',round($programado[12]).'%','FFC0C0C0','CENTER');
 
 		$f->mergeCelda($objPHPExcel,'C40','C40','REAL','FFC0C0C0','CENTER');
-		$f->mergeCelda($objPHPExcel,'D40','D40',$fisico[0].'%');
-		$f->mergeCelda($objPHPExcel,'E40','E40',$fisico[1].'%');
-		$f->mergeCelda($objPHPExcel,'F40','F40',$fisico[2].'%');
-		$f->mergeCelda($objPHPExcel,'G40','G40',$fisico[3].'%');
-		$f->mergeCelda($objPHPExcel,'H40','H40',$fisico[4].'%');
-		$f->mergeCelda($objPHPExcel,'I40','I40',$fisico[5].'%');
-		$f->mergeCelda($objPHPExcel,'J40','J40',$fisico[6].'%');
-		$f->mergeCelda($objPHPExcel,'K40','K40',$fisico[7].'%');
-		$f->mergeCelda($objPHPExcel,'L40','L40',$fisico[8].'%');
-		$f->mergeCelda($objPHPExcel,'M40','M40',$fisico[9].'%');
-		$f->mergeCelda($objPHPExcel,'N40','N40',$fisico[10].'%');
-		$f->mergeCelda($objPHPExcel,'O40','O40',$fisico[11].'%');
-		$f->mergeCelda($objPHPExcel,'P40','P40',$fisico[12].'%','FFC0C0C0','CENTER');
+		$f->mergeCelda($objPHPExcel,'D40','D40',round($fisico[0]).'%');
+		$f->mergeCelda($objPHPExcel,'E40','E40',round($fisico[1]).'%');
+		$f->mergeCelda($objPHPExcel,'F40','F40',round($fisico[2]).'%');
+		$f->mergeCelda($objPHPExcel,'G40','G40',round($fisico[3]).'%');
+		$f->mergeCelda($objPHPExcel,'H40','H40',round($fisico[4]).'%');
+		$f->mergeCelda($objPHPExcel,'I40','I40',round($fisico[5]).'%');
+		$f->mergeCelda($objPHPExcel,'J40','J40',round($fisico[6]).'%');
+		$f->mergeCelda($objPHPExcel,'K40','K40',round($fisico[7]).'%');
+		$f->mergeCelda($objPHPExcel,'L40','L40',round($fisico[8]).'%');
+		$f->mergeCelda($objPHPExcel,'M40','M40',round($fisico[9]).'%');
+		$f->mergeCelda($objPHPExcel,'N40','N40',round($fisico[10]).'%');
+		$f->mergeCelda($objPHPExcel,'O40','O40',round($fisico[11]).'%');
+		$f->mergeCelda($objPHPExcel,'P40','P40',round($fisico[12]).'%','FFC0C0C0','CENTER');
 
 		$f->mergeCelda($objPHPExcel,'B41','B42','FINANCIERO','FFC0C0C0','CENTER');
 		$f->mergeCelda($objPHPExcel,'C41','C41','PROG','FFC0C0C0','CENTER');
-		$f->mergeCelda($objPHPExcel,'D41','D41',$programado[0].'%');
-		$f->mergeCelda($objPHPExcel,'E41','E41',$programado[1].'%');
-		$f->mergeCelda($objPHPExcel,'F41','F41',$programado[2].'%');
-		$f->mergeCelda($objPHPExcel,'G41','G41',$programado[3].'%');
-		$f->mergeCelda($objPHPExcel,'H41','H41',$programado[4].'%');
-		$f->mergeCelda($objPHPExcel,'I41','I41',$programado[5].'%');
-		$f->mergeCelda($objPHPExcel,'J41','J41',$programado[6].'%');
-		$f->mergeCelda($objPHPExcel,'K41','K41',$programado[7].'%');
-		$f->mergeCelda($objPHPExcel,'L41','L41',$programado[8].'%');
-		$f->mergeCelda($objPHPExcel,'M41','M41',$programado[9].'%');
-		$f->mergeCelda($objPHPExcel,'N41','N41',$programado[10].'%');
-		$f->mergeCelda($objPHPExcel,'O41','O41',$programado[11].'%');
-		$f->mergeCelda($objPHPExcel,'P41','P41',$programado[12].'%','FFC0C0C0','CENTER');
+		$f->mergeCelda($objPHPExcel,'D41','D41',round($programado[0]).'%');
+		$f->mergeCelda($objPHPExcel,'E41','E41',round($programado[1]).'%');
+		$f->mergeCelda($objPHPExcel,'F41','F41',round($programado[2]).'%');
+		$f->mergeCelda($objPHPExcel,'G41','G41',round($programado[3]).'%');
+		$f->mergeCelda($objPHPExcel,'H41','H41',round($programado[4]).'%');
+		$f->mergeCelda($objPHPExcel,'I41','I41',round($programado[5]).'%');
+		$f->mergeCelda($objPHPExcel,'J41','J41',round($programado[6]).'%');
+		$f->mergeCelda($objPHPExcel,'K41','K41',round($programado[7]).'%');
+		$f->mergeCelda($objPHPExcel,'L41','L41',round($programado[8]).'%');
+		$f->mergeCelda($objPHPExcel,'M41','M41',round($programado[9]).'%');
+		$f->mergeCelda($objPHPExcel,'N41','N41',round($programado[10]).'%');
+		$f->mergeCelda($objPHPExcel,'O41','O41',round($programado[11]).'%');
+		$f->mergeCelda($objPHPExcel,'P41','P41',round($programado[12]).'%','FFC0C0C0','CENTER');
 
 		$f->mergeCelda($objPHPExcel,'C42','C42','REAL','FFC0C0C0','CENTER');
-		$f->mergeCelda($objPHPExcel,'D42','D42',$financiero[0].'%');
-		$f->mergeCelda($objPHPExcel,'E42','E42',$financiero[1].'%');
-		$f->mergeCelda($objPHPExcel,'F42','F42',$financiero[2].'%');
-		$f->mergeCelda($objPHPExcel,'G42','G42',$financiero[3].'%');
-		$f->mergeCelda($objPHPExcel,'H42','H42',$financiero[4].'%');
-		$f->mergeCelda($objPHPExcel,'I42','I42',$financiero[5].'%');
-		$f->mergeCelda($objPHPExcel,'J42','J42',$financiero[6].'%');
-		$f->mergeCelda($objPHPExcel,'K42','K42',$financiero[7].'%');
-		$f->mergeCelda($objPHPExcel,'L42','L42',$financiero[8].'%');
-		$f->mergeCelda($objPHPExcel,'M42','M42',$financiero[9].'%');
-		$f->mergeCelda($objPHPExcel,'N42','N42',$financiero[10].'%');
-		$f->mergeCelda($objPHPExcel,'O42','O42',$financiero[11].'%');
-		$f->mergeCelda($objPHPExcel,'P42','P42',$financiero[12].'%','FFC0C0C0','CENTER');
+		$f->mergeCelda($objPHPExcel,'D42','D42',round($financiero[0]).'%');
+		$f->mergeCelda($objPHPExcel,'E42','E42',round($financiero[1]).'%');
+		$f->mergeCelda($objPHPExcel,'F42','F42',round($financiero[2]).'%');
+		$f->mergeCelda($objPHPExcel,'G42','G42',round($financiero[3]).'%');
+		$f->mergeCelda($objPHPExcel,'H42','H42',round($financiero[4]).'%');
+		$f->mergeCelda($objPHPExcel,'I42','I42',round($financiero[5]).'%');
+		$f->mergeCelda($objPHPExcel,'J42','J42',round($financiero[6]).'%');
+		$f->mergeCelda($objPHPExcel,'K42','K42',round($financiero[7]).'%');
+		$f->mergeCelda($objPHPExcel,'L42','L42',round($financiero[8]).'%');
+		$f->mergeCelda($objPHPExcel,'M42','M42',round($financiero[9]).'%');
+		$f->mergeCelda($objPHPExcel,'N42','N42',round($financiero[10]).'%');
+		$f->mergeCelda($objPHPExcel,'O42','O42',round($financiero[11]).'%');
+		$f->mergeCelda($objPHPExcel,'P42','P42',round($financiero[12]).'%','FFC0C0C0','CENTER');
 
 		//PROBLEMATICA
 		$f->mergeCelda($objPHPExcel,'B44','P44','PROBLEMATICA','FFC0C0C0','CENTER');

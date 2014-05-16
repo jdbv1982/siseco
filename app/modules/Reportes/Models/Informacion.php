@@ -29,6 +29,8 @@ class Informacion extends \Eloquent{
 	(SELECT razsoc FROM contratistas WHERE id = lic.l_idempresa) AS razsoc,
 	(SELECT nombre FROM estados WHERE id = lic.l_origen) AS estado,
 	(SELECT nombre FROM eventos WHERE id = o.idevento) AS evento,
+	(SELECT SUM(afisico) FROM avances WHERE idobra = p.id) AS afisico,
+	(SELECT SUM(afinanciero) FROM avances WHERE idobra = p.id) AS afinanciero,
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,o.observaciones,
 	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.spei,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.numcheque,a.fcheque,a.montopagado,a.amort_cred_pte

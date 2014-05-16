@@ -20,7 +20,7 @@ class ObrasController extends \BaseController{
 			->select('planeacion.*','fuentes.nombre_fuente','regiones.nombre_region','oficios.numerooficio','oficios.nombreoficio','licitaciones.l_contrato')
 			->where('idfgeneral','=',$id)
 			->where('nombreoficio','=','AUTORIZACION', 'AND')
-			->get();		
+			->get();
 		$this->layout->contenido = View::make('Obras::listado', compact('obras'));
 	}
 
@@ -30,10 +30,10 @@ class ObrasController extends \BaseController{
             ->join('fuentes', 'planeacion.idfuente', '=', 'fuentes.id')
             ->groupBy('planeacion.idfuente')
             ->get( array(
-            		'fuentes.nombre_fuente',            		
+            		'fuentes.nombre_fuente',
 			        DB::raw( 'COUNT(planeacion.id) AS numobras' ),
 			        DB::raw( 'SUM(planeacion.inv_aut) AS monto' ),
-			    ));         
+			    ));
          $totplan = DB::table('planeacion')->get(array(
          	DB::raw( 'COUNT(planeacion.id) AS plantotobras' ),
 			DB::raw( 'SUM(planeacion.inv_aut) AS plantotmonto' ),
@@ -79,7 +79,7 @@ class ObrasController extends \BaseController{
          		));
 
 
-        
+
 		$this->layout->contenido = View::make('Obras::resumen', compact('planeacion', 'totplan','licitaciones','totlic','administracion','totadm'));
 	}
 
@@ -94,7 +94,7 @@ class ObrasController extends \BaseController{
 			$empresa = DB::table('contratistas')->get();
 		}else{
 			$empresa = Contratistas::find($licitaciones->l_idempresa);
-				
+
 			if($licitaciones->l_tipoemp == 1){
 				$tipoempresa = 'Local';
 			}else{
@@ -109,13 +109,20 @@ class ObrasController extends \BaseController{
 		}
 
 		$obras = Obras::find($id);
-		$administracion = Administracion::find($id);
-		
+		$administracion = DB::table('administracion')
+			->where('idobra','=',$id)
+			->where('montopagado','=',0,'AND')
+			->get();
+
+		$estimaciones = DB::table('estimaciones')
+			->where('idobra','=',$id)
+			->get();
+
 		$oficio = DB::table('oficios')->where('idobra','=',$id)->first();
 
 		$mobras = new Obras;
         $avances = $mobras->getAvance($id);
-		$this->layout->contenido = View::make('Obras::resumenobra', compact('licitaciones','empresa', 'tipoempresa','cmic','administracion','oficio','obras','avances'))->with('planeacion', $planeacion);
+		$this->layout->contenido = View::make('Obras::resumenobra', compact('licitaciones','empresa', 'tipoempresa','cmic','administracion','oficio','obras','avances','estimaciones'))->with('planeacion', $planeacion);
 	}
 
 	public function getNuevo($id){
@@ -146,7 +153,7 @@ class ObrasController extends \BaseController{
 		if($obra->validAndSave($data)){
 			return Redirect::to('obras/resumen/'.Input::get('id'));
 		}else{
-			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($obra->errores)->withInput();			
+			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($obra->errores)->withInput();
 		}
 
 	}
@@ -173,7 +180,7 @@ class ObrasController extends \BaseController{
 				'l.l_ndias')
 			->where('planeacion.id','=',$id)
 			->where('nombreoficio','=','AUTORIZACION', 'AND')
-			->get();		
+			->get();
 		$residencias = DB::table('residencias')->lists('nombre','id');
 		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias'));
 	}
