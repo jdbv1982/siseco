@@ -111,6 +111,13 @@ $(document).ready(function() {
 		sumar($('#tblcal'),2,3);
 	});
 
+	$(document).on('click','#sumarcale',function(e){
+		e.preventDefault();
+		sumardiv($('.mes'),$('#sumacalen'));
+	});
+
+
+
 	$('#ppi').on('focusout', function(){
 		getDescripcion($(this).val(), $('#nombreppi'));
 	});
@@ -222,8 +229,27 @@ $( "body" ).on( "click", "#linkautorizadas", function(e) {
 	});
 });
 
+$("body").on('focusin',".nombrecal",function(){
+	$( this ).parent().css( "width", "20%" );
+});
+$("body").on('focusout',".nombrecal",function(){
+	$( this ).parent().removeAttr("style");
+});
+
+$("body").on('focusin',".montocal",function(){
+	$( this ).parent().css( "width", "10%" );
+});
+$("body").on('focusout',".montocal",function(){
+	$( this ).parent().removeAttr("style");
+});
+
+
+
 
 });
+
+
+
 
 //+++++++++++++++++++OBRAS*************************
 
@@ -602,3 +628,15 @@ function rellenaUnSelect(sel,url){
 }
 
 
+function sumardiv(miClase, miTotal ) {
+	var suma = 0;
+	miClase.each(function(key, element){
+		var valor = parseFloat($(element).val());
+  			//var valor = parseFloat($('#estructura tr').eq(i).find('td  > input').eq(j).val());
+  			suma = roundToTwo(suma) + roundToTwo(valor);
+	});
+
+	miTotal.val(suma);
+
+
+} // end function

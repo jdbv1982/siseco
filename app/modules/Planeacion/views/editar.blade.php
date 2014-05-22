@@ -285,11 +285,9 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <br>
         <legend>Calendarizacion de Recursos</legend>
-        <a href="#" id="otrocalendario" class="btn btn-primary">+</a>
-
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         </div>
-        <table class="table table-bordered" id="tblcal">
+        <table class="table table-bordered">
             <thead>
                 <th>Concepto</th>
                 <th>%</th>
@@ -307,33 +305,28 @@
                 <th>NOV</th>
                 <th>DIC</th>
             </thead>
-            <tbody id="bodycal">
+            <tbody>
                 @foreach ($calen as $calendario)
-                <tr id="filacal">
-                    <td >{{ Form::text('conceptocal[]',$calendario->conceptocal,array('class'=>'form-control','required')) }}</td>
-                    <td >{{ Form::text('porcentaje[]',$calendario->porcentaje,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('totalcal[]',$calendario->totalcal,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('enero[]',$calendario->enero,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('febrero[]',$calendario->febrero,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('marzo[]',$calendario->marzo,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('abril[]',$calendario->abril,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('mayo[]',$calendario->mayo,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('junio[]',$calendario->junio,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('julio[]',$calendario->julio,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('agosto[]',$calendario->agosto,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('septiembre[]',$calendario->septiembre,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('octubre[]',$calendario->octubre,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('noviembre[]',$calendario->noviembre,array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('diciembre[]',$calendario->diciembre,array('class'=>'form-control')) }}</td>
-
+                <tr>
+                    <td >{{ Form::text('',$calendario->conceptocal,array('class'=>'form-control','required')) }}</td>
+                    <td >{{ Form::text('',$calendario->porcentaje,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->totalcal,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->enero,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->febrero,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->marzo,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->abril,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->mayo,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->junio,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->julio,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->agosto,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->septiembre,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->octubre,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->noviembre,array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('',$calendario->diciembre,array('class'=>'form-control')) }}</td>
                 </tr>
-
                 @endforeach
             </tbody>
-
-
         </table>
-
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -488,57 +481,57 @@
                             </table>
                         </div>
 
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <legend>Calendarizacion de Recursos</legend>
+        <a href="#" id="otrocalendario" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></a>
+        <a href="#" id="versumascal" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></a>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        </div>
+        <table class="table table-bordered" id="tblcal">
+            <thead>
+                <th>Concepto</th>
+                <th>%</th>
+                <th>Pesos</th>
+                <th>ENE</th>
+                <th>FEB</th>
+                <th>MAR</th>
+                <th>ABR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AGO</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DIC</th>
+            </thead>
+            <tbody id="bodycal">
+                <tr id="filacal">
+                    <td >{{ Form::text('conceptocal[]',null,array('class'=>'form-control nombrecal','required')) }}</td>
+                    <td >{{ Form::text('porcentaje[]','0.00',array('class'=>'form-control')) }}</td>
+                    <td >{{ Form::text('totalcal[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('enero[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('febrero[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('marzo[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('abril[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('mayo[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('junio[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('julio[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('agosto[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('septiembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('octubre[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('noviembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('diciembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                </tr>
+            </tbody>
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <br>
-                            <legend>Calendarizacion de Recursos</legend>
-                            <a href="#" id="otrocalendarioedit" class="btn btn-primary">+</a>
+        </table>
 
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            </div>
-                            <table class="table table-bordered" id="tblcal">
-                                <thead>
-                                    <th>Concepto</th>
-                                    <th>%</th>
-                                    <th>Pesos</th>
-                                    <th>ENE</th>
-                                    <th>FEB</th>
-                                    <th>MAR</th>
-                                    <th>ABR</th>
-                                    <th>MAY</th>
-                                    <th>JUN</th>
-                                    <th>JUL</th>
-                                    <th>AGO</th>
-                                    <th>SEP</th>
-                                    <th>OCT</th>
-                                    <th>NOV</th>
-                                    <th>DIC</th>
-                                </thead>
-                                <tbody id="bodycaledit">
-                                    <tr id="filacaledit">
-                                        <td >{{ Form::text('conceptocal[]',null,array('class'=>'form-control','required')) }}</td>
-                                        <td >{{ Form::text('porcentaje[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('totalcal[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('enero[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('febrero[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('marzo[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('abril[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('mayo[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('junio[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('julio[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('agosto[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('septiembre[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('octubre[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('noviembre[]','0.00',array('class'=>'form-control')) }}</td>
-                                        <td >{{ Form::text('diciembre[]','0.00',array('class'=>'form-control')) }}</td>
-                                    </tr>
-                                </tbody>
+    </div>
 
-
-                            </table>
-
-                        </div>
                     </div>
 
                 </div>

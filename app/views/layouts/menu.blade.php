@@ -90,6 +90,9 @@
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 20) == 'true')
                     <li><a href="{{ URL::to('estimaciones/listado') }}">Estimaciones</a></li>
                 @endif
+                @if(Auth::user()->verificaPermiso(Auth::user()->id, 36) == 'true')
+                    <li><a href="{{ URL::to('calendarizacion/listado') }}">Calendarización</a></li>
+                @endif
                 </ul>
             </li>
         </ul>

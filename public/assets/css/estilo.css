@@ -24,12 +24,12 @@ body{
 
 .contenido{
 	width: 100%;
-	float: left;	
+	float: left;
 }
 
 .contenidodash{
 	width: 90%;
-	float: left;		
+	float: left;
 }
 
 
@@ -146,6 +146,6 @@ a.expandAll {
 		color:#000000;
 		letter-spacing:.1em;
 		line-height:1.7em;
-		padding:3px 5px 1px;
+		padding:3px 5px 1px;+
 	}
 
