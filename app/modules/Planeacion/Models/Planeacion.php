@@ -11,7 +11,7 @@ class Planeacion extends \Eloquent{
 	protected $table = 'planeacion';
 
 	public function isValid($data){
-		$rules = array(			
+		$rules = array(
 			'idregion'		=> 'required',
 			'iddistrito'	=> 'required',
 			'idmunicipio'	=> 'required',
@@ -20,7 +20,7 @@ class Planeacion extends \Eloquent{
 			'idsubprograma'	=> 'required',
 			'idtipo'		=> 'required',
 			'numeroobra'	=> 'required',
-			'nombreobra'	=> 'required'			
+			'nombreobra'	=> 'required'
 		);
 
 		$validar = Validator::make($data, $rules);
@@ -28,7 +28,7 @@ class Planeacion extends \Eloquent{
 			return true;
 		}
 
-		$this->errores = $validar->errors(); 
+		$this->errores = $validar->errors();
 		return false;
 	}
 

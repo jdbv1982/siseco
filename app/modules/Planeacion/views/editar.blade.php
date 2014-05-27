@@ -82,7 +82,7 @@
     </div>
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <br>
-        <legend>Datos de la Obra - Identificaion</legend>
+        <legend>Datos de la Obra - Identificación</legend>
         <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
             {{ Form::label('idfuente','Fuente') }}
             <div class="controls">

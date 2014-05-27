@@ -104,10 +104,10 @@
  <div class="row col-xs-12 col-sm-4 col-sm-offset-0">
     <div class="panel panel-warning">
       <div class="panel-heading">
-        <h3 class="panel-title">Reportes</h3>
+        <h3 class="panel-title">Graficas</h3>
       </div>
       <div class="panel-body">
-        En Construcción...
+          <li><a class="link" href="{{ URL::to('graficas/barrasxfuente') }}" target="blank">Obras Contratadas por Fuente</a></li>
       </div>
     </div>
  </div>

@@ -9,14 +9,14 @@ class FacturaController extends \BaseController{
 
 		public function setNuevo($id){
 			$factura = Factura::where('idestimacion','=',$id)->get();
-			$factura = $factura[0];
 
 			if(sizeof($factura) == 0){
 				$this->layout->contenido = View::make('Facturas::nuevo',compact('id'));
 			}else{
+				$factura = $factura[0];
 				$this->layout->contenido = View::make('Facturas::editar', compact('factura'));
 			}
-			
+
 		}
 
 		public function postnuevo(){

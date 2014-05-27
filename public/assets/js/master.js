@@ -191,6 +191,16 @@ $(document).ready(function() {
 	  	guardaEvento();
 	});
 
+	$( "body" ).on( "click", "#saveseguimiento", function(e) {
+		e.preventDefault();
+	  	guardaSeguimiento();
+	});
+
+	$( "body" ).on( "click", "#saveresidencia", function(e) {
+		e.preventDefault();
+	  	guardaResidencia();
+	});
+
 	$('#fecha1').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 	$('#fecha2').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 	$('#fecha3').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
@@ -640,3 +650,76 @@ function sumardiv(miClase, miTotal ) {
 
 
 } // end function
+
+function guardaSeguimiento(){
+	var data = $('#postseguimiento').serialize();
+
+	var comentarios = $('#comentarios').val();
+	var concejecutar = $('#concejecutar').val();
+	var observaciones = $('#observaciones').val();
+	var observacionesseg = $('#observacionesseg').val();
+	var codigoaccion = $('#codigoaccion').val();
+	var ninforme = $('#ninforme').val();
+
+	$.ajax({
+	url:"../../agregaseguimiento"
+	,type : "POST"
+	,async: true
+	,data : data
+	,success: function(msg){
+		if(msg == 'true'){
+			$('#seguimiento').modal('hide');
+			$('.alerta').toggle(500, function() {
+		                  setTimeout("$('.alerta').fadeOut('slow');", 500);
+		             });
+	 		$('#comentariosok').html(comentarios);
+	 		$('#concejecutarok').html(concejecutar);
+	 		$('#observacionesok').html(observaciones);
+	 		$('#observacionessegok').html(observacionesseg);
+	 		$('#codigoaccionok').html(codigoaccion);
+	 		$('#ninformeok').html(ninforme);
+		}else{
+			$('.alerta').css({ display: "block" });
+			$('.mensage').html('');
+				$.each( msg, function( key, value ) {
+					$('.mensage').append('<h6>'+value+'</h6>');
+				});
+			}
+		}
+	});
+	return true;
+}
+
+function guardaResidencia(){
+	var data = $('#postseguimiento').serialize();
+
+	var idresidencia = $('#idresidencia').val();
+	$.ajax({
+	url:"../../agregaresidencia"
+	,type : "POST"
+	,async: true
+	,data : data
+	,success: function(msg){
+		if(msg == 'true'){
+			$('#residencia').modal('hide');
+			$('.alerta').toggle(500, function() {
+		                  setTimeout("$('.alerta').fadeOut('slow');", 500);
+		             });
+			setNombreResidencia($('#residenciaok'),idresidencia);
+		}else{
+			$('.alerta').css({ display: "block" });
+			$('.mensage').html('');
+				$.each( msg, function( key, value ) {
+					$('.mensage').append('<h6>'+value+'</h6>');
+				});
+			}
+		}
+	});
+	return true;
+}
+
+function setNombreResidencia(elemento,idresidencia){
+	$.post( "../../getNombreResidencia/"+idresidencia, function( data ) {
+  		elemento.html( data );
+	});
+}

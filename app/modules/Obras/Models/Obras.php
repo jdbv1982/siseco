@@ -35,7 +35,7 @@ class Obras extends \Eloquent{
 
 	public function getInfoObras($id){
 		$datos = db::table('planeacion as p')
-			->join('residencias as r','p.idresidencia','=','r.id')
+			->leftjoin('residencias as r','p.idresidencia','=','r.id')
 			->join('estructura as es', 'p.id','=','es.idobra')
 			->leftjoin('licitaciones as l','p.id','=','l.id')
 			->leftjoin('contratistas as c','l.l_idempresa','=','c.id')
@@ -43,7 +43,7 @@ class Obras extends \Eloquent{
 			->get(array('p.id','r.nombre as nombreresidencia','l.l_contrato',
 				'l_fecha','p.nombreobra','l.l_montocontratado','c.razsoc',
 				'l.l_finicio','l.l_ffinal',
-				DB::raw( 'SUM(es.invfederal) + SUM(es.investatal) + 
+				DB::raw( 'SUM(es.invfederal) + SUM(es.investatal) +
          			 SUM(es.invmunicipal) AS autorizado' )
 				));
 		return json_decode(json_encode($datos));

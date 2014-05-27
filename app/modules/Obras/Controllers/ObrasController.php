@@ -7,6 +7,10 @@ use App\Modules\Licitaciones\Models\Licitaciones;
 use App\Modules\Contratistas\Models\Contratistas;
 use App\Modules\Administracion\Models\Administracion;
 use App\Modules\Obras\Models\Obras;
+use App\Modules\Reportes\Models\Informacion;
+use App\Modules\Planeacion\Models\Seguimiento;
+use App\Modules\Obras\Models\Residencia;
+use App\Modules\Residencias\Models\Residencias as re;
 
 class ObrasController extends \BaseController{
 	protected $layout = "layouts.layout";
@@ -20,6 +24,18 @@ class ObrasController extends \BaseController{
 			->select('planeacion.*','fuentes.nombre_fuente','regiones.nombre_region','oficios.numerooficio','oficios.nombreoficio','licitaciones.l_contrato')
 			->where('idfgeneral','=',$id)
 			->where('nombreoficio','=','AUTORIZACION', 'AND')
+			->get();
+		$this->layout->contenido = View::make('Obras::listado', compact('obras'));
+	}
+
+	public function getTodas(){
+		$obras = DB::table('planeacion')
+			->join('fuentes','planeacion.idfuente','=','fuentes.id')
+			->join('regiones','planeacion.idRegion','=','regiones.id')
+			->join('oficios','planeacion.id','=','oficios.idobra')
+			->leftjoin('licitaciones','planeacion.id','=','licitaciones.id')
+			->select('planeacion.*','fuentes.nombre_fuente','regiones.nombre_region','oficios.numerooficio','oficios.nombreoficio','licitaciones.l_contrato')
+			->where('nombreoficio','=','AUTORIZACION')
 			->get();
 		$this->layout->contenido = View::make('Obras::listado', compact('obras'));
 	}
@@ -170,19 +186,47 @@ class ObrasController extends \BaseController{
 	}
 
 	public function verEstatus($id){
-		$planeacion = DB::table('planeacion')
-			->join('fuentes','planeacion.idfuente','=','fuentes.id')
-			->join('regiones','planeacion.idRegion','=','regiones.id')
-			->join('oficios','planeacion.id','=','oficios.idobra')
-			->leftjoin('licitaciones as l','planeacion.id','=','l.id')
-			->select('planeacion.*','fuentes.nombre_fuente','regiones.nombre_region','oficios.numerooficio','oficios.nombreoficio',
-				'l.l_procedimiento', 'l.l_contrato','l.l_montocontratado','l.l_anticipo',
-				'l.l_ndias')
-			->where('planeacion.id','=',$id)
-			->where('nombreoficio','=','AUTORIZACION', 'AND')
-			->get();
+		$obra = new Informacion;
+		$planeacion = $obra->getInformacionId($id);
 		$residencias = DB::table('residencias')->lists('nombre','id');
 		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias'));
+	}
+
+	public function seguimiento(){
+		$data = Input::all();
+		$seguimiento = Seguimiento::find($data['id']);
+		if(is_null($seguimiento)){
+			App::abort(404);
+		}
+
+		if($seguimiento->validAndSave($data)){
+			return 'true';
+		}else{
+			return $evento->errores;
+		}
+	}
+
+	public function residencia(){
+		$data = Input::all();
+		$residencia = Residencia::find($data['id']);
+		if(is_null($residencia)){
+			App::abort(404);
+		}
+
+		if($residencia->validAndSave($data)){
+			return 'true';
+		}else{
+			return $evento->errores;
+		}
+	}
+
+	public function getNombreResidencia($id){
+		$residencia = re::find($id);
+		if(is_null($residencia)){
+			return '';
+		}else{
+			return $residencia->nombre;
+		}
 	}
 
 }

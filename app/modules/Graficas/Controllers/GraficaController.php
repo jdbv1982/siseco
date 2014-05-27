@@ -25,7 +25,8 @@ public function graficaBarras(){
 	$tituloy = "NUMERO DE OBRAS";
 	$titulox = "OBRAS 2014";
 	$datos = $obras->getResumenInfo(["idfgeneral"]);
-	return View::make('Graficas::barras',compact('titulo','tituloy','titulox'));
+
+	return View::make('Graficas::barras',compact('titulo','tituloy','titulox','datos'));
 }
 
 }

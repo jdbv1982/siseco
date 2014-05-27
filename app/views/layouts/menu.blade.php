@@ -55,6 +55,9 @@
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 15) == 'true')
                             <li><a href="{{ URL::to('obras/listado/8') }}">PIBAI</a></li>
                         @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 37) == 'true')
+                            <li><a href="{{ URL::to('obras/listado') }}">Todas</a></li>
+                        @endif
                 </ul>
             </li>
 
