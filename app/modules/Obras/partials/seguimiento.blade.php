@@ -14,7 +14,7 @@
                 <div class="row">
                     {{ Form::hidden('id', $planeacion[0]->id) }}
                     <div class="form-group col-xs-12 col-sm-6">
-                        {{ Form::label('idclasseguimiento','Residencia') }}
+                        {{ Form::label('idclasseguimiento','Clasificación de Obra') }}
                         <div class="controls">
                             {{ Form::select('idclasseguimiento', $clasificadores,null, array('class' => 'form-control upper')) }}
                         </div>
