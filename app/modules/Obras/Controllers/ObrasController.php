@@ -188,8 +188,9 @@ class ObrasController extends \BaseController{
 	public function verEstatus($id){
 		$obra = new Informacion;
 		$planeacion = $obra->getInformacionId($id);
+		$clasificadores = DB::table('classeguimiento')->lists('nombre','id');
 		$residencias = DB::table('residencias')->lists('nombre','id');
-		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias'));
+		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias','clasificadores'));
 	}
 
 	public function seguimiento(){

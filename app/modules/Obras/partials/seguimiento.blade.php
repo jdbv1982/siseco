@@ -14,6 +14,13 @@
                 <div class="row">
                     {{ Form::hidden('id', $planeacion[0]->id) }}
                     <div class="form-group col-xs-12 col-sm-6">
+                        {{ Form::label('idclasseguimiento','Residencia') }}
+                        <div class="controls">
+                            {{ Form::select('idclasseguimiento', $clasificadores,null, array('class' => 'form-control upper')) }}
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
                         {{ Form::label('comentarios','Comentarios') }}
                         <div class="controls">
                             {{ Form::textarea('comentarios', $planeacion[0]->comentarios, array('class'=>'form-control','rows'=>'3') ) }}
@@ -34,7 +41,7 @@
                     <div class="form-group col-xs-12 col-sm-6">
                         {{ Form::label('observacionesseg','Observaciones Seguimiento') }}
                         <div class="controls">
-                            {{ Form::textarea('observacionesseg', $planeacion[0]->observacionesseg, array('class'=>'form-control','rows'=>'3') ) }}
+                            {{ Form::textarea('observacionesseg', $planeacion[0]->observacionesseg, array('class'=>'form-control','rows'=>'5') ) }}
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
