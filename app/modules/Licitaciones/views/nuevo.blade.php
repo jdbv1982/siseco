@@ -1,5 +1,5 @@
 <div class="col-xs-10 col-xs-offset-1">
-@include('layouts/errores')	
+@include('layouts/errores')
 {{ Form::open(array('url'=> array('licitaciones/nuevo', $id), 'method'=>'POST','class'=>'form-inline')) }}
   <input type="hidden" name="id" id="id" value="{{ $id }}">
   <input type="hidden" name="idfuente_" id="id" value="{{ $planeacion->idfgeneral }}">
@@ -63,14 +63,14 @@
 			<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 				{{ Form::label('l_finicio','Fecha de Inicio') }}
 				<div class="controls">
-					{{ Form::text('l_finicio',null,array('class'=>'form-control')) }}					
+					{{ Form::text('l_finicio',null,array('class'=>'form-control')) }}
 				</div>
 			</div>
 
 			<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 				{{ Form::label('l_ffinal','Fecha Final') }}
 				<div class="controls">
-					{{ Form::text('l_ffinal',null,array('class'=>'form-control')) }}					
+					{{ Form::text('l_ffinal',null,array('class'=>'form-control')) }}
 				</div>
 			</div>
 
@@ -127,13 +127,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="alert alert-danger alert-dismissable alerta oculto">                  
+                <div class="alert alert-danger alert-dismissable alerta oculto">
                   <strong>Error!</strong> Corregir los siguientes Errores:.
                   <p class="mensage"></p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Agregar Contratista</h4>
-            </div>            
+            </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -183,8 +183,14 @@
                             {{ Form::text('celular',null,array('class'=>'form-control')) }}
                         </div>
                     </div>
-                   
-                </div>           
+                    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {{ Form::label('rfc','RFC') }}
+                        <div class="controls">
+                            {{ Form::text('rfc',null,array('class'=>'form-control')) }}
+                        </div>
+                    </div>
+
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" id="setcontratista" class="btn btn-primary">Guardar</button>

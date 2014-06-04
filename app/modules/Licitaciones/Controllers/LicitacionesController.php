@@ -6,6 +6,7 @@ use App\Modules\Planeacion\Models\Planeacion;
 use App\Modules\Licitaciones\Models\Fianzas;
 use App\Modules\Licitaciones\Models\Convenio;
 use App\Modules\Licitaciones\Models\Adendo;
+use App\Modules\Licitaciones\Models\Diferimiento;
 
 
 
@@ -35,6 +36,8 @@ class LicitacionesController extends \BaseController{
 
 		$adendos = DB::table('adendos')->where('idobra','=',$id)->get();
 
+		$diferimientos = DB::table('diferimientos')->where('idobra','=',$id)->get();
+
 
 		if(is_null($planeacion)){
 			App::abort(404);
@@ -43,7 +46,7 @@ class LicitacionesController extends \BaseController{
 		if(is_null($licitacion)){
 			$this->layout->contenido = View::make('Licitaciones::nuevo', compact('empresas','estados','id','planeacion'));
 		}else{
-			$this->layout->contenido = View::make('Licitaciones::editar', compact('empresas','estados','id','fianzas','tfianza','afianzadoras','tconvenio','convenios','adendos','planeacion'))->with('licitacion',$licitacion);
+			$this->layout->contenido = View::make('Licitaciones::editar', compact('empresas','estados','id','fianzas','tfianza','afianzadoras','tconvenio','convenios','adendos','planeacion','diferimientos'))->with('licitacion',$licitacion);
 		}
 	}
 
@@ -153,6 +156,31 @@ class LicitacionesController extends \BaseController{
 
 	}
 
+
+	public function getDiferimiento($id){
+		$diferimiento = Diferimiento::find($id);
+
+		if(is_null($diferimiento)){
+			App::abort(404);
+		}
+
+		$this->layout->contenido = View::make('Licitaciones::editardiferimiento', compact('diferimiento'));
+	}
+
+	public function setDiferimiento($id){
+		$data = Input::all();
+		$diferimiento = Diferimiento::find($id);
+		if(is_null($diferimiento)){
+			App::abort(404);
+		}
+
+		if($diferimiento->validAndSave($data)){
+			return Redirect::to('licitaciones/nuevo/'.$diferimiento->idobra);
+		}else{
+			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($diferimiento->errores)->withInput();
+		}
+	}
+
 	public function agregaFianza($id){
 		$data = Input::all();
 		$fianza = new Fianzas;
@@ -181,6 +209,16 @@ class LicitacionesController extends \BaseController{
 			return 'true';
 		}else{
 			return $adendo->errores;
+		}
+	}
+
+	public function agregaDiferimiento($id){
+		$data = Input::all();
+		$diferimiento = new Diferimiento;
+		if($diferimiento->validAndSave($data)){
+			return 'true';
+		}else{
+			return $diferimiento->errores;
 		}
 	}
 }

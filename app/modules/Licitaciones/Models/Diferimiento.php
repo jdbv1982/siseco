@@ -2,14 +2,14 @@
 
 use Validator;
 
-class Convenio extends \Eloquent{
+class Diferimiento extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idobra','numconvenio','fechaconvenio','tipoconvenio','cantidad','finicio','ffinal','observ_convenio');
-	protected $table = 'convenios';
+	protected $fillable = array('idobra','numdiferimiento','fechadiferimiento','cantidad','finiciodiferimiento','ffinaldiferimiento','observ_diferimiento');
+	protected $table = 'diferimientos';
 
 	public function isValid($data){
 		$rules = array(
-			'numconvenio' => 'required'
+			'numdiferimiento' => 'required'
 		);
 
 		$validar = Validator::make($data, $rules);

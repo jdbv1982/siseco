@@ -6,6 +6,7 @@ use App\Modules\Estimaciones\Models\FechasEstimacion as Fechas;
 use App\Modules\Obras\Models\Obras;
 use App\Modules\Planeacion\Models\Planeacion;
 use App\Modules\Facturas\Models\Factura;
+use App\Modules\Residencias\Models\Residencias;
 
 class EstimacionController extends \BaseController{
 	protected $layout = "layouts.layout";
@@ -13,13 +14,14 @@ class EstimacionController extends \BaseController{
 	public function getListado(){
 		$est = new Estimacion;
 		$datos = $est->getEstimaciones();
-		$this->layout->contenido = View::make('Estimaciones::listado', compact('datos'));			
+		$this->layout->contenido = View::make('Estimaciones::listado', compact('datos'));
 	}
 
 	public function setNuevo($id){
 		$obra = Planeacion::find($id);
+		$residencia = Residencias::find($obra->idresidencia);
 		$estatus = DB::table('eststatus')->lists('nombre','id');
-		$this->layout->contenido = View::make('Estimaciones::nuevo', compact('obra','estatus'));
+		$this->layout->contenido = View::make('Estimaciones::nuevo', compact('obra','estatus','residencia'));
 	}
 
 	public function postNuevo($id){
@@ -56,9 +58,9 @@ class EstimacionController extends \BaseController{
 		$obra = Planeacion::find($idobra);
 		$fechas = Fechas::find($id);
 		if(is_null($fechas)){
-			$this->layout->contenido = View::make('Estimaciones::fechas', compact('obra','est'));			
+			$this->layout->contenido = View::make('Estimaciones::fechas', compact('obra','est'));
 		}else{
-			$this->layout->contenido = View::make('Estimaciones::actualizafechas', compact('obra','est','fechas'));			
+			$this->layout->contenido = View::make('Estimaciones::actualizafechas', compact('obra','est','fechas'));
 		}
 	}
 
@@ -66,7 +68,7 @@ class EstimacionController extends \BaseController{
 		$data = Input::all();
 		$fechas = Fechas::find($id);
 		if(is_null($fechas)){
-			$fechas = new Fechas;			
+			$fechas = new Fechas;
 		}
 
 		if($fechas->validAndSave($data)){

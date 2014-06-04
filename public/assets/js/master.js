@@ -162,6 +162,11 @@ $(document).ready(function() {
 	  	guardaConvenio($('#idobra').val());
 	});
 
+	$( "body" ).on( "click", "#adddiferimiento", function(e) {
+		e.preventDefault();
+	  	guardaDiferimiento($('#idobra').val());
+	});
+
 	$( "body" ).on( "click", "#addadendo", function(e) {
 		e.preventDefault();
 	  	guardaAdendo($('#idobra').val());
@@ -211,6 +216,15 @@ $(document).ready(function() {
 	$('#fecha8').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 	$('#fecha9').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 	$('#fecha10').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+
+	$('#fechadiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+	$('#finiciodiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+	$('#ffinaldiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+
+	$('#finicio_est').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+	$('#ftermino_est').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+
+
 
 	    $('#selecctall').click(function(event) {  //on click
         if(this.checked) { // check select status
@@ -437,6 +451,36 @@ function varificarAccesso(usuario, pass){
 
 
 }
+
+function guardaDiferimiento(id){
+	var numdiferimiento 	= $('#numdiferimiento').val();
+	var fechadiferimiento	= $('#fechadiferimiento').val();
+	var cantdiferimiento	= $('#cantidad').val();
+	var data = $('#iddiferimiento').serialize();
+
+	$.ajax({
+	url:"../../agregadiferimiento/"+id
+	,type : "POST"
+	,async: true
+	,data : data
+	,success: function(msg){
+		if(msg == 'true'){
+			limpiarCampos();
+			$('#tbdiferimiento').append('<tr><td>'+ numdiferimiento +'</td> <td>'+ fechadiferimiento +'</td> <td>'+ cantdiferimiento +'</td> </tr>');
+			$('#diferimientos').modal('hide');
+		}else{
+			$('.alerta').css({ display: "block" });
+			$('.mensage').html('');
+				$.each( msg, function( key, value ) {
+					$('.mensage').append('<h6>'+value+'</h6>');
+				});
+			}
+		}
+	});
+	return true;
+
+}
+
 
 //funcion para guardar un oficio
 function guardaOficio(id){

@@ -23,8 +23,12 @@ class CreateEstimacionesTable extends Migration {
 			$table->text('observacion')->nullable();
 			$table->date('fdevolucion')->nullable();
 			$table->double('importe')->nullable();
-			$table->string('pejecucion')->nullable();
+			$table->date('finicio_est')->nullable();
+			$table->date('ftermino_est')->nullable();
 			$table->integer('estatus')->nullable();
+			$table->text('recibido_por')->nullable();
+			$table->text('nombreobra_ori')->nullable();
+
 			$table->timestamps();
 		});
 	}

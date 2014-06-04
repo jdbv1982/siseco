@@ -12,10 +12,10 @@
         </tr>
     </thead>
     <tbody>
-        
+
     @foreach ($oficios as $oficio)
     <tr>
-    	<td>{{ $oficio->id }}</td>
+    	<td>{{ $oficio->idobra }}</td>
         <td>{{ $oficio->nombreoficio }}</td>
         <td>{{ $oficio->numerooficio }}</td>
         <td>{{ $oficio->fechaoficio }}</td>

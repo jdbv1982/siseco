@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <legend>Datos Generales</legend>
-        @if (Auth::user()->idPerfil > 4)
+        @if(Auth::user()->verificaPermiso(Auth::user()->id, 41) == 'true')
             <a href="#" id="masoficio" data-toggle="modal" data-target="#autorizar" class="btn btn-primary"> + </a>
         @endif
 

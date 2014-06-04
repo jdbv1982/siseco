@@ -13,7 +13,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     @if(Auth::check())
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        @if (Auth::user()->idPerfil > 4)
+        @if(Auth::user()->verificaPermiso(Auth::user()->id, 31) == 'true')
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema <b class="caret"></b></a>

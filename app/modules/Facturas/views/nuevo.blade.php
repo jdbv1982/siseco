@@ -1,5 +1,8 @@
 <h2>Nueva Factura</h2>
 
+<p><strong>Estimacion: </strong>{{ $estimacion->nombre }} {{ $estimacion->numestimacion }}</p>
+<p><strong>Nombre de la Obra: </strong>{{ $estimacion->nombreobra_ori }}</p>
+
 {{ Form::open(array('url'=> array('facturas/nuevo'),'method'=>'POST')) }}
 
 <input type="hidden" id="idestimacion" name="idestimacion" value="{{ $id }}">
@@ -16,7 +19,7 @@
 		<div class="controls">
 			{{ Form::text('fechaexp',null,array('class'=>'form-control','required')) }}
 		</div>
-	</div>	
+	</div>
 
 	<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		{{ Form::label('subtotal','Subtotal') }}
@@ -42,14 +45,14 @@
 	<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		{{ Form::label('finieje','Fecha de Inicio') }}
 		<div class="controls">
-			{{ Form::text('finieje',null,array('class'=>'form-control')) }}
+			{{ Form::text('finieje',$estimacion->finicio_est,array('class'=>'form-control')) }}
 		</div>
 	</div>
 
 	<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		{{ Form::label('ffineje','Fecha de Termino') }}
 		<div class="controls">
-			{{ Form::text('ffineje',null,array('class'=>'form-control')) }}
+			{{ Form::text('ffineje',$estimacion->ftermino_est,array('class'=>'form-control')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -59,7 +62,7 @@
 		</div>
 	</div>
 
-	
+
 
 </div>
 	<br>

@@ -3,20 +3,22 @@
 use View, Input, Redirect, Response, Auth;
 
 use App\Modules\Facturas\Models\Factura;
+use App\Modules\Estimaciones\Models\Estimacion;
 
 class FacturaController extends \BaseController{
+
 		protected $layout = "layouts.layout";
 
 		public function setNuevo($id){
 			$factura = Factura::where('idestimacion','=',$id)->get();
+			$estimacion = Estimacion::find($id);
 
 			if(sizeof($factura) == 0){
-				$this->layout->contenido = View::make('Facturas::nuevo',compact('id'));
+				$this->layout->contenido = View::make('Facturas::nuevo',compact('id', 'estimacion'));
 			}else{
 				$factura = $factura[0];
 				$this->layout->contenido = View::make('Facturas::editar', compact('factura'));
 			}
-
 		}
 
 		public function postnuevo(){

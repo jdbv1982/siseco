@@ -4,11 +4,11 @@ use Validator, DB;
 
 class Estimacion extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idobra','nombre','numrevision','numestimacion','festimacion','observacion','fdevolucion','importe','pejecucion','estatus');
+	protected $fillable = array('idobra','nombre','numrevision','numestimacion','festimacion','observacion','fdevolucion','importe','estatus','finicio_est','ftermino_est','recibido_por','nombreobra_ori');
 	protected $table = 'estimaciones';
 
 	public function isValid($data){
-		$rules = array(			
+		$rules = array(
 			'idobra' => 'required',
 			'nombre' => 'required',
 			'importe' => 'required'
@@ -19,7 +19,7 @@ class Estimacion extends \Eloquent{
 			return true;
 		}
 
-		$this->errores = $validar->errors(); 
+		$this->errores = $validar->errors();
 		return false;
 	}
 
@@ -36,7 +36,7 @@ class Estimacion extends \Eloquent{
 		return DB::table('planeacion as p')
 			->leftjoin('estimaciones as es','es.idobra','=','p.id')
 			->leftjoin('eststatus as e','es.estatus','=','e.id')
-			->select('p.id','p.numeroobra','p.nombreobra', 'es.nombre', 'es.numrevision','es.numestimacion','es.festimacion','es.observacion','es.fdevolucion','es.importe','es.pejecucion','es.estatus','e.nombre as estatus','es.id as idestimacion')
+			->select('p.id','p.numeroobra','p.nombreobra', 'es.nombre', 'es.numrevision','es.numestimacion','es.festimacion','es.observacion','es.fdevolucion','es.importe','es.finicio_est','es.ftermino_est', 'es.estatus','e.nombre as estatus','es.id as idestimacion')
 			->get();
 	}
 }

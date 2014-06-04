@@ -15,7 +15,8 @@ return array(
 
 	'paths' => array(
 		__DIR__.'/../views',
-		__DIR__.'/../modules/Obras/partials'
+		__DIR__.'/../modules/Obras/partials',
+		__DIR__.'/../modules/partials'
 		),
 
 	/*
