@@ -16,7 +16,14 @@
                     <div class="form-group col-xs-12 col-sm-6">
                         {{ Form::label('idclasseguimiento','Clasificación de Obra') }}
                         <div class="controls">
-                            {{ Form::select('idclasseguimiento', $clasificadores,null, array('class' => 'form-control upper')) }}
+                            {{ Form::select('idclasseguimiento', $clasificadores,$planeacion[0]->idclasseguimiento, array('class' => 'form-control upper')) }}
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        {{ Form::label('idsubclasseguimiento','Clasificación de Obra') }}
+                        <div class="controls">
+                            {{ Form::select('idsubclasseguimiento', $subclasificadores,$planeacion[0]->idsubclasseguimiento, array('class' => 'form-control upper')) }}
                         </div>
                         <br>
                     </div>

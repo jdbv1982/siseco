@@ -57,6 +57,7 @@ class CreatePlaneacionTable extends Migration {
 			$table->integer('idfgeneral');
 			$table->integer('idresidencia')-nullable();
 			$table->integer('idclasseguimiento')-nullable();
+			$table->integer('idsubclasseguimiento')-nullable();
 
 			$table->timestamps();
 		});

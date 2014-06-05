@@ -6,7 +6,7 @@ class Informacion extends \Eloquent{
 	public function getInformacion(){
 		return DB::select( DB::raw("SELECT
 	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas,
-	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,
+	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,
 	(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 	(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 	(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
@@ -44,7 +44,7 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	public function getInformacionId($id){
 		$datos = DB::select( DB::raw("SELECT
 	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas,
-	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,
+	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,
 	(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 	(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 	(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
