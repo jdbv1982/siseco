@@ -155,24 +155,37 @@
                 {{ Form::select('idsituacion', $situacion,null, array('class' => 'form-control upper')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-3">
             {{ Form::label('idmodalidad', 'Modalidad de Ejecucion') }}
             <div class="controls">
                 {{ Form::select('idmodalidad', $modalidad,null, array('class' => 'form-control upper')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-3">
             {{ Form::label('numeroobra', 'Numero de Obra') }}
             <div class="controls">
                 {{ Form::text('numeroobra',null,array('class'=>'form-control', 'required')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-2">
             {{ Form::label('idfgeneral', 'Fuente General') }}
             <div class="controls">
                 {{ Form::select('idfgeneral', $fgeneral,null, array('class' => 'form-control upper')) }}
             </div>
         </div>
+        <div class="form-group col-xs-12 col-sm-2">
+            {{ Form::label('tipo_obra_id', 'Tipo de Obra') }}
+            <div class="controls">
+                {{ Form::select('tipo_obra_id', $tipos_obra,null, array('class' => 'form-control upper')) }}
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-2">
+            {{ Form::label('tipo_atn_id', 'Tipo de Atencion') }}
+            <div class="controls">
+                {{ Form::select('tipo_atn_id', $tipo_atencion,null, array('class' => 'form-control upper')) }}
+            </div>
+        </div>
+
         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
             {{ Form::label('nombreobra','Nombre de la Obra') }}
             <div class="controls">

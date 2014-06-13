@@ -7,7 +7,7 @@ class Planeacion extends \Eloquent{
 	protected $fillable = array('ppi','nombreppi','idregion','iddistrito','idmunicipio','idlocalidad','idprograma','idsubprograma','idtipo','numeroobra','nombreobra','idfuente',
 			'idsubfuente','idorigen','idsuborigen','idclassuborigen','idcvefin','ejercicio','idramo','idfondo','idsituacion','depejecutora','nombreaccion','idunidadmedida',
 			'idmeta', 'cantidad','idpoblacion', 'bmujeres','bhombres','bjornales','caracteristicas','idmodalidad','comentarios','concejecutar','observaciones','codigoaccion','observacionesseg',
-			'ninforme','idfgeneral','idresidencia');
+			'ninforme','idfgeneral','idresidencia','tipo_obra_id','tipo_atn_id');
 	protected $table = 'planeacion';
 
 	public function isValid($data){
