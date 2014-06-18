@@ -4,7 +4,7 @@ use Validator, DB;
 
 class Factura extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idestimacion', 'folio', 'fechaexp', 'subtotal', 'amtzxant', 'liquido', 'finieje', 'ffineje', 'observaciones', 'idusuario');
+	protected $fillable = array('idestimacion', 'folio', 'fechaexp', 'subtotal', 'amtzxant','supervision','secodam','cmic', 'liquido', 'finieje', 'ffineje', 'observaciones', 'idusuario');
 	protected $table = 'facturas';
 
 	public function isValid($data){

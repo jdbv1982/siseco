@@ -11,26 +11,32 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <legend>Datos Generales</legend>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-2">
+                {{ Form::label('status_id','Estatus de la Obra') }}
+                <div class="controls">
+                    {{ Form::select('status_id', $status_id,null, array('class' => 'form-control upper')) }}
+                </div>
+            </div>
+        <div class="form-group col-xs-12 col-sm-2">
             {{ Form::label('nombreoficio','Nombre del Oficio') }}
             <div class="controls">
                 {{ Form::text('nombreoficio','AUTORIZACION',array('class'=>'form-control', 'required', 'readonly')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-3">
             {{ Form::label('numerooficio','Numero de Oficio') }}
             <div class="controls">
                 {{ Form::text('numerooficio',null,array('class'=>'form-control upper', 'required','autofocus')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-2">
             {{ Form::label('fechaoficio','Fecha') }}
             <div class="controls">
                 {{ Form::text('fechaoficio',null,array('class'=>'form-control')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            {{ Form::label('fecharecibido','Fecha de Recibido por la Dependencia') }}
+        <div class="form-group col-xs-12 col-sm-2">
+            {{ Form::label('fecharecibido','Recibido por la Dependencia') }}
             <div class="controls">
                 {{ Form::text('fecharecibido',null,array('class'=>'form-control')) }}
             </div>

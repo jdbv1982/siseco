@@ -1,6 +1,6 @@
 <div class="col-xs-10 col-xs-offset-1">
     <h2>Listado de Estimaciones</h2>
-<p>			
+<p>
     <a href="{{ URL::to('/inicio') }}" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></a>
 </p>
 <div class="table-responsive">
@@ -19,13 +19,13 @@
         </tr>
     </thead>
     <tbody>
-        
+
     @foreach ($datos as $dato)
     <tr>
     	<td>{{ $dato->id }}</td>
         <td>{{ $dato->numeroobra }}</td>
         <td>{{ $dato->nombreobra }}</td>
-        <td>{{ $dato->nombre }}</td>
+        <td>{{ $dato->nombre }} {{ $dato->numestimacion }}</td>
         <td>{{ $dato->numrevision }}</td>
         <td>{{ $dato->estatus }}</td>
         <td>{{ $dato->importe }}</td>
@@ -43,7 +43,7 @@
                 @endif
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 24) == 'true')
                     <a class="btn btn-default" href="{{ URL::to('estimaciones/facturas/'.$dato->id) }}" data-toggle="tooltip" data-placement="left" title="Agregar Facturas"><img src="../../public/assets/images/app/facturas.png" alt=""></a>
-                @endif            
+                @endif
             @endif
         </td>
 

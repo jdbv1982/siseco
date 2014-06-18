@@ -33,10 +33,11 @@ class PlaneacionController extends \BaseController{
 		$metas = DB::table('metas')->lists('nombremeta','id');
 		$tpoblacion = DB::table('poblacion')->lists('nombrepoblacion','id');
 		$fgeneral = DB::table('fuentegeneral')->lists('fuentegeneral','id');
+		$status_id = DB::table('status_obras')->lists('nombre','id');
 		$this->layout->contenido = View::make('Planeacion::nuevo',
 			compact('regiones','distritos','municipios','localidades','fuentes','subfuentes',
 					'origen','suborigen','clasificacion','financiamiento','medidas','programa',
-					'subprograma','tipoprograma','modalidad','situacion','metas','tpoblacion','fgeneral','tipos_obra','tipo_atencion'));
+					'subprograma','tipoprograma','modalidad','situacion','metas','tpoblacion','fgeneral','tipos_obra','tipo_atencion','status_id'));
 	}
 
 	public function AddObra(){
@@ -200,12 +201,12 @@ class PlaneacionController extends \BaseController{
 		$tpoblacion = DB::table('poblacion')->lists('nombrepoblacion','id');
 		$tipos_obra = DB::table('tipo_obra')->lists('nombre','id');
 		$tipo_atencion = DB::table('tipo_atencion')->lists('nombre','id');
-
+		$status_id = DB::table('status_obras')->lists('nombre','id');
 		$this->layout->contenido = View::make('Planeacion::editar',
 			compact('regiones','distritos','municipios','localidades','fuentes',
 				'estructura','oficios','calen','medidas','programa','subprograma',
 				'tipoprograma','modalidad','situacion','subfuentes','origen','suborigen',
-				'clasificacion','financiamiento','fgeneral','metas','tpoblacion','tipos_obra','tipo_atencion'))
+				'clasificacion','financiamiento','fgeneral','metas','tpoblacion','tipos_obra','tipo_atencion','status_id'))
 		->with('obra', $obra);
 
 

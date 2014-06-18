@@ -36,14 +36,19 @@
                 @endforeach
             </tbody>
         </table>
-
-        <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="form-group col-xs-12 col-sm-2">
+                {{ Form::label('status_id','Estatus de la Obra') }}
+                <div class="controls">
+                    {{ Form::select('status_id', $status_id,null, array('class' => 'form-control upper')) }}
+                </div>
+            </div>
+        <div class="form-group col-xs-12 col-sm-2">
             {{ Form::label('ppi','PPI') }}
             <div class="controls">
                 {{ Form::text('ppi',null,array('class'=>'form-control', 'required')) }}
             </div>
         </div>
-        <div class="form-group col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="form-group col-xs-12 col-sm-8">
             {{ Form::label('nombreppi', 'Nombe de PPI') }}
             <div class="controls">
                 {{ Form::text('nombreppi',null,array('class'=>'form-control', 'required')) }}
