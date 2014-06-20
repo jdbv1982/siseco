@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 <h1>Editar Calendarización</h1>
 <a href="#" id="sumarcale" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></a>
 @include('layouts/errores')
