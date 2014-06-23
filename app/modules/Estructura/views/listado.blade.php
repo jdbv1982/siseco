@@ -5,6 +5,7 @@
         <tr>
         	<th># Obra</th>
             <th>Concepto</th>
+            <th>Total</th>
             <th>Inv. Federal</th>
             <th>Inv. Estatal</th>
             <th>Inv. municipal</th>
@@ -18,6 +19,7 @@
     <tr>
         <td>{{ $est->idobra }}</td>
         <td>{{ $est->concepto }}</td>
+        <td>{{ $est->total }}</td>
         <td>{{ $est->invfederal }}</td>
         <td>{{ $est->investatal }}</td>
         <td>{{ $est->invmunicipal }}</td>

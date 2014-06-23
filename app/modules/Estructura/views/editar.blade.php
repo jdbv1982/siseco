@@ -3,10 +3,16 @@
 {{ Form::model($estructura, array('url'=> array('estructura/editar',$estructura->id),'method'=>'POST',)) }}
 {{ Form::hidden('idobra', $estructura->idobra) }}
 <div class="row">
-	<div class="form-group col-xs-12 col-sm-4">
+	<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('Concepto:') }}
 		<div class="controls">
 			{{ Form::text('concepto',$estructura->concepto,array('class'=>'form-control','required')) }}
+		</div>
+	</div>
+	<div class="form-group col-xs-12 col-sm-2">
+		{{ Form::label('Total:') }}
+		<div class="controls">
+			{{ Form::text('total',$estructura->total,array('class'=>'form-control')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-2">
@@ -37,6 +43,6 @@
 <br>
 <div class="form-group">
 	{{ Form::submit('Guardar',array('class'=>'btn btn-primary')) }}
-	<a href="{{ URL::to('calendarizacion/listado') }}" class="btn btn-primary">Cancelar</a>
+	<a href="{{ URL::to('estructura/listado') }}" class="btn btn-primary">Cancelar</a>
 </div>
 {{ Form::close() }}
