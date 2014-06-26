@@ -45,7 +45,7 @@ class ContratadasController extends \BaseController{
 
 	public function verResumen(){
 		$opcion = Input::get('filtro');
-	
+
 		$rep = new Reportes;
 		$obras = new Contratadas;
 		$datos = $obras->getResumenInfo($opcion);
@@ -57,7 +57,7 @@ class ContratadasController extends \BaseController{
 		if( $opcion == ["idmunicipio"]){$filtro = 'MUNICIPIO';}
 		if( $opcion == ["idlocalidad"]){$filtro = 'LOCALIDAD';}
 
-	
+
 		return $rep->printResumen($datos, $totales, $filtro);
 	}
 }

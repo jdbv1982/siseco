@@ -428,13 +428,13 @@
                     <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ Form::label('fechaoficio','Fecha') }}
                         <div class="controls">
-                            {{ Form::text('fechaoficio','0000-00-00',array('class'=>'form-control')) }}
+                            {{ Form::text('fechaoficio','0000-00-00',array('class'=>'form-control fecha')) }}
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ Form::label('fecharecibido','Recibido por la Dependencia') }}
                         <div class="controls">
-                            {{ Form::text('fecharecibido','0000-00-00',array('class'=>'form-control')) }}
+                            {{ Form::text('fecharecibido','0000-00-00',array('class'=>'form-control fecha')) }}
                         </div>
                     </div>
 

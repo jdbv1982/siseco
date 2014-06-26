@@ -12,7 +12,7 @@
             <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 {{ Form::label('fechaconvenio','Fecha') }}
                 <div class="controls">
-                    {{ Form::text('fechaconvenio',null,array('class'=>'form-control', 'required')) }}
+                    {{ Form::text('fechaconvenio',null,array('class'=>'form-control fecha', 'required')) }}
                 </div>
             </div>
             <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -30,13 +30,13 @@
             <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 {{ Form::label('finicio','Fecha Inicio') }}
                 <div class="controls">
-                    {{ Form::text('finicio',null,array('class'=>'form-control', 'required')) }}
+                    {{ Form::text('finicio',null,array('class'=>'form-control fecha', 'required')) }}
                 </div>
             </div>
             <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 {{ Form::label('ffinal','Fecha Termino') }}
                 <div class="controls">
-                    {{ Form::text('ffinal',null,array('class'=>'form-control', 'required')) }}
+                    {{ Form::text('ffinal',null,array('class'=>'form-control fecha', 'required')) }}
                 </div>
             </div>
         </div>

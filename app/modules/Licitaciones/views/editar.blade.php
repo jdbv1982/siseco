@@ -35,7 +35,7 @@
 			<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 				{{ Form::label('l_fecha','Fecha') }}
 				<div class="controls">
-					{{ Form::text('l_fecha',null,array('class'=>'form-control')) }}
+					{{ Form::text('l_fecha',null,array('class'=>'form-control fecha')) }}
 				</div>
 			</div>
 		</div>
@@ -64,14 +64,14 @@
 			<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 				{{ Form::label('l_finicio','Fecha de Inicio') }}
 				<div class="controls">
-					{{ Form::text('l_finicio',null,array('class'=>'form-control')) }}
+					{{ Form::text('l_finicio',null,array('class'=>'form-control fecha')) }}
 				</div>
 			</div>
 
 			<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 				{{ Form::label('l_ffinal','Fecha Final') }}
 				<div class="controls">
-					{{ Form::text('l_ffinal',null,array('class'=>'form-control')) }}
+					{{ Form::text('l_ffinal',null,array('class'=>'form-control fecha')) }}
 				</div>
 			</div>
 

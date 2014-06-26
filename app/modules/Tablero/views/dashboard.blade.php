@@ -7,13 +7,16 @@
       </div>
       <div class="panel-body">
         	@if(Auth::user()->verificaPermiso(Auth::user()->id, 16) == 'true')
-                <li><a href="{{ URL::to('reportes/obrasautorizadas') }}">Obras Autorizadas</a></li>
+                <li><a class="reporte" href="{{ URL::to('reportes/obrasautorizadas') }}">Obras Autorizadas</a></li>
             @endif
             @if(Auth::user()->verificaPermiso(Auth::user()->id, 17) == 'true')
-                <li><a href="{{ URL::to('reportes/obrascontratadas') }}">Obras Contratadas</a></li>
+                <li><a class="reporte" href="{{ URL::to('reportes/obrascontratadas') }}">Obras Contratadas</a></li>
             @endif
             @if(Auth::user()->verificaPermiso(Auth::user()->id, 18) == 'true')
-                <li><a href="{{ URL::to('reportes/resumen') }}">Resumen de Obras</a></li>
+                <li><a class="reporte" href="{{ URL::to('reportes/resumen') }}">Resumen de Obras</a></li>
+            @endif
+            @if(Auth::user()->verificaPermiso(Auth::user()->id, 18) == 'true')
+                <li><a class="reporte" href="{{ URL::to('reportes/resumen_planeacion') }}">Resumen Planeacion</a></li>
             @endif
                 <li><a href="{{ URL::to('reportes/informacion') }}">Información Completa</a></li>
       </div>
@@ -57,14 +60,8 @@
       <div class="panel-heading">
         <h3 class="panel-title">Panel de filtros</h3>
       </div>
-      <div class="panel-body">
-        En Construcción...
-        das
-        das
-        da
-        sd
-        asd
-        asd
+      <div id="filtros" class="panel-body">
+
       </div>
     </div>
  </div>

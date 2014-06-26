@@ -11,41 +11,41 @@
                      <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha1','Ingreso a Ventanilla') }}
                         <div class="controls">
-                            {{ Form::text('fecha1',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha1',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha2','Ingreso a CAO') }}
                         <div class="controls">
-                            {{ Form::text('fecha2',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha2',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha3','Ingreso a SCT') }}
                         <div class="controls">
-                            {{ Form::text('fecha3',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha3',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha4','Valida SCT') }}
                         <div class="controls">
-                            {{ Form::text('fecha4',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha4',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha5','Ingreso a BANOBRAS') }}
                         <div class="controls">
-                            {{ Form::text('fecha5',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha5',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         {{ Form::label('fecha6','De Pago') }}
                         <div class="controls">
-                            {{ Form::text('fecha6',null,array('class'=>'form-control')) }}
+                            {{ Form::text('fecha6',null,array('class'=>'form-control fecha')) }}
                         </div>
-                    </div>  
+                    </div>
                 </div>
-                                                                                                                                                                                                                                                                                                                                       
+
 
 
 <br>

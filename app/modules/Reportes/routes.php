@@ -17,4 +17,9 @@ Route::group(array('before'=>'auth'), function(){
 	Route::get('reportes/anexovi/{id}', array('uses'=>'App\Modules\Reportes\Controllers\SeguimientoController@AnexoVI'));
 
 
+	//Reportes Planeacion
+	Route::get('reportes/resumen_planeacion', array('uses'=>'App\Modules\Reportes\Controllers\PlaneacionController@formResumen'));
+	Route::post('reportes/resumen_planeacion_', array('uses'=>'App\Modules\Reportes\Controllers\PlaneacionController@verResumen'));
+
+
 });

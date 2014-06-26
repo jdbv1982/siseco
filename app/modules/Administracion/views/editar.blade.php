@@ -26,14 +26,14 @@
 		{{ Form::label('felab','F. Elaboracion') }}
 		<div class="input-group col-xs-12">
 			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-			{{ Form::text('felab',null,array('class'=>'form-control text-right', 'required')) }}
+			{{ Form::text('felab',null,array('class'=>'form-control text-right fecha', 'required')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-2 ">
 		{{ Form::label('frecp','F. Recepción') }}
 		<div class="input-group col-xs-12">
 			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-			{{ Form::text('frecp',null,array('class'=>'form-control text-right')) }}
+			{{ Form::text('frecp',null,array('class'=>'form-control text-right fecha')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-2 ">
@@ -111,7 +111,7 @@
 		{{ Form::label('fcheque','F. Cheque') }}
 		<div class="input-group col-xs-12 2 ">
 			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-			{{ Form::text('fcheque',null,array('class'=>'form-control text-right')) }}
+			{{ Form::text('fcheque',null,array('class'=>'form-control text-right fecha')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-3 ">

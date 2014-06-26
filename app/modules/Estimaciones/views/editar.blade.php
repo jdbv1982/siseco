@@ -28,13 +28,13 @@
 	<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('festimacion','Fecha') }}
 		<div class="controls">
-			{{ Form::text('festimacion',null,array('class'=>'form-control')) }}
+			{{ Form::text('festimacion',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('fdevolucion','Fecha Devolución') }}
 		<div class="controls">
-			{{ Form::text('fdevolucion',null,array('class'=>'form-control')) }}
+			{{ Form::text('fdevolucion',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-2">
@@ -46,14 +46,14 @@
 		<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('finicio_est','Inicio') }}
 		<div class="controls">
-			{{ Form::text('finicio_est',null,array('class'=>'form-control')) }}
+			{{ Form::text('finicio_est',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 
 	<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('ftermino_est','Termino') }}
 		<div class="controls">
-			{{ Form::text('ftermino_est',null,array('class'=>'form-control')) }}
+			{{ Form::text('ftermino_est',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-2">

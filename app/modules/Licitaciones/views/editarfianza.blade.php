@@ -18,7 +18,7 @@
         <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
             {{ Form::label('fechafianza','Fecha') }}
             <div class="controls">
-                {{ Form::text('fechafianza',null,array('class'=>'form-control', 'required')) }}
+                {{ Form::text('fechafianza',null,array('class'=>'form-control fecha', 'required')) }}
             </div>
         </div>
         <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">

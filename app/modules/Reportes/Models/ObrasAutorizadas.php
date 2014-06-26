@@ -4,169 +4,20 @@ use DB;
 
 class ObrasAutorizadas extends \Eloquent{
 	public function getObrasAut($r, $d, $m, $l){
-		if(($r == 0) and ($d == 0) and ($m == 0) and ($l == 0)){
-			return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));
-		}//todas las obras
+		$sql = "SELECT p.id, p.nombreobra, finan.nombrefinanciamiento, of.numerooficio, of.fechaoficio, SUM(est.investatal) AS monto
+				FROM planeacion AS p
+				INNER JOIN financiamiento AS finan ON p.idcvefin = finan.id
+				INNER JOIN oficios AS of ON p.id = of.idobra
+				INNER JOIN estructura AS est ON p.id = est.idobra ";
+		$sql .= "WHERE of.nombreoficio = 'AUTORIZACION' ";
 
-		if($r != 0){
-			if($d != 0){
-				if($m != 0){
-					if($l != 0){
-						return $obras = DB::table('planeacion')
-						->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-						->join('oficios','planeacion.id','=','oficios.idobra')
-						->join('estructura','planeacion.id','=','estructura.idobra')
-						->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-						->where('oficios.nombreoficio','=','AUTORIZACION')
-						->where('planeacion.idregion','=',$r)
-						->where('planeacion.iddistrito','=',$d)
-						->where('planeacion.idmunicipio','=',$m)
-						->where('planeacion.idlocalidad','=',$l)
-						->get(array(
-			            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-						        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-					    ));						
-					}
-					return $obras = DB::table('planeacion')
-						->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-						->join('oficios','planeacion.id','=','oficios.idobra')
-						->join('estructura','planeacion.id','=','estructura.idobra')
-						->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-						->where('oficios.nombreoficio','=','AUTORIZACION')
-						->where('planeacion.idregion','=',$r)
-						->where('planeacion.iddistrito','=',$d)
-						->where('planeacion.idmunicipio','=',$m)
-						->get(array(
-			            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-						        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-					    ));					
-				}
-				return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.idregion','=',$r)
-				->where('planeacion.iddistrito','=',$d)
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));				
-			}
-			return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.idregion','=',$r)
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));			
-		}//filtro por region
+		if($r != 0){$sql .= "AND p.idregion = $r ";}
+		if($d != 0){$sql .= "AND p.iddistrito = $d ";}
+		if($m != 0){$sql .= "AND p.idmunicipio = $m ";}
+		if($l != 0){ $sql .= "AND p.idlocalidad = $l ";}
 
-		if($d != 0){
-			if($m != 0){
-					if($l != 0){
-						return $obras = DB::table('planeacion')
-						->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-						->join('oficios','planeacion.id','=','oficios.idobra')
-						->join('estructura','planeacion.id','=','estructura.idobra')
-						->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-						->where('oficios.nombreoficio','=','AUTORIZACION')
-						->where('planeacion.idregion','=',$r)
-						->where('planeacion.iddistrito','=',$d)
-						->where('planeacion.idmunicipio','=',$m)
-						->where('planeacion.idlocalidad','=',$l)
-						->get(array(
-			            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-						        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-					    ));						
-					}
-					return $obras = DB::table('planeacion')
-						->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-						->join('oficios','planeacion.id','=','oficios.idobra')
-						->join('estructura','planeacion.id','=','estructura.idobra')
-						->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-						->where('oficios.nombreoficio','=','AUTORIZACION')
-						->where('planeacion.idregion','=',$r)
-						->where('planeacion.iddistrito','=',$d)
-						->where('planeacion.idmunicipio','=',$m)
-						->get(array(
-			            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-						        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-					    ));					
-				}
-			return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.iddistrito','=',$d,'AND')
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));			
-		}//filtro por distrito
-
-		if($m != 0){
-			if($l != 0){
-				return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.idregion','=',$r)
-				->where('planeacion.iddistrito','=',$d)
-				->where('planeacion.idmunicipio','=',$m)
-				->where('planeacion.idlocalidad','=',$l)
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));						
-			}
-			return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.idmunicipio','=',$m,'AND')
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));			
-		}//filtro por municipio
-
-		if($l != 0){
-			return $obras = DB::table('planeacion')
-				->join('financiamiento','planeacion.idcvefin','=','financiamiento.id')
-				->join('oficios','planeacion.id','=','oficios.idobra')
-				->join('estructura','planeacion.id','=','estructura.idobra')
-				->groupBy('planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio')
-				->where('oficios.nombreoficio','=','AUTORIZACION')
-				->where('planeacion.idlocalidad','=',$l,'AND')
-				->get(array(
-	            		'planeacion.id', 'planeacion.nombreobra','financiamiento.nombrefinanciamiento','oficios.numerooficio','oficios.fechaoficio',
-				        DB::raw( 'SUM(estructura.investatal) AS monto' ),
-			    ));			
-		}//filtro por localidad
-
+		$sql .= "GROUP BY p.id, p.nombreobra, finan.nombrefinanciamiento, of.numerooficio, of.fechaoficio";
+		$datos = DB::select( DB::raw($sql));
+		return $datos;
 	}
-
-
-	
 }

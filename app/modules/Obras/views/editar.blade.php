@@ -35,7 +35,7 @@
 	<div class="form-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
 		{{ Form::label('l_fecha','Firma de Contrato:') }}
 		<div class="controls">
-			{{ Form::text('l_fecha',$obra[0]->l_fecha,array('class'=>'form-control', 'readonly','disabled')) }}
+			{{ Form::text('l_fecha',$obra[0]->l_fecha,array('class'=>'form-control fecha', 'readonly','disabled')) }}
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -146,7 +146,7 @@
 			{{ Form::text('convenio',null,array('class'=>'form-control text-right')) }}
 		</div>
 	</div>
-	
+
 </div>
 
 <div class="row col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -166,8 +166,8 @@
 		</div>
 	</div>
 	<div class="form-group">
-		{{ Form::label('plazos','ACUERDO RESCISION DE OBRA', array('class'=>'col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')) }}		
-	</div>	
+		{{ Form::label('plazos','ACUERDO RESCISION DE OBRA', array('class'=>'col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')) }}
+	</div>
 	<div class="form-group">
 		{{ Form::label('numero','Numero:', array('class'=>'col-xs-12 col-sm-4 col-md-4 col-lg-4')) }}
 		<div class="controls col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -177,7 +177,7 @@
 	<div class="form-group">
 		{{ Form::label('fecha','Fecha:', array('class'=>'col-xs-12 col-sm-4 col-md-4 col-lg-4')) }}
 		<div class="controls col-xs-12 col-sm-8 col-md-8 col-lg-8">
-			{{ Form::text('fecha',null,array('class'=>'form-control text-right')) }}
+			{{ Form::text('fecha',null,array('class'=>'form-control text-right fecha')) }}
 		</div>
 	</div>
 	<div class="form-group">
@@ -193,7 +193,7 @@
 <legend>Avances</legend>
 <p>Avance Fisico: <strong>{{$avances->afisico}} %</strong></p>
 <p>Avance Financiero: <strong>{{$avances->afinanciero}} %</strong></p>
-</div>	
+</div>
 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <br>
 <legend>Estimaciones
@@ -214,7 +214,7 @@
         </tr>
     </thead>
     <tbody id="tbodyest">
-        
+
     @foreach ($estimaciones as $estimacion)
     <tr>
         <td>{{ $estimacion->nombre }}</td>

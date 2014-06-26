@@ -1,6 +1,6 @@
 <h4>Resumen de Obras</h4>
 
-{{ Form::open(array('url'=>'reportes/verresumen','class'=>'form-inline')) }}
+{{ Form::open(array('url'=>'reportes/resumen_planeacion_','class'=>'form-inline')) }}
 <div class="row">
 	@include('radiobtn.fuente_partial')
 	@include('radiobtn.region_partial')

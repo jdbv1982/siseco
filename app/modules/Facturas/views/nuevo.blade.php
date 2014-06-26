@@ -17,7 +17,7 @@
 	<div class="form-group col-xs-12 col-sm-2">
 		{{ Form::label('fechaexp','Fecha') }}
 		<div class="controls">
-			{{ Form::text('fechaexp',null,array('class'=>'form-control','required')) }}
+			{{ Form::text('fechaexp',null,array('class'=>'form-control fecha','required')) }}
 		</div>
 	</div>
 
@@ -65,14 +65,14 @@
 		<div class="form-group col-xs-12 col-sm-2 col-lg-1">
 			{{ Form::label('finieje','Fecha de Inicio') }}
 			<div class="controls">
-				{{ Form::text('finieje',$estimacion->finicio_est,array('class'=>'form-control')) }}
+				{{ Form::text('finieje',$estimacion->finicio_est,array('class'=>'form-control fecha')) }}
 			</div>
 		</div>
 
 		<div class="form-group col-xs-12 col-sm-2 col-lg-1">
 			{{ Form::label('ffineje','Fecha de Termino') }}
 			<div class="controls">
-				{{ Form::text('ffineje',$estimacion->ftermino_est,array('class'=>'form-control')) }}
+				{{ Form::text('ffineje',$estimacion->ftermino_est,array('class'=>'form-control fecha')) }}
 			</div>
 		</div>
 		<div class="form-group col-xs-12 col-sm-8 col-lg-10">

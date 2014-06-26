@@ -2,22 +2,7 @@ $(document).ready(function() {
 	var rutas = [ "../distritos/", "../municipios/", "../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../subprogramas/","../tipoprogramas/","../subfuentes/","../origenes/","../suborigenes/","../clasificacion/","../financiero/","../meta/" ];
 	var rutas1 = [ "../../distritos/", "../../municipios/", "../../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../../subprogramas/","../../tipoprogramas/","../../subfuentes/","../../origenes/","../../suborigenes/","../../clasificacion/","../../financiero/","../../meta/"];
 
-	$(".gallery a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000, autoplay_slideshow: false, social_tools:''});
-	$('.file').preimage();//muestra las imagens en minuatura antes de subirlas al servidor
-	$.timeliner({fontOpen: '1.2em', // value: any valid CSS font-size value, defaults to 1em; sets the font size of an event after it is opened
-			fontClosed: '1em', // value: any valid CSS font-size value, defaults to 1em; sets the font size of an event after it is closed
-			expandAllText: '+ expandir todo', // value: string; defaults to '+ expand all'
-			collapseAllText: '- colapsar todo'
-	});
-
-	if($('#_nivel').val() == 0){
-		misRutas = rutas;
-	}else{
-		misRutas = rutas1;
-	}
-//planeacion
-	$('#fechaoficio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecharecibido').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true,changeMonth: true, changeYear: true });
+	if($('#_nivel').val() == 0){misRutas = rutas;}else{misRutas = rutas1;}
 
 	$(document).on('click', '.test', function(){
 		$(this).removeClass( "test" );
@@ -142,15 +127,7 @@ $(document).ready(function() {
 	});
 
 
-//funciones para el area de licitaciones
-	$('#fechafianza').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#l_finicio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#l_ffinal').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#l_fecha').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fechaconvenio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
-	$('#finicio').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#ffinal').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
 	$( "body" ).on( "click", "#addfianza", function(e) {
 		e.preventDefault();
@@ -179,12 +156,7 @@ $(document).ready(function() {
 	});
 
 	//funciones para el area de obras
-	$('#festimacion').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fdevolucion').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
-	$('#fechaexp').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#finieje').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#ffineje').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
 	$( "body" ).on( "click", "#addestimacion", function(e) {
 		e.preventDefault();
@@ -206,23 +178,7 @@ $(document).ready(function() {
 	  	guardaResidencia();
 	});
 
-	$('#fecha1').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha2').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha3').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha4').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha5').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha6').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha7').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha8').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha9').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fecha10').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
-	$('#fechadiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#finiciodiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#ffinaldiferimiento').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-
-	$('#finicio_est').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#ftermino_est').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
 
 
 
@@ -239,9 +195,7 @@ $(document).ready(function() {
     });
 
 	    //funciones para la parte de administracion
-	$('#felab').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#frecp').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
-	$('#fcheque').datepicker({ dateFormat: "yy-mm-dd",changeMonth: true, changeYear: true });
+
 
 //tablero de mando
 $( "body" ).on( "click", "#linkautorizadas", function(e) {
@@ -577,17 +531,6 @@ function getDescripcion(id, sel){
 
 }
 
-/*function sumar() {
-	var re;
-    var valor = 0;
-    $(document).find('.vertical1').each(function(){
-        re = $(this).val();
-        valor += parseFloat(re)
-    });
-    //$('#Total').val(valor.toFixed(2));
-    alert(valor.toFixed(2));
-
-}*/
 
 function limpiarCampos(){
 	$("input[type=text]").val("");

@@ -2,7 +2,7 @@
 
 {{ Form::model($oficio, array('url'=> array('oficios/editar',$oficio->id),'method'=>'POST','class'=>'target')) }}
 
-@include('layouts/errores')	
+@include('layouts/errores')
 {{ Form::text('id',$oficio->id,array("class"=>'hidden')) }}
 {{ Form::text('idobra',$oficio->idobra,array("class"=>'hidden')) }}
 <div class="row">
@@ -23,14 +23,14 @@
 	<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		{{ Form::label('fechaoficio','Fecha') }}
 		<div class="controls">
-			{{ Form::text('fechaoficio',null,array('class'=>'form-control')) }}
+			{{ Form::text('fechaoficio',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 
 	<div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		{{ Form::label('fecharecibido','Fecha') }}
 		<div class="controls">
-			{{ Form::text('fecharecibido',null,array('class'=>'form-control')) }}
+			{{ Form::text('fecharecibido',null,array('class'=>'form-control fecha')) }}
 		</div>
 	</div>
 </div>
