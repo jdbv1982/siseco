@@ -2,7 +2,9 @@ $(document).ready(function() {
 	var rutas = [ "../distritos/", "../municipios/", "../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../subprogramas/","../tipoprogramas/","../subfuentes/","../origenes/","../suborigenes/","../clasificacion/","../financiero/","../meta/" ];
 	var rutas1 = [ "../../distritos/", "../../municipios/", "../../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../../subprogramas/","../../tipoprogramas/","../../subfuentes/","../../origenes/","../../suborigenes/","../../clasificacion/","../../financiero/","../../meta/"];
 
+
 	if($('#_nivel').val() == 0){misRutas = rutas;}else{misRutas = rutas1;}
+
 
 	$(document).on('click', '.test', function(){
 		$(this).removeClass( "test" );
@@ -15,13 +17,18 @@ $(document).ready(function() {
 	});
 
 	//aqui mostramos los datos traidos por ajax para rellenar los combos
-	$('#idregion').on('change',function(){
+	$(document).on('change','#idregion',function(){
+		if($('#_nivel').val() == 0){misRutas = rutas;}else{misRutas = rutas1;}
 		rellenaSelect($('#iddistrito'),misRutas[0],$(this).val());
 	});
-	$('#iddistrito').on('change',function(){
+
+	$(document).on('change','#iddistrito',function(){
+		if($('#_nivel').val() == 0){misRutas = rutas;}else{misRutas = rutas1;}
 		rellenaSelect($('#idmunicipio'),misRutas[1],$(this).val());
 	});
-	$('#idmunicipio').on('change',function(){
+
+	$(document).on('change','#idmunicipio',function(){
+		if($('#_nivel').val() == 0){misRutas = rutas;}else{misRutas = rutas1;}
 		rellenaSelect($('#idlocalidad'),misRutas[2],$(this).val());
 	});
 

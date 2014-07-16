@@ -19,7 +19,7 @@ class Reportes{
 		$objDrawing->setHeight(45);
 		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
 
-		$objPHPExcel->getActiveSheet()->mergeCells('B2:G2');
+		$objPHPExcel->getActiveSheet()->mergeCells('B2:H2');
 		$objPHPExcel->getActiveSheet()->setCellValue('B2', 'REPORTE DE OBRAS AUTORIZADAS');
 		$objPHPExcel->getActiveSheet()->getStyle('B2')->applyFromArray($styleArray);
 		$objPHPExcel->getActiveSheet()->getStyle('B2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -30,35 +30,38 @@ class Reportes{
 
 		$objPHPExcel->getActiveSheet()
 		            ->setCellValue('B3', 'NUMERO')
-		            ->setCellValue('C3','NOMBRE DE LA OBRA')
-		            ->setCellValue('D3','MONTO')
-		            ->setCellValue('E3','NO. OFICIO')
-		            ->setCellValue('F3','FECHA')
-		            ->setCellValue('G3','FUENTE FINANCIAMIENTO');
+		            ->setCellValue('C3', 'EJERCICIO')
+		            ->setCellValue('D3','NOMBRE DE LA OBRA')
+		            ->setCellValue('E3','MONTO')
+		            ->setCellValue('F3','NO. OFICIO')
+		            ->setCellValue('G3','FECHA')
+		            ->setCellValue('H3','FUENTE FINANCIAMIENTO');
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getStyle('B3:G3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getStyle('B3:H3')->applyFromArray($styleArray);
 
 		$i=4;
 			foreach ($obras as $key => $obra) {
 				$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $obra->id);
-				$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $obra->nombreobra);
-				$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $obra->monto);
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->numerooficio);
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->fechaoficio);
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->nombrefinanciamiento);
-				$objPHPExcel->getActiveSheet()->getStyle('C'.$i)->getAlignment()->setWrapText(true);
-				$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getAlignment()->setWrapText(true);
+				$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $obra->ejercicio);
+				$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $obra->nombreobra);
+				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->monto);
+				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->numerooficio);
+				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->fechaoficio);
+				$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $obra->nombrefinanciamiento);
+				$objPHPExcel->getActiveSheet()->getStyle('D'.$i)->getAlignment()->setWrapText(true);
+				$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getAlignment()->setWrapText(true);
 				$objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(60);
-				$objPHPExcel->getActiveSheet()->getStyle('D'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 				$i++;
 		}
-		
+
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename=Obras Autorizadas.xlsx');
 		$objWriter =  \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -117,7 +120,7 @@ $styleArray = array(
 		$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getStyle('B3:K3')->applyFromArray($styleArray);
 
-		
+
 
 		$i=4;
 		foreach ($obras as $key => $obra) {
@@ -136,8 +139,8 @@ $styleArray = array(
 			$i++;
 		}
 
-		
-		
+
+
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename=Obras Contratadas.xlsx');
 		$objWriter =  \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -174,8 +177,8 @@ $styleArray = array(
 		$objPHPExcel->getActiveSheet()->getStyle('B3')->applyFromArray($styleArray);
 		$objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$objPHPExcel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15);
-		
-		
+
+
 		$objPHPExcel->getActiveSheet()
 		            ->setCellValue('B4',$filtro)
 		            ->setCellValue('C4','NUM OBRAS AUTORIZADAS')
@@ -214,7 +217,7 @@ $styleArray = array(
 			$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 			$i++;
 		}
-		
+
 
 
 		header('Content-Type: application/vnd.ms-excel');
@@ -223,6 +226,6 @@ $styleArray = array(
 		$objWriter->save('php://output');
 	}
 
-	
+
 
 }

@@ -31,7 +31,7 @@ class Resumen_Planeacion extends \Eloquent{
 
 		$sql = "SELECT f.".$campo." AS nombre, p.ejercicio,
 			COUNT(DISTINCT(p.id)) AS autorizadas,
-			SUM(es.total) AS total,
+			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS total,
 			SUM(es.invfederal) AS federal,
 			SUM(es.investatal) AS estatal,
 			SUM(es.invmunicipal) AS municipal,
@@ -50,7 +50,7 @@ class Resumen_Planeacion extends \Eloquent{
 	public function get_Totales_resumen(){
 		$sql = "SELECT f.fuentegeneral AS nombre, p.ejercicio,
 			COUNT(DISTINCT(p.id)) AS autorizadas,
-			SUM(es.total) AS total,
+			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS total,
 			SUM(es.invfederal) AS federal,
 			SUM(es.investatal) AS estatal,
 			SUM(es.invmunicipal) AS municipal,

@@ -31,7 +31,7 @@ class ContratadasController extends \BaseController{
 		$obra = new Contratadas;
 		$rep = new Reportes;
 
-		if(Input::has('chkfgeneral')){$f = Input::get('chkfgeneral');}else{$f = 0;}
+		if(Input::has('chkfgeneral')){$f = Input::get('idfgeneral');}else{$f = 0;}
 		if(Input::has('chkregion')){$r = Input::get('idregion');}else{$r = 0;}
 		if(Input::has('chkdistrito')){$d = Input::get('iddistrito');}else{$d = 0;}
 		if(Input::has('chkmunicipio')){$m = Input::get('idmunicipio');}else{$m = 0;}

@@ -36,10 +36,12 @@
  <div class="row col-xs-12 col-sm-4 col-sm-offset-0">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Reportes</h3>
+        <h3 class="panel-title">Reportes Control</h3>
       </div>
       <div class="panel-body">
-        En Construcción...
+         @if(Auth::user()->verificaPermiso(Auth::user()->id, 18) == 'true')
+                <li><a href="{{ URL::to('reportes/inf_anual_fuente') }}">Inversion anual por fuente</a></li>
+            @endif
       </div>
     </div>
  </div>
@@ -81,10 +83,12 @@
 <div class="row col-xs-12 col-sm-4 col-sm-offset-0">
     <div class="panel panel-warning">
       <div class="panel-heading">
-        <h3 class="panel-title">Reportes</h3>
+        <h3 class="panel-title">Reportes Seguimiento</h3>
       </div>
       <div class="panel-body">
-        En Construcción...
+        @if(Auth::user()->verificaPermiso(Auth::user()->id, 16) == 'true')
+                <li><a href="{{ URL::to('reportes/informacion') }}">Inversion por fuente y clasificacion</a></li>
+            @endif
       </div>
     </div>
  </div>

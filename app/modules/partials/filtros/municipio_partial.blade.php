@@ -3,6 +3,6 @@
 		<span class="input-group-addon">
 			{{ Form::checkbox('chkmunicipio',1)}}
 		</span>
-		{{ Form::select('idmunicipio', $municipios,null, array('class' => 'form-control upper')) }}
+		{{ Form::select('idmunicipio', $municipios,null, array('class' => 'form-control upper','id'=>'idmunicipio')) }}
 	</div><!-- /input-group -->
 </div><!-- /.col-lg-6 -->

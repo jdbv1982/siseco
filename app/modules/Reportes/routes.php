@@ -21,5 +21,11 @@ Route::group(array('before'=>'auth'), function(){
 	Route::get('reportes/resumen_planeacion', array('uses'=>'App\Modules\Reportes\Controllers\PlaneacionController@formResumen'));
 	Route::post('reportes/resumen_planeacion_', array('uses'=>'App\Modules\Reportes\Controllers\PlaneacionController@verResumen'));
 
+	//reportes seguimiento
+	Route::get('reportes/invxfuentexclasificacion', array('uses'=>'App\Modules\Reportes\Controllers\CompletasController@invFuenteClasificacion'));
+
+	//reportes de control
+	Route::get('reportes/inf_anual_fuente', array('uses'=>'App\Modules\Reportes\Controllers\ControlController@inf_anual_fuente'));
+
 
 });

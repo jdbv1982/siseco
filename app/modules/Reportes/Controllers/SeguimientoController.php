@@ -21,4 +21,8 @@ class SeguimientoController extends \BaseController{
 		return $anexo->printInformacion($datos,$datos_reporte, $estructura, $programado, $fisico, $financiero, $prorrogas);
 	}
 
+	public function invFuenteClasificacion(){
+
+	}
+
 }

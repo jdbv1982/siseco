@@ -5,6 +5,9 @@ use DB;
 class Contratadas extends \Eloquent{
 	protected $whereok;
 	public function getObrasContratadas($f, $r, $d, $m, $l){
+
+
+
 		$sql = "SELECT
 			(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 			(SELECT nombre_fuente FROM fuentes WHERE id = p.idfuente) AS fuentegeneral,
@@ -67,32 +70,33 @@ class Contratadas extends \Eloquent{
 
 		$sql = "SELECT f.".$campo." AS nombre,
 			COUNT(DISTINCT(p.id)) AS autorizadas,
-			SUM(es.investatal) AS montoautorizado,
+			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS montoautorizado,
 			COUNT(DISTINCT(l.id)) AS contratadas,
 			SUM(l.l_montocontratado) AS montocontratado
 			FROM planeacion AS p
 			INNER JOIN ".$tabla." AS f ON f.id = p.".$key."
 			INNER JOIN estructura AS es ON p.id = es.idobra
 			LEFT JOIN licitaciones AS l ON p.id = l.id
-			GROUP BY f.id";
+			GROUP BY f.id, p.ejercicio
+			ORDER BY p.ejercicio, f.id";
 
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
 	}
 
 	public function getTotalesResumen(){
-		return DB::table('planeacion as p')
-			->join('fuentegeneral as f','f.id','=','p.idfgeneral')
-			->join('estructura as es','p.id','=','es.idobra')
-			->leftjoin('licitaciones as l','p.id','=','l.id')
-			//->groupBy('f.fuentegeneral')
-			->get(array(
-				'f.fuentegeneral' ,
-				DB::raw( 'COUNT(DISTINCT(p.id)) AS autorizadas' ),
-				DB::raw( 'SUM(es.investatal) AS montoautorizado' ),
-				DB::raw( 'COUNT(DISTINCT(l.id)) AS contratadas' ),
-				DB::raw( 'SUM(l.l_montocontratado) AS montocontratado' )
 
-			));
+		$sql = "SELECT f.fuentegeneral AS nombre,
+			COUNT(DISTINCT(p.id)) AS autorizadas,
+			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS montoautorizado,
+			COUNT(DISTINCT(l.id)) AS contratadas,
+			SUM(l.l_montocontratado) AS montocontratado
+			FROM planeacion AS p
+			INNER JOIN fuentegeneral AS f ON f.id = p.idfgeneral
+			INNER JOIN estructura AS es ON p.id = es.idobra
+			LEFT JOIN licitaciones AS l ON p.id = l.id ";
+
+		$datos = DB::select( DB::raw($sql));
+		return $datos;
 	}
 }
