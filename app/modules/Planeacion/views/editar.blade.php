@@ -503,7 +503,7 @@
         <legend>Calendarizacion de Recursos</legend>
         <a href="#" id="otrocalendario" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></a>
         <a href="#" id="versumascal" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></a>
-
+        <label  class="label label-info" id="valor"></label>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         </div>
         <table class="table table-bordered" id="tblcal">
@@ -526,21 +526,21 @@
             </thead>
             <tbody id="bodycal">
                 <tr id="filacal">
-                    <td >{{ Form::text('conceptocal[]',null,array('class'=>'form-control nombrecal','required')) }}</td>
-                    <td >{{ Form::text('porcentaje[]','0.00',array('class'=>'form-control')) }}</td>
-                    <td >{{ Form::text('totalcal[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('enero[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('febrero[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('marzo[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('abril[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('mayo[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('junio[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('julio[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('agosto[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('septiembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('octubre[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('noviembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
-                    <td >{{ Form::text('diciembre[]','0.00',array('class'=>'form-control montocal')) }}</td>
+                    <td >{{ Form::text('conceptocal[]',null,array('class'=>'form-control nombrecal vervalor','required')) }}</td>
+                    <td >{{ Form::text('porcentaje[]','0.00',array('class'=>'form-control vervalor')) }}</td>
+                    <td >{{ Form::text('totalcal[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('enero[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('febrero[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('marzo[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('abril[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('mayo[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('junio[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('julio[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('agosto[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('septiembre[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('octubre[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('noviembre[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
+                    <td >{{ Form::text('diciembre[]','0.00',array('class'=>'form-control montocal vervalor')) }}</td>
                 </tr>
             </tbody>
 

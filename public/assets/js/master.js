@@ -223,12 +223,32 @@ $("body").on('focusout',".nombrecal",function(){
 
 $("body").on('focusin',".montocal",function(){
 	$( this ).parent().css( "width", "10%" );
+	$(this).priceFormat({
+	    prefix: '$ ',
+	    centsSeparator: '.',
+	    thousandsSeparator: ',',
+	    centsLimit: 2
+	});
 });
 $("body").on('focusout',".montocal",function(){
 	$( this ).parent().removeAttr("style");
+	$(this).priceFormat({
+	    prefix: '',
+	    thousandsSeparator: ''
+	});
 });
 
 
+ $("body").on('keyup', '.vervalor',function () {
+      var value = $(this).val();
+      $("#valor").text(value);
+    });
+
+
+$("body").on('focusin',".vervalor",function(){
+	var value = $(this).val();
+      $("#valor").text(value);
+});
 
 
 });
@@ -553,13 +573,14 @@ function agregarEstructura(idest, idtable){
 function sumar(miTabla, numero, jcolumna) {
   filas = miTabla.find("tbody tr")
   for (var i = 1; i <= filas.length; i++) {
-  var suma = 0;
+  var suma = 0.00;
   		celdas = miTabla.find('tr').eq(i).find('td');
   		for (var j = jcolumna; j < celdas.length; j++) {
-  			var valor = parseFloat(miTabla.find('tr').eq(i).find('td  > input').eq(j).val());
+  			var valor = parseFloat(miTabla.find('tr').eq(i).find('td  > input').eq(j).val()).toFixed(2);
   			//var valor = parseFloat($('#estructura tr').eq(i).find('td  > input').eq(j).val());
   			suma = roundToTwo(suma) + roundToTwo(valor);
   		};
+  			suma = parseFloat(suma).toFixed(2);
   			miTabla.find('tr').eq(i).find('td  > input').eq(numero).val(suma);
     }
 
