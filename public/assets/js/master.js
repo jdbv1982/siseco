@@ -227,13 +227,16 @@ $("body").on('focusin',".montocal",function(){
 	    prefix: '$ ',
 	    centsSeparator: '.',
 	    thousandsSeparator: ',',
+	    allowNegative: true,
 	    centsLimit: 2
+
 	});
 });
 $("body").on('focusout',".montocal",function(){
 	$( this ).parent().removeAttr("style");
 	$(this).priceFormat({
 	    prefix: '',
+	    allowNegative: true,
 	    thousandsSeparator: ''
 	});
 });

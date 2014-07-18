@@ -14,10 +14,6 @@ class ControlController extends \BaseController{
 
 		return $impresion->printInversionAnual($datos->getInvAnual(), $totales);
 
-
-
-		//return $rep->printInformacion($obras);
-
 	}
 
 

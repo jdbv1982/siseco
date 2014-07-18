@@ -1,6 +1,7 @@
 <?php namespace App\Modules\Reportes\Servicios;
 
 class ImpresionControl{
+
 	public function printInversionAnual($datos, $totales){
 
 		$styleArray = array(
@@ -56,18 +57,18 @@ class ImpresionControl{
 		foreach ($datos as $key => $dato) {
 			$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $dato->fuentegeneral);
 			$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $dato->numobras);
-			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $dato->enero);
-			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $dato->febrero);
-			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $dato->marzo);
-			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $dato->abril);
-			$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $dato->mayo);
-			$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $dato->junio);
-			$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $dato->julio);
-			$objPHPExcel->getActiveSheet()->setCellValue('K'.$i, $dato->agosto);
-			$objPHPExcel->getActiveSheet()->setCellValue('L'.$i, $dato->septiembre);
-			$objPHPExcel->getActiveSheet()->setCellValue('M'.$i, $dato->octubre);
-			$objPHPExcel->getActiveSheet()->setCellValue('N'.$i, $dato->noviembre);
-			$objPHPExcel->getActiveSheet()->setCellValue('O'.$i, $dato->diciembre);
+			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $this->getPorcentaje($dato->enero, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $this->getPorcentaje($dato->febrero, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $this->getPorcentaje($dato->marzo, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $this->getPorcentaje($dato->abril, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $this->getPorcentaje($dato->mayo, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $this->getPorcentaje($dato->junio, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $this->getPorcentaje($dato->julio, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('K'.$i, $this->getPorcentaje($dato->agosto, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('L'.$i, $this->getPorcentaje($dato->septiembre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('M'.$i, $this->getPorcentaje($dato->octubre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('N'.$i, $this->getPorcentaje($dato->noviembre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('O'.$i, $this->getPorcentaje($dato->diciembre, $dato->total) );
 			$objPHPExcel->getActiveSheet()->setCellValue('P'.$i, $dato->total);
 			$objPHPExcel->getActiveSheet()->getStyle('P'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 			$i++;
@@ -76,18 +77,18 @@ class ImpresionControl{
 		foreach ($totales as $key => $dato) {
 			$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, 'TOTAL');
 			$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $dato->numobras);
-			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $dato->enero);
-			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $dato->febrero);
-			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $dato->marzo);
-			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $dato->abril);
-			$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $dato->mayo);
-			$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $dato->junio);
-			$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $dato->julio);
-			$objPHPExcel->getActiveSheet()->setCellValue('K'.$i, $dato->agosto);
-			$objPHPExcel->getActiveSheet()->setCellValue('L'.$i, $dato->septiembre);
-			$objPHPExcel->getActiveSheet()->setCellValue('M'.$i, $dato->octubre);
-			$objPHPExcel->getActiveSheet()->setCellValue('N'.$i, $dato->noviembre);
-			$objPHPExcel->getActiveSheet()->setCellValue('O'.$i, $dato->diciembre);
+			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $this->getPorcentaje($dato->enero, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $this->getPorcentaje($dato->febrero, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $this->getPorcentaje($dato->marzo, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $this->getPorcentaje($dato->abril, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $this->getPorcentaje($dato->mayo, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $this->getPorcentaje($dato->junio, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $this->getPorcentaje($dato->julio, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('K'.$i, $this->getPorcentaje($dato->agosto, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('L'.$i, $this->getPorcentaje($dato->septiembre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('M'.$i, $this->getPorcentaje($dato->octubre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('N'.$i, $this->getPorcentaje($dato->noviembre, $dato->total) );
+			$objPHPExcel->getActiveSheet()->setCellValue('O'.$i, $this->getPorcentaje($dato->diciembre, $dato->total) );
 			$objPHPExcel->getActiveSheet()->setCellValue('P'.$i, $dato->total);
 			$objPHPExcel->getActiveSheet()->getStyle('P'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 		}
@@ -97,6 +98,10 @@ class ImpresionControl{
 		header('Content-Disposition: attachment;filename=Informacion Completa.xlsx');
 		$objWriter =  \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->save('php://output');
+	}
+
+	public function getPorcentaje($valor, $total){
+		return round($valor * 100 / $total, 2);
 	}
 
 }

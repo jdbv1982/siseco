@@ -41,7 +41,7 @@ class Resumen_Planeacion extends \Eloquent{
 			INNER JOIN estructura AS es ON p.id = es.idobra
 			LEFT JOIN licitaciones AS l ON p.id = l.id
 			GROUP BY f.id, p.ejercicio
-			ORDER BY f.id, p.ejercicio";
+			ORDER BY p.ejercicio,  f.id";
 
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
