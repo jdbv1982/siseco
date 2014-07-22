@@ -4,7 +4,7 @@ use Validator;
 
 class Administracion extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idobra','clc','felab','frecp','numfactura','concepto','fianza','spei','ministrado','porc5','porc2','radicado','orden','numcheque','fcheque','montopagado','amort_cred_pte','idtipo','idnivel');
+	protected $fillable = array('idobra','clc','felab','frecp','numfactura','concepto','fianza','ministrado','porc5','porc2','radicado','orden','amort_cred_pte','idtipo','idnivel');
 	protected $table = 'administracion';
 
 	public function isValid($data){

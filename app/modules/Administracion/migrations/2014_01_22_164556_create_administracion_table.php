@@ -22,15 +22,11 @@ class CreateAdministracionTable extends Migration {
 			$table->string('numfactura',100)->nullable();
 			$table->text('concepto')->nullable();
 			$table->string('fianza', 100)->nullable();
-			$table->string('spei', 100)->nullable();
 			$table->double('ministrado')->nullable();
 			$table->double('porc5')->nullable();
 			$table->double('porc2')->nullable();
 			$table->double('radicado')->nullable();
 			$table->string('orden', 100)->nullable();
-			$table->string('numcheque', 100)->nullable();
-			$table->date('fcheque')->nullable();
-			$table->double('montopagado')->nullable();
 			$table->double('amort_cred_pte')->nullable();
 			$table->integer('idtipo')->nullable();
 			$table->integer('idnivel')->nullable();

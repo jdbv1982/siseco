@@ -156,7 +156,7 @@
                 <td>{{ $a->clc }}</td>
                 <td>{{ $a->felab }}</td>
                 <td>{{ $a->concepto }}</td>
-                <td>{{ $a->montopagado }}</td>
+                <td>{{ $a->concepto }}</td>
             </tr>
             @endforeach
         </tbody>

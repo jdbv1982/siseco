@@ -16,21 +16,17 @@
             <th>Fact</th>
             <th>Concepto</th>
             <th>Fianza</th>
-            <th>SPEI</th>
             <th>Ministrado</th>
             <th>5 %</th>
             <th>2 %</th>
             <th>Radicado</th>
             <th>Orden</th>
-            <th>Cheque</th>
-            <th>Fecha</th>
-            <th>Pagado</th>
             <th>Amort. Cred. Pte</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        
+
     @foreach ($adms as $adm)
     <tr>
     	<td>{{ $adm->id }}</td>
@@ -40,15 +36,11 @@
         <td>{{ $adm->numfactura }}</td>
         <td>{{ $adm->concepto }}</td>
         <td>{{ $adm->fianza }}</td>
-        <td>{{ $adm->spei }}</td>
         <td>{{ $adm->ministrado }}</td>
         <td>{{ $adm->porc5 }}</td>
         <td>{{ $adm->porc2 }}</td>
         <td>{{ $adm->radicado }}</td>
         <td>{{ $adm->orden }}</td>
-        <td>{{ $adm->numcheque }}</td>
-        <td>{{ $adm->fcheque }}</td>
-        <td>{{ $adm->montopagado }}</td>
         <td>{{ $adm->amort_cred_pte }}</td>
         <td class="text-center">
             <a class="btn btn-default" href="{{ URL::to('administracion/editar/'.$adm->id) }}">

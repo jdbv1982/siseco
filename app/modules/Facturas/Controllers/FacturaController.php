@@ -21,7 +21,8 @@ class FacturaController extends \BaseController{
 					$supervision = 0;
 				}else{
 					$anticipo = 0;
-					$supervision = round($estimacion->importe * 1.5,2);
+					//return $estimacion->importe;
+					return$supervision = round($estimacion->importe *  .015,2);
 				}
 
 					$secodam = round($estimacion->importe * .05,2);

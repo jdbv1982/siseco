@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-2">
-		{{ Form::label('idnivel','Tipo de CLC') }}
+		{{ Form::label('idnivel','Tipo de Recurso') }}
 		<div class="controls">
 			{{ Form::select('idnivel', $tipos,null, array('class' => 'form-control')) }}
 		</div>
@@ -96,33 +96,6 @@
 			{{ Form::text('amort_cred_pte',null,array('class'=>'form-control')) }}
 		</div>
 	</div>
-	<div class="form-group col-xs-12 col-sm-4 col-md-3 ">
-		{{ Form::label('spei','Spei') }}
-		<div class="controls">
-			{{ Form::text('spei',null,array('class'=>'form-control')) }}
-		</div>
-	</div>
-	<div class="form-group col-xs-12 col-sm-4 col-md-3 ">
-		{{ Form::label('numcheque','Num. Cheque') }}
-		<div class="controls">
-			{{ Form::text('numcheque',null,array('class'=>'form-control')) }}
-		</div>
-	</div>
-	<div class="form-group col-xs-12 col-sm-4 col-md-3 ">
-		{{ Form::label('fcheque','F. Cheque') }}
-		<div class="input-group col-xs-12 2 ">
-			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
-			{{ Form::text('fcheque',null,array('class'=>'form-control text-right fecha')) }}
-		</div>
-	</div>
-	<div class="form-group col-xs-12 col-sm-4 col-md-3 ">
-		{{ Form::label('montopagado','Pagado') }}
-		<div class="input-group">
-			<span class="input-group-addon ">$</span>
-			{{ Form::text('montopagado',null,array('class'=>'form-control text-right')) }}
-		</div>
-	</div>
-
 </div>
 <br>
 	<div class="form-group">

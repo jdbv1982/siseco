@@ -127,7 +127,6 @@ class ObrasController extends \BaseController{
 		$obras = Obras::find($id);
 		$administracion = DB::table('administracion')
 			->where('idobra','=',$id)
-			->where('montopagado','=',0,'AND')
 			->get();
 
 		$estimaciones = DB::table('estimaciones')

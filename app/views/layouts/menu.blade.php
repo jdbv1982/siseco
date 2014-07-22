@@ -53,7 +53,10 @@
                             <li><a href="{{ URL::to('obras/listado/7') }}">RG23</a></li>
                         @endif
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 15) == 'true')
-                            <li><a href="{{ URL::to('obras/listado/8') }}">PIBAI</a></li>
+                            <li><a href="{{ URL::to('obras/listado/8') }}">PROII</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 43) == 'true')
+                            <li><a href="{{ URL::to('obras/listado/9') }}">PIBAI</a></li>
                         @endif
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 37) == 'true')
                             <li><a href="{{ URL::to('obras/listado') }}">Todas</a></li>
