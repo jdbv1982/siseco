@@ -17,6 +17,7 @@ class AdministracionController extends \BaseController{
 		$planeacion = Planeacion::find($id);
 		$tipos = array("1"=>"ESTATAL","2"=>"FEDERAL");
 		$tclc = array("1"=>"ADMINISTRACION DIRECTA","2"=>"CONTRATO","3"=>"ANTICIPO");
+		$facturas = $this->getFacturas($id);
 		$fianzas = DB::table('fianzas')
 			->select('numfianza')
 			->where('idobra','=',$id)
@@ -30,7 +31,7 @@ class AdministracionController extends \BaseController{
 			App::abort(404);
 		}
 
-		$this->layout->contenido = View::make('Administracion::nuevo', compact('planeacion','tipos','tclc','numfianzas'));
+		$this->layout->contenido = View::make('Administracion::nuevo', compact('planeacion','tipos','tclc','numfianzas','facturas'));
 	}
 
 	public function setNuevo(){
@@ -76,5 +77,16 @@ class AdministracionController extends \BaseController{
 		}else{
 			return Redirect::back()->with('menaje', 'Datos incorrectos, vuelve a intentarlo.')->withErrors($administracion->errores)->withInput();
 		}
+	}
+
+	function getFacturas($id){
+		$sql = "SELECT f.*
+			FROM facturas f
+			INNER JOIN estimaciones e ON e.id = f.idestimacion
+			WHERE e.idobra = $id AND f.id NOT IN (SELECT numfactura FROM administracion WHERE idobra = $id )
+			";
+
+		$datos = DB::select( DB::raw($sql));
+		return $datos;
 	}
 }

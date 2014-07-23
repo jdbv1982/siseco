@@ -67,23 +67,6 @@
         </ul>
         <ul class="nav navbar-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    @if(Auth::user()->verificaPermiso(Auth::user()->id, 16) == 'true')
-                        <li><a href="{{ URL::to('reportes/obrasautorizadas') }}">Obras Autorizadas</a></li>
-                    @endif
-                    @if(Auth::user()->verificaPermiso(Auth::user()->id, 17) == 'true')
-                        <li><a href="{{ URL::to('reportes/obrascontratadas') }}">Obras Contratadas</a></li>
-                    @endif
-                    @if(Auth::user()->verificaPermiso(Auth::user()->id, 18) == 'true')
-                        <li><a href="{{ URL::to('reportes/resumen') }}">Resumen de Obras</a></li>
-                    @endif
-                </ul>
-            </li>
-
-        </ul>
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogos <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 4) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
@@ -113,6 +96,20 @@
                 @endif
             </li>
         </ul>
+
+        @if(Auth::user()->verificaPermiso(Auth::user()->id, 44) == 'true')
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilerias <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @if(Auth::user()->verificaPermiso(Auth::user()->id, 45) == 'true')
+                        <li><a href="{{ URL::to('clc/importar') }}">Importar Clc's</a></li>
+                    @endif
+                </ul>
+            </li>
+
+        </ul>
+        @endif
 
         <ul class="nav navbar-nav navbar-right">
             <li>

@@ -39,10 +39,14 @@
 	</div>
 	<div class="form-group col-xs-12 col-sm-4 col-md-2 ">
 		{{ Form::label('numfactura','Factura') }}
-		<div class="controls">
-			{{ Form::text('numfactura',null,array('class'=>'form-control')) }}
+		<div class="input-group">
+			{{ Form::text('numfactura',null,array('class'=>'form-control', "readonly", "id"=>"numfactura")) }}
+			 <span class="input-group-btn">
+			            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#facturas"><span class="glyphicon glyphicon-search"></span></button>
+			 </span>
 		</div>
 	</div>
+
 	<div class="form-group col-xs-12 col-sm-4 col-md-2 ">
 		{{ Form::label('fianza','Fianza') }}
 		<div class="controls">
@@ -106,3 +110,7 @@
 {{ Form::close() }}
 
 </div>
+
+
+
+@include('administracion/facturas_partial')

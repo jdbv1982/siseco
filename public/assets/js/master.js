@@ -201,7 +201,21 @@ $(document).ready(function() {
         }
     });
 
-	    //funciones para la parte de administracion
+//funciones para la parte de administracion
+
+$(document).on('click', '.selfactura', function(){
+	$('#facturas').modal('hide');
+	$('#numfactura').val($(this).closest('tr').find('td:eq(0)').text());
+});
+
+
+$(document).on('click', '#detalleclc', function(){
+	$.post( "../detalleclc", function( data ) {
+  		elemento.html( data );
+	});
+});
+
+
 
 
 //tablero de mando
