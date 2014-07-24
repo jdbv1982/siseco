@@ -19,8 +19,8 @@
 
 <div class="row  col-sm-3">
 <div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 12%;">
-    12%
+  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+    0%
   </div>
 </div>
 

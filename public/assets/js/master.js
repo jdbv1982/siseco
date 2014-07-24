@@ -210,8 +210,17 @@ $(document).on('click', '.selfactura', function(){
 
 
 $(document).on('click', '#detalleclc', function(){
+	/*$.post( "../detalleclc", function( data ) {
+
+	});*/
+
 	$.post( "../detalleclc", function( data ) {
-  		elemento.html( data );
+		alert(data.length);
+		$.each( data, function(key) {
+	            		$(".progress-bar").html(data[key].id);
+	            		$(".progress-bar").css("width", data[key].id);
+		});
+
 	});
 });
 

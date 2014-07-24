@@ -68,17 +68,20 @@ class Contratadas extends \Eloquent{
 		}
 
 
-		$sql = "SELECT f.".$campo." AS nombre,
-			COUNT(DISTINCT(p.id)) AS autorizadas,
-			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS montoautorizado,
-			COUNT(DISTINCT(l.id)) AS contratadas,
-			SUM(l.l_montocontratado) AS montocontratado
-			FROM planeacion AS p
-			INNER JOIN ".$tabla." AS f ON f.id = p.".$key."
-			INNER JOIN estructura AS es ON p.id = es.idobra
-			LEFT JOIN licitaciones AS l ON p.id = l.id
-			GROUP BY f.id, p.ejercicio
-			ORDER BY p.ejercicio, f.id";
+		$sql = "SELECT (SELECT ".$campo." FROM ".$tabla." WHERE id = ".$key.") AS nombre,
+			ejercicio,
+			COUNT(autorizadas) AS autorizadas,
+			ROUND(SUM(inversion),2) AS montoautorizado,
+			COUNT(contratadas) AS contratadas,
+			ROUND(SUM(contratado),2) AS montocontratado FROM (
+			SELECT ".$key.",p.ejercicio,p.id AS autorizadas,
+			(SELECT SUM(invfederal) + SUM(investatal) + SUM(invmunicipal) + SUM(invparticipantes) FROM estructura WHERE idobra = p.id) AS inversion,
+			(SELECT id FROM licitaciones WHERE id = p.id) AS contratadas,
+			(SELECT l_montocontratado FROM licitaciones WHERE id = p.id) AS contratado
+			FROM planeacion p) AS tb1
+			GROUP BY ".$key.", ejercicio
+			ORDER BY ejercicio, ".$key."
+		";
 
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
@@ -86,15 +89,18 @@ class Contratadas extends \Eloquent{
 
 	public function getTotalesResumen(){
 
-		$sql = "SELECT f.fuentegeneral AS nombre,
-			COUNT(DISTINCT(p.id)) AS autorizadas,
-			SUM(es.invfederal) + SUM(es.investatal) + SUM(es.invmunicipal) + SUM(es.invparticipantes) AS montoautorizado,
-			COUNT(DISTINCT(l.id)) AS contratadas,
-			SUM(l.l_montocontratado) AS montocontratado
-			FROM planeacion AS p
-			INNER JOIN fuentegeneral AS f ON f.id = p.idfgeneral
-			INNER JOIN estructura AS es ON p.id = es.idobra
-			LEFT JOIN licitaciones AS l ON p.id = l.id ";
+		$sql = "SELECT (SELECT fuentegeneral FROM fuentegeneral WHERE id = idfgeneral) AS nombre,
+			ejercicio,
+			COUNT(autorizadas) AS autorizadas,
+			ROUND(SUM(inversion),2) AS montoautorizado,
+			COUNT(contratadas) AS contratadas,
+			ROUND(SUM(contratado),2) AS montocontratado FROM (
+			SELECT p.idfgeneral,p.ejercicio,p.id AS autorizadas,
+			(SELECT SUM(invfederal) + SUM(investatal) + SUM(invmunicipal) + SUM(invparticipantes) FROM estructura WHERE idobra = p.id) AS inversion,
+			(SELECT id FROM licitaciones WHERE id = p.id) AS contratadas,
+			(SELECT l_montocontratado FROM licitaciones WHERE id = p.id) AS contratado
+			FROM planeacion p) AS tb1
+			 ";
 
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
