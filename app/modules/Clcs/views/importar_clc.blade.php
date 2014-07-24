@@ -5,7 +5,7 @@
 		<div class="form-group">
 			{{ Form::label('archivo_clc','Seleccione Archivo') }}
 			<div class="controls">
-				{{ Form::file('archivo_clc', array('class'=>'form-control')) }}
+				{{ Form::file('archivo_clc', array('class'=>'form-control','id'=>'archivo_clc')) }}
 
 			</div>
 		</div>

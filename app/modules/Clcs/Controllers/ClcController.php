@@ -2,22 +2,17 @@
 
 use view, Input, DB, Response;
 
-
-use App\Modules\Residencias\Models\Residencias as re;
-
 class ClcController extends \BaseController{
 	protected $layout = "layouts.layout";
 
-	public function importar(){
-		$this->layout->contenido = View::make('Clcs::importar_clc', compact('contratistas'));
-	}
+	protected $archivo;
 
-	public function guardar(){
-		$archivo = Input::file('archivo_clc');
-		$this->setClc($archivo);
+	public function importar(){
+		$this->layout->contenido = View::make('Clcs::importar_clc');
 	}
 
 	public function setClc($archivo){
+		//return $archivo;
 		$objReader = \PHPExcel_IOFactory::createReader('Excel2007');
 		$objReader->setReadDataOnly(true);
 
@@ -44,9 +39,8 @@ class ClcController extends \BaseController{
 		}
 
 	public function getDetalleClc(){
-		$residencia = re::all();
-		return $residencia;
-		return Response::json($residencia);
+		$archivo = $_FILES['archivo']['name'];
+		return Response::json($this->setClc($archivo));
 	}
 
 }

@@ -213,15 +213,38 @@ $(document).on('click', '#detalleclc', function(){
 	/*$.post( "../detalleclc", function( data ) {
 
 	});*/
+var inputFileImage = document.getElementById("archivo_clc");
+var file = inputFileImage.files[0];
+var data = new FormData();
+data.append('archivo',file);
+var url = "../detalleclc";
 
-	$.post( "../detalleclc", function( data ) {
-		alert(data.length);
+$.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(json){
+                    	alert(json);
+                }
+});
+
+/*$.post( "../detalleclc", function( data ) {
+		var total = data.length;
+		var registro = 1;
 		$.each( data, function(key) {
-	            		$(".progress-bar").html(data[key].id);
-	            		$(".progress-bar").css("width", data[key].id);
+			var progreso = Math.round(registro * 100 / total);
+			registro = registro + 1;
+	            		$(".progress-bar").html(progreso+"%");
+	            		$(".progress-bar").css("width", progreso+"%");
 		});
-
-	});
+		$(".progress-bar").html("0%");
+	            	$(".progress-bar").css("width", "0%");
+	});*/
 });
 
 
