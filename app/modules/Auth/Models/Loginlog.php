@@ -1,4 +1,4 @@
-<? namespace App\Modules\Auth\Models;
+<?php namespace App\Modules\Auth\Models;
 
 use Validator;
 
