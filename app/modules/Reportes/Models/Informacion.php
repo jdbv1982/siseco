@@ -33,7 +33,7 @@ class Informacion extends \Eloquent{
 	(SELECT SUM(afinanciero) FROM avances WHERE idobra = p.id) AS afinanciero,
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,o.observaciones,
-	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.spei,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.numcheque,a.fcheque,a.montopagado,a.amort_cred_pte
+	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte
 FROM planeacion AS p
 LEFT JOIN licitaciones AS lic ON p.id = lic.id
 LEFT JOIN obras AS o ON p.id = o.id
@@ -72,7 +72,7 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	(SELECT nombre FROM residencias WHERE id = p.idresidencia) AS residencia,
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,p.observaciones,
-	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.spei,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.numcheque,a.fcheque,a.montopagado,a.amort_cred_pte
+	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte
 FROM planeacion AS p
 LEFT JOIN licitaciones AS lic ON p.id = lic.id
 LEFT JOIN obras AS o ON p.id = o.id

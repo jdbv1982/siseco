@@ -197,10 +197,10 @@ class Completas{
 				$objPHPExcel->getActiveSheet()->setCellValue('BI'.$i, $dato->porc2);
 				$objPHPExcel->getActiveSheet()->setCellValue('BJ'.$i, $dato->radicado);
 				$objPHPExcel->getActiveSheet()->setCellValue('BK'.$i, $dato->orden);
-				$objPHPExcel->getActiveSheet()->setCellValue('BL'.$i, $dato->spei);
-				$objPHPExcel->getActiveSheet()->setCellValue('BM'.$i, $dato->numcheque);
-				$objPHPExcel->getActiveSheet()->setCellValue('BN'.$i, $dato->fcheque);
-				$objPHPExcel->getActiveSheet()->setCellValue('BO'.$i, $dato->montopagado);
+				$objPHPExcel->getActiveSheet()->setCellValue('BL'.$i, "");
+				$objPHPExcel->getActiveSheet()->setCellValue('BM'.$i, "");
+				$objPHPExcel->getActiveSheet()->setCellValue('BN'.$i, "");
+				$objPHPExcel->getActiveSheet()->setCellValue('BO'.$i, "");
 				$objPHPExcel->getActiveSheet()->setCellValue('BP'.$i, $dato->amort_cred_pte);
 				$objPHPExcel->getActiveSheet()->setCellValue('BQ'.$i, $dato->afinanciero.'%');
 

@@ -210,41 +210,43 @@ $(document).on('click', '.selfactura', function(){
 
 
 $(document).on('click', '#detalleclc', function(){
-	/*$.post( "../detalleclc", function( data ) {
+	$('#myModal').modal({
+		backdrop:'static',
+  		keyboard: false
+	});
 
-	});*/
-var inputFileImage = document.getElementById("archivo_clc");
-var file = inputFileImage.files[0];
-var data = new FormData();
-data.append('archivo',file);
-var url = "../detalleclc";
+	var progreso = 0;
+	var item = 1;
 
-$.ajax({
-                type: "POST",
-                url: url,
-                data: data,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: "json",
-                success: function(json){
-                    	alert(json);
-                }
-});
+	$(".progress-bar").html("0%");
+	$(".progress-bar").css("width", "0%");
+	var inputFileImage = document.getElementById("archivo_clc");
+	var file = inputFileImage.files[0];
+	var data = new FormData();
+	data.append('myfile',file);
+	var url = "../detalleclc";
 
-/*$.post( "../detalleclc", function( data ) {
-		var total = data.length;
-		var registro = 1;
-		$.each( data, function(key) {
-			var progreso = Math.round(registro * 100 / total);
-			registro = registro + 1;
-	            		$(".progress-bar").html(progreso+"%");
-	            		$(".progress-bar").css("width", progreso+"%");
-		});
-		$(".progress-bar").html("0%");
-	            	$(".progress-bar").css("width", "0%");
-	});*/
+	$.ajax({
+	                type: "POST",
+	                url: url,
+	                data: data,
+	                async: false,
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                dataType: "json",
+	                success: function(data){
+	                	var total = data.length;
+	                    	$.each( data, function(key) {
+	                    		$.post( "../insertaregistro",{registro:data[key]}).done(function( data ) {
+					progreso = Math.round((item) * 100 / total);
+			            		$(".progress-bar").html(progreso+"%");
+			            		$(".progress-bar").css("width", progreso+"%");
+			            		item = item + 1;
+				  });;
+			});
+	                }
+	});
 });
 
 

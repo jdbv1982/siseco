@@ -17,11 +17,20 @@
 
 </div>
 
-<div class="row  col-sm-3">
-<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-    0%
-  </div>
-</div>
-
+<div class ="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class ="modal-dialog modal-lg">
+		<div class ="modal-content">
+			<div class ="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class  ="modal-title" id="myModalLabel">Procesando archivo...</h4>
+			</div>
+			<div class ="modal-body">
+				<div class ="progress">
+					<div class ="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+						0%
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
