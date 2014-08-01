@@ -97,6 +97,14 @@
             </li>
         </ul>
 
+         @if(Auth::user()->verificaPermiso(Auth::user()->id, 46) == 'true')
+         <ul class="nav navbar-nav">
+            <li>
+                    <a href="{{ URL::to('clc/listado') }}">Listado de Clcs</a>
+            </li>
+        </ul>
+         @endif
+
         @if(Auth::user()->verificaPermiso(Auth::user()->id, 44) == 'true')
         <ul class="nav navbar-nav">
             <li class="dropdown">

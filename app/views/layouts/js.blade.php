@@ -11,3 +11,7 @@
 {{ HTML::script('assets/js/timeliner.min.js') }}
 {{ HTML::script('assets/js/jquery.prettyPhoto.js') }}
 {{ HTML::script('assets/js/priceformat.js') }}
+
+@if(isset($js))
+	{{ HTML::script($js) }}
+@endif

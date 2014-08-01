@@ -11,7 +11,7 @@
 	<div class="contenido">
     	@if(isset($contenido))
 		{{ $contenido }}
-		@endif						
+		@endif
 	</div>
 
 
