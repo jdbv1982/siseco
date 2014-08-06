@@ -1,15 +1,19 @@
-<?php namespace App\Modules\Clcs\Models;
+<?php namespace App\Modules\Caja\Models;
 
 use Validator;
 
-class UpdateObraClc extends \Eloquent{
+class Caja extends \Eloquent{
 	public $errores;
-	protected $fillable = array('concepto','id_status');
-	protected $table = 'obra_clc';
+	protected $fillable = array('no_cheque','fecha','beneficiario','importe','concepto','recibido_por','orden_id');
+	protected $table = 'caja';
 
 	public function isValid($data){
 		$rules = array(
-			'id_status'=> 'required'
+			'no_cheque' 	=> 'required',
+			'fecha'		=> 'required',
+			'beneficiario'	=> 'required',
+			'importe'	=> 'required',
+			'recibido_por'	=> 'required'
 		);
 
 		$validar = Validator::make($data, $rules);
@@ -31,4 +35,8 @@ class UpdateObraClc extends \Eloquent{
 	}
 
 }
+
+
+
+
 

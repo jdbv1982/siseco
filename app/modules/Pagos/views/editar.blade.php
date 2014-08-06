@@ -1,8 +1,8 @@
-<h3>Nueva Orden de Pago</h3>
+<h3>Editar Orden de Pago</h3>
 
 @include('layouts/errores')
 
-{{ Form::open(array('url'=>'pagos/guardar','method'=>'POST')) }}
+{{ Form::model($orden,array('url'=>['pagos/editar', $orden->id],'method'=>'POST')) }}
 {{ Form::hidden('clc_id', $clc->id) }}
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('folio','No. Folio:') }}

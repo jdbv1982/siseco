@@ -13,6 +13,12 @@ class Obraclc extends \Eloquent{
 			'no_afectacion' => 'required|unique:obra_clc'
 		);
 
+		if($this->exists){
+			$rules['no_afectacion'] .= ',no_afectacion,' . $this->id;
+		}else{
+			$rules['no_afectacion'] .= '|required';
+		}
+
 		$validar = Validator::make($data, $rules);
 		if($validar->passes()){
 			return true;
