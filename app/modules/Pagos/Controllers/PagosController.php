@@ -46,6 +46,7 @@ class PagosController extends \BaseController{
 		$pago = new Pago;
 
 		if($pago->validAndSave($data)){
+			$this->updateStatusClc( $data['clc_id'], $data['id_status']);
 			return Redirect::to('clc/listado');
 		}else{
 			return Redirect::back()->withErrors($pago->errores)->withInput();

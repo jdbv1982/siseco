@@ -2,7 +2,7 @@
 
 @include('layouts/errores')
 
-{{ Form::model($pago, array('url'=> array('caja/pagar', $pago->id),'method'=>'POST')) }}
+{{ Form::model($caja, array('url'=> array('caja/actualizar', $caja->id),'method'=>'POST')) }}
 
 {{Form::hidden('orden_id', $pago->id)}}
 {{Form::hidden('clc_id', $pago->clc_id)}}
@@ -57,6 +57,7 @@
 	{{ Form::submit('Guardar',array('class'=>'btn btn-primary')) }}
 	@endif
 	<a href="{{ URL::to('caja/listado') }}" class="btn btn-primary">Regresar</a>
+	<a href="{{ URL::to('caja/impresion',[$pago->banco_id, $caja->id]) }}" target="_blank" class="btn btn-primary">Imprimir</a>
 </div>
 
 {{ Form::close() }}
