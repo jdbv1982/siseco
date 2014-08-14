@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateObraClcTable extends Migration {
+class CreateHistorialclcTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,16 +12,12 @@ class CreateObraClcTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('obra_clc', function(Blueprint $table)
+		Schema::create('historialclc', function(Blueprint $table)
 		{
 			$table->increments('id');
-
-			$table->integer('idobra');
-			$table->string('no_afectacion',25);
-			$table->text('concepto');
-			$table->integer('id_status');
-			$table->string('num_spei')->nullable();
-
+			$table->integer('clc_id');
+			$table->integer('status_id');
+			$table->string('actualizado_por');
 			$table->timestamps();
 		});
 	}
@@ -33,7 +29,7 @@ class CreateObraClcTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('obra_clc');
+		Schema::drop('historialclc');
 	}
 
 }

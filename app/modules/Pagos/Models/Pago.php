@@ -4,14 +4,14 @@ use Validator;
 
 class Pago extends \Eloquent{
 	public $errores;
-	protected $fillable = array('clc_id','folio','beneficiario','observaciones','ejercicio_id','banco_id','cuenta_id','concepto','deducciones','aditivas','importe','total');
+	protected $fillable = array('clc_id','folio','beneficiario','observaciones','ejercicio_id','banco_id','cuenta_id','concepto','deducciones','aditivas','importe','total','status_id');
 	protected $table = 'pagos';
 
 
 	public function isValid($data){
 		$rules = array(
 			'clc_id' => 'required',
-			'folio' => 'required|unique:pagos',
+			'folio' => 'required',
 			'beneficiario' => 'required',
 			'importe'	=> 'required'
 		);

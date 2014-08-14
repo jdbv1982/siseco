@@ -27,8 +27,16 @@
             <a class="btn btn-default" href="{{ URL::to('clc/editar/'.$lista->id) }}">
                 <span class="glyphicon glyphicon-pencil"></span>
             </a>
-            <a class="btn btn-default" href="{{ URL::to('pagos/nueva/'.$lista->id) }}">
+            @if($lista->num_spei != '')
+            <a class="btn btn-default" href="{{ URL::to('pagos/lista/'.$lista->id) }}">
                 <span class="glyphicon glyphicon-usd"></span>
+            </a>
+            @endif
+            <a class="btn btn-default" href="{{ URL::to('clc/historial/'.$lista->id) }}">
+                <span class="glyphicon glyphicon-list"></span>
+            </a>
+            <a class="btn btn-default" href="{{ URL::to('clc/checklist/'.$lista->id) }}">
+                <span class="glyphicon glyphicon-ok-circle"></span>
             </a>
         </td>
 
@@ -37,3 +45,4 @@
     </tbody>
   </table>
 </div>
+

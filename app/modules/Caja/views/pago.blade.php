@@ -22,22 +22,22 @@
 
 <div class="form-group col-xs-12 col-sm-6 col-lg-7">
 	{{ Form::label('beneficiario','Beneficiario') }}
-	{{ Form::text('beneficiario',null,array('class'=>'form-control','required')) }}
+	{{ Form::text('beneficiario',null,array('class'=>'form-control','required','readonly')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-3">
 	{{ Form::label('importe','Importe') }}
-	{{ Form::text('importe',null,array('class'=>'form-control text-right','required')) }}
+	{{ Form::text('importe',null,array('class'=>'form-control text-right','required','readonly')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-9">
 	{{ Form::label('importe_let','Importe en Letra') }}
-	{{ Form::text('importe_let',$cantidad,array('class'=>'form-control','required')) }}
+	{{ Form::text('importe_let',$cantidad,array('class'=>'form-control','required','readonly')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-6">
 	{{ Form::label('concepto','Concepto de Pago:') }}
-	{{ Form::textarea('concepto',null,array('class'=>'form-control','required','rows'=>'5')) }}
+	{{ Form::textarea('concepto',null,array('class'=>'form-control','required','rows'=>'5','readonly')) }}
 </div>
 
 
@@ -47,13 +47,13 @@
 </div>
 
 <div class="form-group col-xs-12 col-sm-6">
-	{{ Form::label('id_status','Estatus de la Clc') }}
-	{{ Form::select('id_status', $status,$clc[0]->id_status, array('class' => 'form-control')) }}
+	{{ Form::label('status_id','Estatus de la Clc') }}
+	{{ Form::select('status_id', $status,4, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-12">
 	<br>
-	@if($clc[0]->id_status < 4)
+	@if($pago->status_id < 4)
 	{{ Form::submit('Guardar',array('class'=>'btn btn-primary')) }}
 	@endif
 	<a href="{{ URL::to('caja/listado') }}" class="btn btn-primary">Regresar</a>

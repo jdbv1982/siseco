@@ -181,40 +181,42 @@ $styleArray = array(
 
 		$objPHPExcel->getActiveSheet()
 		            ->setCellValue('B4',$filtro)
-		            ->setCellValue('C4','NUM OBRAS AUTORIZADAS')
-		            ->setCellValue('D4','MONTO AUTORIZADO')
-		            ->setCellValue('E4','NUM OBRAS CONTRATADAS')
-		            ->setCellValue('F4','MONTO CONTRATADO');
+		            ->setCellValue('C4','Año')
+		            ->setCellValue('D4','NUM OBRAS AUTORIZADAS')
+		            ->setCellValue('E4','MONTO AUTORIZADO')
+		            ->setCellValue('F4','NUM OBRAS CONTRATADAS')
+		            ->setCellValue('G4','MONTO CONTRATADO');
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getStyle('B4:F4')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getStyle('B4:G4')->applyFromArray($styleArray);
 
 
 		$i=5;
 		foreach ($datos as $key => $dato) {
 			$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $dato->nombre);
-			$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $dato->autorizadas);
-			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $dato->montoautorizado);
-			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $dato->contratadas);
-			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $dato->montocontratado);
-			$objPHPExcel->getActiveSheet()->getStyle('D'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
-			$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+			$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $dato->ejercicio);
+			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $dato->autorizadas);
+			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $dato->montoautorizado);
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $dato->contratadas);
+			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $dato->montocontratado);
+			$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+			$objPHPExcel->getActiveSheet()->getStyle('G'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 			$i++;
 		}
 
 		foreach ($totales as $key => $total) {
 			$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, 'TOTALES:');
-			$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $total->autorizadas);
-			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $total->montoautorizado);
-			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $total->contratadas);
-			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $total->montocontratado);
-			$objPHPExcel->getActiveSheet()->getStyle('B'.$i.':'.'F4'.$i)->getFont()->setBold(true);
-			$objPHPExcel->getActiveSheet()->getStyle('D'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
-			$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+			$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $total->autorizadas);
+			$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $total->montoautorizado);
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $total->contratadas);
+			$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $total->montocontratado);
+			$objPHPExcel->getActiveSheet()->getStyle('D'.$i.':'.'G4'.$i)->getFont()->setBold(true);
+			$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+			$objPHPExcel->getActiveSheet()->getStyle('G'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 			$i++;
 		}
 

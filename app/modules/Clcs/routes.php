@@ -11,6 +11,14 @@ Route::group(array('before'=>'auth'), function(){
 	Route::get('clc/editar/{id}',['uses'=>'App\Modules\Clcs\Controllers\ClcController@editar']);
 	Route::post('clc/editar/{id}',['uses'=>'App\Modules\Clcs\Controllers\ClcController@update']);
 
+	Route::get('clc/historial/{id}',['uses'=>'App\Modules\Clcs\Controllers\ClcController@historial']);
+
+	Route::get('clc/checklist/{id}', ['uses'=>'App\Modules\Clcs\Controllers\CheckController@checklist']);
+
+	Route::post('clc/update/{id}', ['uses'=>'App\Modules\Clcs\Controllers\CheckController@saveChecklist']);
+
+
+
 
 
 });
