@@ -2,14 +2,14 @@
 
 use Validator;
 
-class UpdateObraClc extends \Eloquent{
+class HistClc extends \Eloquent{
 	public $errores;
-	protected $fillable = array('concepto','id_status','num_spei');
-	protected $table = 'obra_clc';
+	protected $fillable = array('clc_id','status_id','actualizado_por');
+	protected $table = 'historialclc';
 
 	public function isValid($data){
 		$rules = array(
-			'id_status'=> 'required'
+			'clc_id' 	=> 'required'
 		);
 
 		$validar = Validator::make($data, $rules);

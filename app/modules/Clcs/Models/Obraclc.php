@@ -4,7 +4,7 @@ use Validator;
 
 class Obraclc extends \Eloquent{
 	public $errores;
-	protected $fillable = array('idobra','no_afectacion','concepto','id_status');
+	protected $fillable = array('idobra','no_afectacion','concepto','id_status','num_spei');
 	protected $table = 'obra_clc';
 
 	public function isValid($data){

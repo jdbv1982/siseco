@@ -84,7 +84,7 @@
 
 <div class="form-group col-xs-2">
 	{{ Form::label('id_status','Estatus de la Clc') }}
-	{{ Form::select('id_status', $status,$clc->id_status, array('class' => 'form-control')) }}
+	{{ Form::select('id_status', $status,null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-12">

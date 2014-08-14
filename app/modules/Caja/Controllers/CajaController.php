@@ -7,6 +7,8 @@ use App\Modules\Pagos\Models \NumeroALetras;
 use App\Modules\Caja\Models\Caja;
 
 use App\Modules\Pagos\Controllers\PagosController;
+use App\Modules\Clcs\Controllers\ClcController;
+use App\Modules\Clcs\Models\Obraclc;
 
 class CajaController extends \BaseController{
 
@@ -19,10 +21,10 @@ class CajaController extends \BaseController{
 
 	public function setPago($id){
 		$pago = Pago::find($id);
-		$clc = $this->getStatus($pago->clc_id);
 		$letras = new NumeroALetras;
 		$cantidad =  strtoupper($letras->num2letras($pago->importe));
 		$status = DB::table('status_clc')->lists('nombre','id');
+
 
 		try{
 			$caja = Caja::where('orden_id','=',$id)->get();
@@ -32,9 +34,9 @@ class CajaController extends \BaseController{
 		}
 
 		if(empty($caja)){
-			$this->layout->contenido = View::make('Caja::pago', compact('pago','cantidad','status','clc'));
+			$this->layout->contenido = View::make('Caja::pago', compact('pago','cantidad','status'));
 		}else{
-			$this->layout->contenido = View::make('Caja::editar', compact('caja', 'pago','cantidad','status','clc'));
+			$this->layout->contenido = View::make('Caja::editar', compact('caja', 'pago','cantidad','status'));
 		}
 	}
 
@@ -43,8 +45,9 @@ class CajaController extends \BaseController{
 		$caja = new Caja;
 
 		if($caja->validAndSave($data)){
-			$pago = new PagosController;
-			$pago->updateStatusClc($data['clc_id'], $data['id_status']);
+			$this->verificarStatus($data['orden_id'], $data['status_id']);
+			$clcCtl = new ClcController;
+			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Nuevo pago en caja');
 			return Redirect::to('caja/listado');
 		}else{
 			return Redirect::back()->withErrors($caja->errores)->withInput();
@@ -62,8 +65,9 @@ class CajaController extends \BaseController{
 		}
 
 		if($caja->validAndSave($data)){
-			$pago = new PagosController;
-			$pago->updateStatusClc($data['clc_id'], $data['id_status']);
+			$this->verificarStatus($data['orden_id'], $data['status_id']);
+			$clcCtl = new ClcController;
+			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Edicion pago en caja');
    			return Redirect::to('caja/listado');
 		}else{
 			return Redirect::back()->withErrors($caja->errores)->withInput();
@@ -100,9 +104,30 @@ class CajaController extends \BaseController{
 		$sql = "SELECT p.id, p.folio, p.beneficiario,c.nombre AS cuenta ,p.observaciones,p.concepto,  p.total, sc.nombre as status
 			FROM pagos p
 			INNER JOIN cuentas c ON c.id = p.cuenta_id
-			INNER JOIN obra_clc oc ON oc.no_afectacion = p.folio
-			INNER JOIN status_clc sc ON sc.id = oc.id_status";
+			INNER JOIN status_clc sc ON sc.id = p.status_id";
 
 		return DB::select( DB::raw($sql));
+	}
+
+	public function verificarStatus($orden, $status){
+
+		$pago = Pago::find($orden);
+
+		if( ! is_null($pago)){
+			$pago->status_id = $status;
+			$pago->save();
+		}
+
+		//verificar si la clc termina en 0 cambiar el status a pagada en obra_clc
+		$pagos = new PagosController;
+		$monto_clc = $pagos->getImporteClc($pago->folio);
+		$monto_pagado = $pagos->getImportePagado($pago->clc_id);
+		if ($monto_clc == $monto_pagado) {
+			$obra_clc = Obraclc::find($pago->clc_id);
+			if( ! is_null($obra_clc)){
+				$obra_clc->id_status = 4;
+				$obra_clc->save();
+			}
+		}
 	}
 }

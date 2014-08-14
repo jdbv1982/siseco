@@ -5,8 +5,10 @@ use view, Input, DB, Response, Redirect;
 use App\Modules\Clcs\Models\Clc;
 use App\Modules\Clcs\Models\Obraclc;
 use App\Modules\Clcs\Models\UpdateObraClc;
+use App\Modules\Clcs\Models\HistClc;
 
 use App\Modules\Planeacion\Models\Planeacion;
+
 
 class ClcController extends \BaseController{
 	protected $layout = "layouts.layout";
@@ -53,6 +55,11 @@ class ClcController extends \BaseController{
 	public function insertar(){
 		$dato = $_POST['registro'];
 
+		if( $dato[12] == '+'){
+			$signo = 1;
+		}else{
+			$signo = -1;
+		}
 
 		$datap = array(
 			'no_afectacion' => $dato[1],
@@ -66,7 +73,7 @@ class ClcController extends \BaseController{
 			'importe'=> $dato[9],
 			'iva'=> $dato[10],
 			'total'=> $dato[11],
-			'signo'=> $dato[12]
+			'signo'=> $signo
 		);
 
 		$obra = '';
@@ -79,6 +86,19 @@ class ClcController extends \BaseController{
 			}
 			return "true";
 		};
+	}
+
+	public function setStatusHistorial($clc, $status,$actualizado){
+		$data = [
+			'clc_id'	=> $clc,
+			'status_id' => $status,
+			'actualizado_por' => $actualizado
+		];
+
+		$hist = new HistClc;
+		$hist->validAndSave($data);
+
+
 	}
 
 	public function setObraClc($obra, $clc){
@@ -94,6 +114,7 @@ class ClcController extends \BaseController{
 		];
 
 		$obra_clc->validAndSave($dataobra);
+		$this->setStatusHistorial($obra_clc->id, 1,'Importacion');
 
 	}
 
@@ -101,7 +122,7 @@ class ClcController extends \BaseController{
 		$listado = DB::table('obra_clc as o')
 			->join('planeacion as p', 'o.idobra','=','p.id')
 			->join('status_clc as c','c.id','=','o.id_status')
-			->select('o.id', 'p.numeroobra','p.nombreobra','o.no_afectacion','o.concepto','c.nombre')
+			->select('o.id', 'p.numeroobra','p.nombreobra','o.no_afectacion','o.concepto','c.nombre','o.num_spei')
 			->get();
 		$this->layout->contenido = View::make('Clcs::listado', compact('listado'));
 	}
@@ -143,15 +164,24 @@ class ClcController extends \BaseController{
 			App::abort(404);
 		}
 
-
-
-
 		if($obra_clc->validAndSave($data)){
+			$this->setStatusHistorial($id, $data['id_status'],'Editar Clc');
    			return Redirect::to('clc/listado');
 		}else{
 			return Redirect::back()->withErrors($obra_clc->errores)->withInput();
    		}
 
 	}
+
+	public function historial($id){
+		$sql = "SELECT hc.id, sc.nombre,hc.actualizado_por, hc.created_at
+			FROM historialclc hc
+			INNER JOIN status_clc sc ON sc.id = hc.status_id
+			WHERE clc_id = $id";
+
+		$historial = DB::select( DB::raw($sql));
+		$this->layout->contenido = View::make('Clcs::historial', compact('historial'));
+	}
+
 
 }

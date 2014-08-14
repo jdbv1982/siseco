@@ -3,6 +3,8 @@
 use View, DB, Response, Input, Redirect;
 
 use App\Modules\Clcs\Models\Obraclc;
+use App\Modules\Clcs\Controllers\ClcController;
+
 
 use App\Modules\Planeacion\Models\Planeacion;
 use App\Modules\Licitaciones\Models\Licitaciones;
@@ -13,8 +15,20 @@ class PagosController extends \BaseController{
 
 	protected $layout = "layouts.layout";
 
+	public function lista($id){
+		$clc = Obraclc::find($id);
+		$ordenes =DB::table('pagos as p')
+				->join('status_clc as sc','sc.id','=','p.status_id')
+				->where('clc_id','=',$id)->get();
+		$monto_total = $this->getImporteClc($clc->no_afectacion);
+		$monto_ordenado = $this->getImporteOrdenado($id);
+		$this->layout->contenido = View::make('Pagos::lista', compact('ordenes','id','monto_total','monto_ordenado'));
+	}
+
 	public function nueva($id){
 		$clc = Obraclc::find($id);
+		$monto_total = $this->getImporteClc($clc->no_afectacion);
+		$monto_ordenado = $this->getImporteOrdenado($id);
 		$obra = Planeacion::find($clc->idobra);
 		$factura = $this->getNumeroFactura($clc->no_afectacion);
 		$beneficiario = $this->getNombreBeneficiario($clc->idobra);
@@ -23,19 +37,7 @@ class PagosController extends \BaseController{
 		$cuentas = DB::table('cuentas')->lists('nombre','id');
 		$status = DB::table('status_clc')->lists('nombre','id');
 
-		try{
-			$orden = Pago::where('clc_id','=',$id)->get();
-			$orden= $orden[0];
-		}catch(\Exception $e){
-			$orden = [];
-		}
-
-		if(empty($orden)){
-			$this->layout->contenido = View::make('Pagos::nueva', compact('clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status'));
-		}else{
-			$this->layout->contenido = View::make('Pagos::editar', compact('orden','clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status'));
-		}
-
+		$this->layout->contenido = View::make('Pagos::nueva', compact('clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status','monto_total','monto_ordenado'));
 
 		$this->layout->js = 'assets/js/clc_ajax.js';
 	}
@@ -46,7 +48,8 @@ class PagosController extends \BaseController{
 		$pago = new Pago;
 
 		if($pago->validAndSave($data)){
-			$this->updateStatusClc( $data['clc_id'], $data['id_status']);
+			$clcCtl = new ClcController;
+			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Nueva Orden de Pago');
 			return Redirect::to('clc/listado');
 		}else{
 			return Redirect::back()->withErrors($pago->errores)->withInput();
@@ -56,7 +59,6 @@ class PagosController extends \BaseController{
 
 	public function editar($id){
 		$data = Input::all();
-
 		$orden = Pago::find($id);
 
 		if(is_null($orden)){
@@ -64,7 +66,8 @@ class PagosController extends \BaseController{
 		}
 
 		if($orden->validAndSave($data)){
-			$this->updateStatusClc( $data['clc_id'], $data['id_status']);
+			$clcCtl = new ClcController;
+			$clcCtl->setStatusHistorial($data['clc_id'], $data['id_status'],'Edicion de ordenes de Pago');
    			return Redirect::to('clc/listado');
 		}else{
 			return Redirect::back()->withErrors($orden->errores)->withInput();
@@ -84,6 +87,7 @@ class PagosController extends \BaseController{
 			];
 
 			$clc->validAndSave($data);
+
 		}
 	}
 
@@ -117,4 +121,30 @@ class PagosController extends \BaseController{
 
 		return Response::json($data);
 	}
+
+	public function getImporteClc($id){
+		$sql = "SELECT ROUND(SUM(total * signo),2) AS total
+			FROM clcs
+			WHERE no_afectacion = $id";
+
+		$total = DB::select( DB::raw($sql));
+		return $total[0]->total;
+	}
+
+	public function getImporteOrdenado($id){
+		$sql = "SELECT CASE WHEN SUM(total) IS NULL THEN 0 ELSE SUM(total) END AS pagado
+			FROM pagos
+			WHERE clc_id = $id";
+		$total = DB::select( DB::raw($sql));
+		return $total[0]->pagado;
+	}
+
+	public function getImportePagado($id){
+		$sql = "SELECT CASE WHEN SUM(total) IS NULL THEN 0 ELSE SUM(total) END AS pagado
+			FROM pagos
+			WHERE clc_id = $id and status_id = 4";
+		$total = DB::select( DB::raw($sql));
+		return $total[0]->pagado;
+	}
+
 }

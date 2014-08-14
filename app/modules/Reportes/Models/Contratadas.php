@@ -5,12 +5,9 @@ use DB;
 class Contratadas extends \Eloquent{
 	protected $whereok;
 	public function getObrasContratadas($f, $r, $d, $m, $l){
-
-
-
 		$sql = "SELECT
 			(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
-			(SELECT nombre_fuente FROM fuentes WHERE id = p.idfuente) AS fuentegeneral,
+			(SELECT fuentegeneral FROM fuentegeneral WHERE id = p.idfgeneral) AS fuentegeneral,
 			(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 			(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
 			(SELECT nombre_localidad FROM localidades WHERE id = p.idlocalidad) AS nombre_localidad,

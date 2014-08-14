@@ -4,9 +4,9 @@ use DB;
 
 class ObrasAutorizadas extends \Eloquent{
 	public function getObrasAut($r, $d, $m, $l){
-		$sql = "SELECT p.id,p.ejercicio, p.nombreobra, finan.nombrefinanciamiento, of.numerooficio, of.fechaoficio, SUM(est.investatal) AS monto
+		$sql = "SELECT p.id,p.ejercicio, p.nombreobra, fg.fuentegeneral AS nombrefinanciamiento, of.numerooficio, of.fechaoficio, SUM(est.investatal) AS monto
 				FROM planeacion AS p
-				INNER JOIN financiamiento AS finan ON p.idcvefin = finan.id
+				INNER JOIN fuentegeneral AS fg ON fg.id = p.idfgeneral
 				INNER JOIN oficios AS of ON p.id = of.idobra
 				INNER JOIN estructura AS est ON p.id = est.idobra ";
 		$sql .= "WHERE of.nombreoficio = 'AUTORIZACION' ";
@@ -16,7 +16,7 @@ class ObrasAutorizadas extends \Eloquent{
 		if($m != 0){$sql .= "AND p.idmunicipio = $m ";}
 		if($l != 0){ $sql .= "AND p.idlocalidad = $l ";}
 
-		$sql .= "GROUP BY p.id, p.nombreobra, finan.nombrefinanciamiento, of.numerooficio, of.fechaoficio ";
+		$sql .= "GROUP BY p.id, p.nombreobra, fg.fuentegeneral, of.numerooficio, of.fechaoficio ";
 		$sql .= "ORDER BY p.ejercicio";
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
