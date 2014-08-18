@@ -56,6 +56,7 @@ class ContratadasController extends \BaseController{
 		if( $opcion == ["iddistrito"]){$filtro = 'DISTRITO';}
 		if( $opcion == ["idmunicipio"]){$filtro = 'MUNICIPIO';}
 		if( $opcion == ["idlocalidad"]){$filtro = 'LOCALIDAD';}
+		if( $opcion == ["idresidencia"]){$filtro = 'RESIDENCIA';}
 
 
 		return $rep->printResumen($datos, $totales, $filtro);

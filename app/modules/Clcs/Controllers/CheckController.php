@@ -1,6 +1,6 @@
 <?php namespace App\Modules\Clcs\Controllers;
 
-use DB, View, Input;
+use DB, View, Input, Redirect;
 
 use App\Modules\Clcs\Models\Obraclc;
 use App\Modules\Planeacion\Models\Planeacion;
@@ -27,7 +27,13 @@ class CheckController extends \BaseController{
 	}
 
 	public function saveChecklist($id){
-		return Input::all();
+		for ($i=1; $i <= 30; $i++) {
+			if(Input::has('radio'.$i)){
+				$this->clcRepo->setDocumentacion(Input::get('clc_id'), $i, Input::get('radio'.$i), Input::get('obs'.$i));
+			}
+		}
+
+		return Redirect::to('clc/checklist/'.$id);
 	}
 
 

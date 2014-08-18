@@ -22,13 +22,13 @@
 </div>
 
 <div class="form-group col-sm-6">
-	<p>ESTIMACION No: <strong>{{$estimacion->nombre}}</strong></p>
+	<p>ESTIMACION No: <strong>{{isset($estimacion->nombre) ? $estimacion->nombre : ''}}</strong></p>
 </div>
 <div class="form-group col-sm-6">
-	<p>IMPORTE: <strong>{{$estimacion->importe}}</strong></p>
+	<p>IMPORTE: <strong>{{isset($estimacion->importe) ? $estimacion->importe : ''}}</strong></p>
 </div>
 <div class="form-group col-sm-12">
-	<p>PERIODO DE EJECUCION: <strong>{{$estimacion->periodo}}</strong></p>
+	<p>PERIODO DE EJECUCION: <strong>{{isset($estimacion->periodo) ? $estimacion->periodo : ''}}</strong></p>
 </div>
 
 </div>

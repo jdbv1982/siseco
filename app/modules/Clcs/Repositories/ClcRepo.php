@@ -2,6 +2,8 @@
 
 use DB;
 
+use App\Modules\Clcs\Models\Reldoc;
+
 class ClcRepo {
 
 	public function getDatosObra($id){
@@ -28,18 +30,70 @@ class ClcRepo {
 			WHERE no_afectacion = $folio LIMIT 1)";
 
 		$estimacion = DB::select( DB::raw($sql));
-		return $estimacion[0];
+		if(! empty($estimacion)){
+			return $estimacion[0];
+		}else{
+			return [];
+		}
 	}
 
 	public function getDocumentacion($clc, $tipo){
 		$sql = "SELECT d.id, d.cve, d.documento,
-		(SELECT presenta FROM rel_doc WHERE id = id AND clc_id = $clc) AS presenta,
-		(SELECT faltante FROM rel_doc WHERE id = id AND clc_id = $clc) AS faltante,
-		(SELECT no_aplica FROM rel_doc WHERE id = id AND clc_id = $clc) AS no_aplica
+		(SELECT presenta FROM rel_doc WHERE doc_id = d.id AND clc_id = $clc) AS presenta,
+		(SELECT faltante FROM rel_doc WHERE doc_id = d.id AND clc_id = $clc) AS faltante,
+		(SELECT no_aplica FROM rel_doc WHERE doc_id = d.id AND clc_id = $clc) AS no_aplica,
+		(SELECT observaciones FROM rel_doc WHERE doc_id = d.id AND clc_id = $clc) AS observaciones
 		FROM cat_doc_contratos d
 		WHERE d.tipo = $tipo";
 
 		$datos = DB::select( DB::raw($sql));
 		return $datos;
+	}
+
+	public function setDocumentacion($clc_id, $doc_id, $valor, $observaciones){
+		$presenta = 0;
+		$faltante = 0;
+		$no_aplica = 0;
+
+		if($valor == 1){
+			$presenta = 1;
+		}elseif ($valor == 2) {
+			$faltante = 1;
+		}else{
+			$no_aplica = 1;
+		}
+
+		$docto = $this->getRelDocto($clc_id, $doc_id);
+		if(empty($docto)){
+			$rel_doc = new Reldoc;
+
+			$data = [
+				'clc_id' => $clc_id,
+				'doc_id' => $doc_id,
+				'presenta' => $presenta,
+				'faltante' => $faltante,
+				'no_aplica' => $no_aplica,
+				'observaciones' => $observaciones
+			];
+			$rel_doc->validAndSave($data);
+		}else{
+			$rel_doc = Reldoc::find($docto[0]->id);
+			$rel_doc->presenta = $presenta;
+			$rel_doc->faltante = $faltante;
+			$rel_doc->no_aplica = $no_aplica;
+			$rel_doc->observaciones = $observaciones;
+			$rel_doc->save();
+		}
+
+	}
+
+	public function getRelDocto($clc_id, $doc_id){
+		$docto = DB::table('rel_doc')
+			->where('clc_id','=',$clc_id)
+			->where('doc_id','=',$doc_id, 'AND')
+			->get();
+
+		return $docto;
+
 	}
 }

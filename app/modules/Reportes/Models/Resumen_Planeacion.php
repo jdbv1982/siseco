@@ -26,6 +26,10 @@ class Resumen_Planeacion extends \Eloquent{
 			$campo = 'nombre_localidad';
 			$tabla = 'localidades';
 			$key = 'idlocalidad';
+		}elseif ($op == ['idresidencia']) {
+			$campo = 'nombre';
+			$tabla = 'residencias';
+			$key = 'idresidencia';
 		}
 
 
