@@ -7,6 +7,7 @@
 	@include('radiobtn.distrito_partial')
 	@include('radiobtn.municipio_partial')
 	@include('radiobtn.localidad_partial')
+	@include('radiobtn.residencia_partial')
 	@include('filtros.submit_partial')
 </div>
 

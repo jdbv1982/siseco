@@ -8,7 +8,8 @@ class ReporteController extends \BaseController{
 	protected $distritos;
 	protected $municipios;
 	protected $localidades;
-	protected$fuentes;
+	protected $fuentes;
+	protected $residencias;
 
 	public function __construct()
     	{
@@ -17,6 +18,7 @@ class ReporteController extends \BaseController{
 		$this->municipios = DB::table('municipios')->where('iddistrito','=',1)->lists('nombre_municipio','id');
 		$this->localidades = DB::table('localidades')->where('idmunicipio','=',1)->lists('nombre_localidad','id');
 		$this->fuentes = DB::table('fuentegeneral')->lists('fuentegeneral','id');
+		$this->residencias = DB::table('residencias')->lists('nombre','id');
     	}
 
 	public function getObrasAut(){
@@ -42,7 +44,8 @@ class ReporteController extends \BaseController{
 		$distritos = $this->distritos;
 		$municipios = $this->municipios;
 		$localidades = $this->localidades;
-		$this->layout->contenido = View::make('Reportes::verresumen',compact('regiones','distritos','municipios','localidades','fuentes'));
+		$residencias = $this->residencias;
+		$this->layout->contenido = View::make('Reportes::verresumen',compact('regiones','distritos','municipios','localidades','fuentes','residencias'));
 	}
 }
 

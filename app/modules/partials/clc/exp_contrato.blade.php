@@ -1,15 +1,17 @@
 <h3 class="text-center">RELACIÓN DE DOCUMENTOS QUE INTEGRAN LA ESTIMACIÓN</h3>
 
 {{ Form::open(array('url'=> array('clc/update',$obraclc->id),'method'=>'POST')) }}
+{{Form::hidden('clc_id',$obraclc->id )}}
 <div class="row col-sm-8 col-sm-offset-2">
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 	<thead>
 		<tr>
 			<th>#</th>
 			<th>Nombre</th>
-			<th>Descripción</th>
 			<th>Presenta</th>
+			<th>Faltante</th>
 			<th>No aplica</th>
+			<th>Observaciones</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,11 +19,10 @@
 		<tr>
 			<td>{{ $d->id }}</td>
 			<td>{{ $d->documento }}</td>
-			<td>{{ Form::radio($d->id,$d->presenta,array('class' => 'radio1'))}}</td>
-			<td>{{ Form::radio($d->id,$d->faltante,array('class' => 'radio1'))}}</td>
-			<td>{{ Form::radio($d->id,$d->no_aplica,array('class' => 'radio1'))}}</td>
-
-			{{--Form::radio($name, $value, $checked, $attributes);--}}
+			<td>{{ Form::radio('radio'.$d->id,1,$d->presenta,array('class' => 'radio1'))}}</td>
+			<td>{{ Form::radio('radio'.$d->id,2,$d->faltante,array('class' => 'radio1'))}}</td>
+			<td>{{ Form::radio('radio'.$d->id,3,$d->no_aplica,array('class' => 'radio1'))}}</td>
+			<td>{{ Form::textarea('obs'.$d->id,$d->observaciones, ['class'=>'form-control', 'rows'=>'2']) }}</td>
 		</tr>
 		@endforeach
 	</tbody>
