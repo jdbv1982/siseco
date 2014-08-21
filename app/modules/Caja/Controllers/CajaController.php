@@ -10,6 +10,8 @@ use App\Modules\Pagos\Controllers\PagosController;
 use App\Modules\Clcs\Controllers\ClcController;
 use App\Modules\Clcs\Models\Obraclc;
 
+use App\Modules\Caja\Servicios\ImpresionBancos as imprime;
+
 class CajaController extends \BaseController{
 
 	protected $layout = "layouts.layout";
@@ -76,6 +78,7 @@ class CajaController extends \BaseController{
 	}
 
 	public function impresion($banco_id, $caja_id){
+		$imprime = new imprime;
 		$caja = Caja::find($caja_id);
 
 		if(is_null($caja)){
@@ -88,7 +91,8 @@ class CajaController extends \BaseController{
 
 
 		if($banco_id == 1){
-			return View::make('Caja::bancomer', compact('caja','fecha','importe'));
+			$imprime->ImprimeBancomer($caja, $fecha, $importe);
+			//return View::make('Caja::bancomer', compact('caja','fecha','importe'));
 		}elseif ($banco_id == 2) {
 			return View::make('Caja::hsbc', compact('caja','fecha','importe'));
 		}else{

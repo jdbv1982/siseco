@@ -1,66 +1,38 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>hsbc</title>
-    <style>
-        .container{
-            width: 600px;
-            height: 800px;
-            float: left;
-        }
+<!--Impresion de la parte de la fecha -->
+{{"<br><br><br>"}}
+{{"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+"}}{{"\t" . $fecha }}
 
-        .fecha{
-            float: right;
-        }
+<!--Impresion de la parte del beneficiario y el importe-->
+{{"<br><br>"}}
+{{ $caja->beneficiario }}
+{{'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;'}}
+{{$caja->importe}}
+{{"<br><br>"}}
+{{$importe}}
 
-        .beneficiario{
-            float: left;
-            padding-top: 10px;
-        }
+<!--Impresion de la parte del concepto-->
+{{"<br><br><br><br><br><br><br><br><br><br><br><br>"}}
+{{$caja->concepto}}
 
-        .importe{
-            float: right;
-            padding-top: 10px;
-        }
-
-        .iniciales{
-            float: left;
-            margin-left: 170px;
-            margin-right: -120px;
-        }
-
-        .letra{
-            padding-top: 8px;
-        }
-
-        .concepto{
-            width: 450px;
-        }
-
-        @page{
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <br/><br/>
-        <div class="fecha">{{ $fecha }}</div>
-        <br/><br/><br/>
-        <div class="beneficiario">{{ $caja->beneficiario }}</div>
-        <div class="importe">{{$caja->importe}}</div>
-        <br/><br/>
-        <div class="letra">{{$importe}}</div>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <div class="concepto">{{$caja->concepto}}</div>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br><br><br><br><br>
-        <div class="iniciales">JDBV</div>
-        <div class="iniciales">JDBV</div>
-        <div class="iniciales">JDBV</div>
-    </div>
-</body>
-</html>
+<!--Impresion de la parte del footer-->
+{{"<br><br><br><br><br><br><br><br><br><br><br><br>"}}
+{{"<br><br><br><br><br><br><br><br><br><br><br><br>"}}
+{{"<br><br><br><br><br>"}}
+{{"JDBV"}}
