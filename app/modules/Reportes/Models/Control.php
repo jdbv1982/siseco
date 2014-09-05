@@ -24,7 +24,7 @@ class Control extends \Eloquent{
 			FROM planeacion p
 			LEFT JOIN calendarizacion c ON c.idobra = p.id ";
 			if ($totales == false){
-				$sql .= "GROUP BY p.idfgeneral, p.ejercicio ORDER BY p.ejercicio, p.idfgeneral";
+				$sql .= "GROUP BY p.idfgeneral, p.ejercicio ORDER BY p.ejercicio, p.idfgeneralx";
 			}
 		$datos = DB::select( DB::raw($sql));
 		return $datos;

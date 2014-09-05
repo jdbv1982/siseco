@@ -10,7 +10,6 @@ use App\Modules\Pagos\Controllers\PagosController;
 use App\Modules\Clcs\Controllers\ClcController;
 use App\Modules\Clcs\Models\Obraclc;
 
-use App\Modules\Caja\Servicios\ImpresionBancos as imprime;
 
 class CajaController extends \BaseController{
 
@@ -78,7 +77,6 @@ class CajaController extends \BaseController{
 	}
 
 	public function impresion($banco_id, $caja_id){
-		$imprime = new imprime;
 		$caja = Caja::find($caja_id);
 
 		if(is_null($caja)){
@@ -87,16 +85,16 @@ class CajaController extends \BaseController{
 			$letras = new NumeroALetras;
 			$fecha = $letras->getFecha($caja->fecha);
 			$importe = $letras->num2letras($caja->importe);
+			$importe_pesos = number_format($caja->importe, 2, '.', ', ');
 		}
 
 
 		if($banco_id == 1){
-			$imprime->ImprimeBancomer($caja, $fecha, $importe);
-			//return View::make('Caja::bancomer', compact('caja','fecha','importe'));
+			return View::make('Caja::bancomer', compact('caja','fecha','importe','importe_pesos'));
 		}elseif ($banco_id == 2) {
-			return View::make('Caja::hsbc', compact('caja','fecha','importe'));
+			return View::make('Caja::hsbc', compact('caja','fecha','importe','importe_pesos'));
 		}else{
-			return View::make('Caja::banamex', compact('caja','fecha','importe'));
+			return View::make('Caja::banamex', compact('caja','fecha','importe','importe_pesos'));
 		}
 	}
 
