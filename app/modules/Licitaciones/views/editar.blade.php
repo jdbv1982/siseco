@@ -75,6 +75,13 @@
 				</div>
 			</div>
 
+			<div class="form-group col-xs-12 col-sm-12">
+                                            {{ Form::label('l_observaciones','Observaciones del contrato') }}
+                                            <div class="controls">
+                                                {{ Form::textarea('l_observaciones',null,array('class'=>'form-control fecha', 'rows'=>'3')) }}
+                                            </div>
+                                        </div>
+
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<br>
