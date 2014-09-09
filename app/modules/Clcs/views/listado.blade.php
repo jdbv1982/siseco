@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Folio</th>
             <th># Obra</th>
             <th>Nombre</th>
             <th>No. Afectacion</th>
@@ -18,6 +19,7 @@
     @foreach ($listado as $lista)
     <tr>
         <td>{{ $lista->id }}</td>
+        <td>{{ $lista->folio }}</td>
         <td>{{ $lista->numeroobra }}</td>
         <td>{{ Str::limit($lista->nombreobra, $limit = 80, $end = '...') }}</td>
         <td>{{ $lista->no_afectacion }}</td>

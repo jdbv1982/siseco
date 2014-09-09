@@ -73,7 +73,8 @@ class ClcController extends \BaseController{
 			'importe'=> $dato[9],
 			'iva'=> $dato[10],
 			'total'=> $dato[11],
-			'signo'=> $signo
+			'signo'=> $signo,
+			'folio' => $dato[13]
 		);
 
 		$obra = '';
@@ -82,7 +83,7 @@ class ClcController extends \BaseController{
 		if($clc->validAndSave($datap)){
 			if($dato[0] <> $obra){
 				$obra = $dato[0];
-				$this->setObraClc($obra, $dato[1]);
+				$this->setObraClc($obra, $dato[1], $dato[13]);
 			}
 			return "true";
 		};
@@ -101,7 +102,7 @@ class ClcController extends \BaseController{
 
 	}
 
-	public function setObraClc($obra, $clc){
+	public function setObraClc($obra, $clc, $folio){
 		$obra_clc = new Obraclc;
 
 		$id_obra = DB::table('planeacion')->where('numeroobra', '=', $obra)->get();
@@ -110,7 +111,8 @@ class ClcController extends \BaseController{
 			'idobra'	=> $id_obra[0]->id,
 			'no_afectacion' => $clc,
 			'concepto'	=> '',
-			'id_status'	=> 1
+			'id_status'	=> 1,
+			'folio'		=> $folio
 		];
 
 		$obra_clc->validAndSave($dataobra);
@@ -122,7 +124,7 @@ class ClcController extends \BaseController{
 		$listado = DB::table('obra_clc as o')
 			->join('planeacion as p', 'o.idobra','=','p.id')
 			->join('status_clc as c','c.id','=','o.id_status')
-			->select('o.id', 'p.numeroobra','p.nombreobra','o.no_afectacion','o.concepto','c.nombre','o.num_spei')
+			->select('o.id', 'p.numeroobra','p.nombreobra','o.no_afectacion','o.concepto','c.nombre','o.num_spei','o.folio')
 			->get();
 		$this->layout->contenido = View::make('Clcs::listado', compact('listado'));
 	}

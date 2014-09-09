@@ -35,6 +35,7 @@
 				<th>Concepto</th>
 				<th>Total</th>
 				<th>Estado</th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +48,11 @@
 				<td>{{ $orden->concepto }}</td>
 				<td>{{ $orden->total }}</td>
 				<td>{{ $orden->nombre }}</td>
+				<td class="text-center">
+					<a class="btn btn-default" href="{{ URL::to('pagos/editar/'.$orden->id) }}">
+						  <span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
 			</tr>
 			@endforeach
 		</tbody>

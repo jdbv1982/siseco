@@ -9,6 +9,21 @@
 	{{ Form::text('folio',$clc->no_afectacion,array('class'=>'form-control text-right','required')) }}
 </div>
 
+<div class="form-group col-xs-12 col-sm-1">
+	{{ Form::label('monto_clc','Monto Clc') }}
+	{{ Form::text('monto_clc',$monto_total,array('class'=>'form-control text-right','required')) }}
+</div>
+
+<div class="form-group col-xs-12 col-sm-1">
+	{{ Form::label('monto_ordenado','Total en Ordenes') }}
+	{{ Form::text('monto_ordenado',$monto_ordenado,array('class'=>'form-control text-right','required')) }}
+</div>
+
+<div class="form-group col-xs-12 col-sm-1">
+	{{ Form::label('monto_porpgar','Total por Pagar') }}
+	{{ Form::text('monto_porpgar',$monto_total - $monto_ordenado,array('class'=>'form-control text-right','required','id'=>'monto_a_pagar')) }}
+</div>
+
 <legend>Datos de la Obra</legend>
 <div class="form-group col-xs-12 col-sm-2">
 	{{ Form::label('obra','No. obra:') }}
@@ -65,26 +80,33 @@
 
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('deducciones','Deducciones:') }}
-	{{ Form::text('deducciones',null,array('class'=>'form-control')) }}
+	{{ Form::text('deducciones',null,array('class'=>'form-control suma-clc')) }}
 </div>
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('aditivas','Aditivas:') }}
-	{{ Form::text('aditivas',null,array('class'=>'form-control')) }}
+	{{ Form::text('aditivas',null,array('class'=>'form-control suma-clc')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('importe','Importe:') }}
-	{{ Form::text('importe',null,array('class'=>'form-control','required')) }}
+	{{ Form::text('importe',null,array('class'=>'form-control suma-clc','required')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('total','Total:') }}
-	{{ Form::text('total',null,array('class'=>'form-control')) }}
+	{{ Form::text('total',null,array('class'=>'form-control','id'=>'total_clc')) }}
 </div>
 
 <div class="form-group col-xs-2">
-	{{ Form::label('id_status','Estatus de la Clc') }}
-	{{ Form::select('id_status', $status,null, array('class' => 'form-control')) }}
+	{{ Form::label('id_status','Estatus de la Orden') }}
+	{{ Form::select('id_status', $status,$orden->status_id, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group col-xs-12 col-sm-12">
+	<br>
+	{{ Form::submit('Guardar',array('class'=>'btn btn-primary','id'=>'btn_pago')) }}
+	<a href="{{ URL::to('pagos/lista/'.$clc->id) }}" class="btn btn-primary">Cancelar</a>
+		<a href="{{ URL::to('clc/listado') }}" class="btn btn-primary">Imprimir</a>
 </div>
 
 <div class="form-group col-xs-12 col-sm-12">

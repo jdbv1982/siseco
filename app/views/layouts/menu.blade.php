@@ -61,6 +61,7 @@
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 37) == 'true')
                             <li><a href="{{ URL::to('obras/listado') }}">Todas</a></li>
                         @endif
+
                 </ul>
             </li>
 
@@ -84,6 +85,9 @@
                 @endif
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 42) == 'true')
                     <li><a href="{{ URL::to('estructura/listado') }}">Estructura</a></li>
+                @endif
+                @if(Auth::user()->verificaPermiso(Auth::user()->id, 48) == 'true')
+                    <li><a href="{{ URL::to('facturas/listado') }}">Facturas</a></li>
                 @endif
                 </ul>
             </li>
