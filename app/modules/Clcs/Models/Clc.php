@@ -4,7 +4,7 @@ use Validator;
 
 class Clc extends \Eloquent{
 	public $errores;
-	protected $fillable = array('no_afectacion','no_control','cve_presupuestal','descripcion','referencia','fecha_ref','proveedor','rfc','importe','iva','total','signo');
+	protected $fillable = array('no_afectacion','no_control','cve_presupuestal','descripcion','referencia','fecha_ref','proveedor','rfc','importe','iva','total','signo','folio');
 	protected $table = 'clcs';
 
 	public function isValid($data){

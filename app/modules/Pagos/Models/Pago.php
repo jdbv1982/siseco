@@ -11,16 +11,9 @@ class Pago extends \Eloquent{
 	public function isValid($data){
 		$rules = array(
 			'clc_id' => 'required',
-			'folio' => 'required',
 			'beneficiario' => 'required',
 			'importe'	=> 'required'
 		);
-
-		if($this->exists){
-			$rules['folio'] .= ',folio,' . $this->id;
-		}else{
-			$rules['folio'] .= '|required';
-		}
 
 		$validar = Validator::make($data, $rules);
 		if($validar->passes()){

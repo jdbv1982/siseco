@@ -59,4 +59,9 @@ class FacturaController extends \BaseController{
 			}
 		}
 
+		public function listado(){
+			$datos = Factura::all();
+			$this->layout->contenido = View::make('Facturas::listado', compact('datos'));
+		}
+
 }

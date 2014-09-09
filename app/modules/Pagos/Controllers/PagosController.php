@@ -18,8 +18,10 @@ class PagosController extends \BaseController{
 	public function lista($id){
 		$clc = Obraclc::find($id);
 		$ordenes =DB::table('pagos as p')
+				->select('p.id','p.folio','p.beneficiario','p.observaciones','p.concepto','p.total','sc.nombre')
 				->join('status_clc as sc','sc.id','=','p.status_id')
-				->where('clc_id','=',$id)->get();
+				->where('clc_id','=',$id)
+				->get();
 		$monto_total = $this->getImporteClc($clc->no_afectacion);
 		$monto_ordenado = $this->getImporteOrdenado($id);
 		$this->layout->contenido = View::make('Pagos::lista', compact('ordenes','id','monto_total','monto_ordenado'));
@@ -56,6 +58,23 @@ class PagosController extends \BaseController{
 		}
 	}
 
+	public function getEditar($id){
+		$clc = Obraclc::find($id);
+		$orden = Pago::find($id);
+		$monto_total = $this->getImporteClc($clc->no_afectacion);
+		$monto_ordenado = $this->getImporteOrdenado($id);
+		$obra = Planeacion::find($clc->idobra);
+		$factura = $this->getNumeroFactura($clc->no_afectacion);
+		$beneficiario = $this->getNombreBeneficiario($clc->idobra);
+		$ejercicios = DB::table('ejercicios')->lists('nombre','id');
+		$bancos = DB::table('bancos')->lists('nombre','id');
+		$cuentas = DB::table('cuentas')->lists('nombre','id');
+		$status = DB::table('status_clc')->lists('nombre','id');
+
+		$this->layout->contenido = View::make('Pagos::editar', compact('orden','clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status','monto_total','monto_ordenado'));
+
+		$this->layout->js = 'assets/js/clc_ajax.js';
+	}
 
 	public function editar($id){
 		$data = Input::all();
