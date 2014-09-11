@@ -101,7 +101,11 @@ class ImpresionControl{
 	}
 
 	public function getPorcentaje($valor, $total){
-		return round($valor * 100 / $total, 2);
+		if($total > 0){
+			return round($valor * 100 / $total, 2);
+		}else{
+			return 0;
+		}
 	}
 
 }
