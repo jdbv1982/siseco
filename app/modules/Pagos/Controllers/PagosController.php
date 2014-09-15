@@ -50,6 +50,10 @@ class PagosController extends \BaseController{
 		$pago = new Pago;
 
 		if($pago->validAndSave($data)){
+			if($pago->folio == 0){
+				$pago->folio = $pago->id;
+				$pago->save();
+			}
 			$clcCtl = new ClcController;
 			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Nueva Orden de Pago');
 			return Redirect::to('clc/listado');

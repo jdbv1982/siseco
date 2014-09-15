@@ -17,6 +17,9 @@
 					<th>Ftto</th>
 					<th>Contrato</th>
 					<th>Region</th>
+					<th>Residencia</th>
+					<th>Tipo de Obra</th>
+					<th>Estatus</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -29,7 +32,10 @@
 						<td>{{$obra->nombre_fuente}}</td>
 						<td>{{$obra->l_contrato}}</td>
 						<td>{{$obra->nombre_region}}</td>
-						<td class="text-center">
+						<td>{{$obra->residencia}}</td>
+						<td>{{$obra->tipo_obra}}</td>
+						<td>{{$obra->status_obra}}</td>
+						<td width="10%" class="text-center">
 								@if(Auth::user()->verificaPermiso(Auth::user()->id, 1) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
 									<a class="btn btn-primary" href="{{ URL::to('documentacion/nuevo/'.$obra->id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
 								@endif

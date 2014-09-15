@@ -29,14 +29,19 @@ class ObrasController extends \BaseController{
 	}
 
 	public function getTodas(){
-		$obras = DB::table('planeacion')
-			->join('fuentes','planeacion.idfuente','=','fuentes.id')
-			->join('regiones','planeacion.idRegion','=','regiones.id')
-			->join('oficios','planeacion.id','=','oficios.idobra')
-			->leftjoin('licitaciones','planeacion.id','=','licitaciones.id')
-			->select('planeacion.*','fuentes.nombre_fuente','regiones.nombre_region','oficios.numerooficio','oficios.nombreoficio','licitaciones.l_contrato')
-			->where('nombreoficio','=','AUTORIZACION')
-			->get();
+		$sql = "SELECT p.id,
+			(SELECT numerooficio FROM oficios WHERE idobra = p.id AND nombreoficio = 'AUTORIZACION') AS numerooficio,
+			(SELECT nombre_fuente FROM fuentes WHERE id = p.idfuente) AS nombre_fuente,
+			(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
+			(SELECT nombre FROM tipo_obra WHERE id = p.tipo_obra_id ) AS tipo_obra,
+			(SELECT nombre FROM residencias WHERE id = p.idresidencia) AS residencia,
+			(SELECT nombre FROM status_obras WHERE id = p.status_id) AS status_obra,
+			p.nombreobra, l.l_contrato
+			FROM planeacion AS p
+			LEFT JOIN licitaciones AS l ON p.id = l.id";
+
+		$obras = DB::select( DB::raw($sql));
+
 		$this->layout->contenido = View::make('Obras::listado', compact('obras'));
 	}
 

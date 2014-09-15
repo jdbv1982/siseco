@@ -6,7 +6,7 @@
 {{ Form::hidden('clc_id', $clc->id) }}
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('folio','No. Folio:') }}
-	{{ Form::text('folio',$clc->no_afectacion,array('class'=>'form-control text-right','required')) }}
+	{{ Form::text('folio',0,array('class'=>'form-control text-right')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-1">
@@ -94,7 +94,7 @@
 
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('total','Total:') }}
-	{{ Form::text('total',0,array('class'=>'form-control','id'=>'total_clc')) }}
+	{{ Form::text('total',0,array('class'=>'form-control','id'=>'total_clc', 'required')) }}
 </div>
 
 <div class="form-group col-xs-2">
