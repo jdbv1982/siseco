@@ -58,6 +58,9 @@
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 43) == 'true')
                             <li><a href="{{ URL::to('obras/listado/9') }}">PIBAI</a></li>
                         @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 58) == 'true')
+                            <li><a href="{{ URL::to('obras/listado/10') }}">SCT</a></li>
+                        @endif
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 37) == 'true')
                             <li><a href="{{ URL::to('obras/listado') }}">Todas</a></li>
                         @endif
@@ -137,6 +140,9 @@
                         @endif
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 56) == 'true')
                             <li><a href="{{ URL::to('clc/listado/9') }}">PIBAI</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 57) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/10') }}">SCT</a></li>
                         @endif
                 </ul>
             </li>
