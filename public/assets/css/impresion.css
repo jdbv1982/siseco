@@ -1,0 +1,46 @@
+body, html{
+	height:100%;
+}
+.table{
+	border: 1px solid #000000 ;
+	padding: 2px;
+}
+
+.firmas{
+	padding-top: 30px;
+	font-size: 8px;
+}
+
+span{
+	font-weight: bold;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.text-sm{
+	height: 40px;
+}
+
+.text-md{
+	height: 80px;
+}
+
+.text-lg{
+	height: 130px;
+}
+
+.td-logo{
+	text-align: center;
+	width: 80px;
+}
+
+
+
+
+

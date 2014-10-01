@@ -9,4 +9,6 @@ Route::group(array('before'=>'auth'), function(){
 	Route::post('cuentas', ['uses'=>'App\Modules\Pagos\Controllers\PagosController@getCuentas']);
 
 	Route::get('pagos/editar/{id}', ['uses'=>'App\Modules\Pagos\Controllers\PagosController@getEditar']);
+
+	Route::get('pagos/impresion/{id}', ['uses'=>'App\Modules\Pagos\Controllers\PagosController@Impresion']);
 });

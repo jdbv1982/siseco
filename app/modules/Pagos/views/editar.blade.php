@@ -3,10 +3,10 @@
 @include('layouts/errores')
 
 {{ Form::model($orden,array('url'=>['pagos/editar', $orden->id],'method'=>'POST')) }}
-{{ Form::hidden('clc_id', $clc->id) }}
+{{ Form::hidden('clc_id', $orden->clc_id) }}
 <div class="form-group col-xs-12 col-sm-1">
 	{{ Form::label('folio','No. Folio:') }}
-	{{ Form::text('folio',$clc->no_afectacion,array('class'=>'form-control text-right','required')) }}
+	{{ Form::text('folio',$orden->folio,array('class'=>'form-control text-right','required')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-1">
@@ -98,22 +98,15 @@
 </div>
 
 <div class="form-group col-xs-2">
-	{{ Form::label('id_status','Estatus de la Orden') }}
-	{{ Form::select('id_status', $status,$orden->status_id, array('class' => 'form-control')) }}
+	{{ Form::label('status_id','Estatus de la Orden') }}
+	{{ Form::select('status_id', $status,$orden->status_id, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group col-xs-12 col-sm-12">
 	<br>
 	{{ Form::submit('Guardar',array('class'=>'btn btn-primary','id'=>'btn_pago')) }}
-	<a href="{{ URL::to('pagos/lista/'.$clc->id) }}" class="btn btn-primary">Cancelar</a>
-		<a href="{{ URL::to('clc/listado') }}" class="btn btn-primary">Imprimir</a>
-</div>
-
-<div class="form-group col-xs-12 col-sm-12">
-	<br>
-	{{ Form::submit('Guardar',array('class'=>'btn btn-primary')) }}
-	<a href="{{ URL::to('clc/listado') }}" class="btn btn-primary">Cancelar</a>
-	<a href="{{ URL::to('clc/listado') }}" class="btn btn-primary">Imprimir</a>
+	<a href="{{ URL::to('pagos/lista/'.$orden->clc_id) }}" class="btn btn-primary">Cancelar</a>
+		<a href="{{ URL::to('pagos/impresion/'.$orden->id) }}" target="_blanck" class="btn btn-primary">Imprimir</a>
 </div>
 
 {{ Form::close() }}

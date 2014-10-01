@@ -6,6 +6,7 @@ use App\Modules\Clcs\Models\Clc;
 use App\Modules\Clcs\Models\Obraclc;
 use App\Modules\Clcs\Models\UpdateObraClc;
 use App\Modules\Clcs\Models\HistClc;
+use App\Modules\Clcs\Models\OrdenClc;
 
 use App\Modules\Planeacion\Models\Planeacion;
 
@@ -120,12 +121,15 @@ class ClcController extends \BaseController{
 
 	}
 
-	public function listado(){
-		$listado = DB::table('obra_clc as o')
-			->join('planeacion as p', 'o.idobra','=','p.id')
-			->join('status_clc as c','c.id','=','o.id_status')
-			->select('o.id', 'p.numeroobra','p.nombreobra','o.no_afectacion','o.concepto','c.nombre','o.num_spei','o.folio')
-			->get();
+	public function listado($id){
+		$sql = "SELECT o.id, p.numeroobra, p.nombreobra, o.no_afectacion, o.concepto, c.nombre, o.num_spei, o.folio
+			FROM obra_clc AS o
+			INNER JOIN planeacion AS p ON o.idobra = p.id
+			INNER JOIN status_clc AS c ON c.id = o.id_status
+			WHERE p.idfgeneral =  $id";
+
+		$listado = DB::select( DB::raw($sql));
+
 		$this->layout->contenido = View::make('Clcs::listado', compact('listado'));
 	}
 
@@ -143,13 +147,13 @@ class ClcController extends \BaseController{
 
 		$factura = DB::select( DB::raw($sql));
 
-		$sql = "SELECT signo,descripcion, total
+		$sql = "SELECT signo,descripcion, ROUND(total, 2) as total
 			FROM clcs
 			WHERE no_afectacion = ". $clc->no_afectacion ."";
 
 		$detalle_clc = DB::select( DB::raw($sql));
 
-		$sql = "SELECT ROUND(SUM(CASE WHEN signo = '+' THEN total ELSE total * -1  END),2) AS total
+		$sql = "SELECT ROUND(SUM(total * signo),2) AS total
 			FROM clcs
 			WHERE no_afectacion = ".$clc->no_afectacion."";
 
@@ -160,6 +164,8 @@ class ClcController extends \BaseController{
 
 	public function update($id){
 		$obra_clc = UpdateObraClc::find($id);
+		$obra = Planeacion::find($obra_clc->idobra);
+
 		$data = Input::all();
 
 		if(is_null($obra_clc)){
@@ -168,7 +174,7 @@ class ClcController extends \BaseController{
 
 		if($obra_clc->validAndSave($data)){
 			$this->setStatusHistorial($id, $data['id_status'],'Editar Clc');
-   			return Redirect::to('clc/listado');
+   			return Redirect::to('clc/listado/'.$obra->idfgeneral);
 		}else{
 			return Redirect::back()->withErrors($obra_clc->errores)->withInput();
    		}
@@ -183,6 +189,16 @@ class ClcController extends \BaseController{
 
 		$historial = DB::select( DB::raw($sql));
 		$this->layout->contenido = View::make('Clcs::historial', compact('historial'));
+	}
+
+	public function setOrdenClc($id,$numero, $facturas){
+		for ($i=0; $i < count($facturas) ; $i++) {
+			$orden = new OrdenClc;
+			$orden->orden_id = $id;
+			$orden->no_afectacion = $numero;
+			$orden->clc_referencia = $facturas[$i];
+			$orden->save();
+		}
 	}
 
 

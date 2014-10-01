@@ -104,9 +104,47 @@
          @if(Auth::user()->verificaPermiso(Auth::user()->id, 46) == 'true')
          <ul class="nav navbar-nav">
             <li>
-                    <a href="{{ URL::to('clc/listado') }}">Listado de Clcs</a>
+
             </li>
         </ul>
+            <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listado de Clcs<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 48) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/1') }}">CAPUFE</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 49) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/2') }}">FAFEF</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 50) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/3') }}">FISE</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 51) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/4') }}">FONDEN</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 52) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/5') }}">FONREGION</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 53) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/6') }}">PNE</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 54) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/7') }}">RG23</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 55) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/8') }}">PROII</a></li>
+                        @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 56) == 'true')
+                            <li><a href="{{ URL::to('clc/listado/9') }}">PIBAI</a></li>
+                        @endif
+                </ul>
+            </li>
+
+        </ul>
+
+
+
          @endif
 
          @if(Auth::user()->verificaPermiso(Auth::user()->id, 47) == 'true')

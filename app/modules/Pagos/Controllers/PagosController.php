@@ -11,6 +11,10 @@ use App\Modules\Licitaciones\Models\Licitaciones;
 use App\Modules\Contratistas\Models\Contratista;
 use App\Modules\Pagos\Models\Pago;
 
+use App\Modules\Clcs\Models\UpdateObraClc;
+
+use App\Modules\Pagos\Servicios\OrdenPago;
+
 class PagosController extends \BaseController{
 
 	protected $layout = "layouts.layout";
@@ -39,15 +43,27 @@ class PagosController extends \BaseController{
 		$cuentas = DB::table('cuentas')->lists('nombre','id');
 		$status = DB::table('status_clc')->lists('nombre','id');
 
-		$this->layout->contenido = View::make('Pagos::nueva', compact('clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status','monto_total','monto_ordenado'));
+
+
+		$sql = "SELECT no_afectacion, referencia,proveedor, SUM(total * signo) AS total FROM clcs
+		WHERE no_afectacion = $clc->no_afectacion AND referencia NOT IN (SELECT clc_referencia FROM orden_clc WHERE no_afectacion = $clc->no_afectacion)
+		GROUP BY no_afectacion, referencia";
+
+		$facturas = DB::select( DB::raw($sql));
+
+		$this->layout->contenido = View::make('Pagos::nueva', compact('clc','obra','factura','beneficiario','ejercicios','bancos','cuentas','status','monto_total','monto_ordenado','facturas'));
 
 		$this->layout->js = 'assets/js/clc_ajax.js';
 	}
 
 
 	public function guardar(){
+		$facturas = Input::get('factura');
 		$data = Input::all();
 		$pago = new Pago;
+
+		$obra_clc = UpdateObraClc::find($data['clc_id']);
+		$obra = Planeacion::find($obra_clc->idobra);
 
 		if($pago->validAndSave($data)){
 			if($pago->folio == 0){
@@ -56,15 +72,17 @@ class PagosController extends \BaseController{
 			}
 			$clcCtl = new ClcController;
 			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Nueva Orden de Pago');
-			return Redirect::to('clc/listado');
+			$clcCtl->setOrdenClc($pago->id, $obra_clc->no_afectacion,$facturas);
+
+			return Redirect::to('clc/listado/'.$obra->idfgeneral);
 		}else{
 			return Redirect::back()->withErrors($pago->errores)->withInput();
 		}
 	}
 
 	public function getEditar($id){
-		$clc = Obraclc::find($id);
 		$orden = Pago::find($id);
+		$clc = Obraclc::find($orden->clc_id);
 		$monto_total = $this->getImporteClc($clc->no_afectacion);
 		$monto_ordenado = $this->getImporteOrdenado($id);
 		$obra = Planeacion::find($clc->idobra);
@@ -83,15 +101,16 @@ class PagosController extends \BaseController{
 	public function editar($id){
 		$data = Input::all();
 		$orden = Pago::find($id);
-
+		$obra_clc = UpdateObraClc::find($data['clc_id']);
+		$obra = Planeacion::find($obra_clc->idobra);
 		if(is_null($orden)){
 			App::abort(404);
 		}
 
 		if($orden->validAndSave($data)){
 			$clcCtl = new ClcController;
-			$clcCtl->setStatusHistorial($data['clc_id'], $data['id_status'],'Edicion de ordenes de Pago');
-   			return Redirect::to('clc/listado');
+			$clcCtl->setStatusHistorial($data['clc_id'], $data['status_id'],'Edicion de ordenes de Pago');
+   			return Redirect::to('pagos/lista/'.$orden->clc_id);
 		}else{
 			return Redirect::back()->withErrors($orden->errores)->withInput();
    		}
@@ -168,6 +187,18 @@ class PagosController extends \BaseController{
 			WHERE clc_id = $id and status_id = 4";
 		$total = DB::select( DB::raw($sql));
 		return $total[0]->pagado;
+	}
+
+	public function Impresion($id){
+		$impresion = new OrdenPago;
+		$orden = Pago::find($id);
+		$cuenta = DB::table('cuentas')
+			->select('nombre')
+			->where('id','=',$orden->cuenta_id)->get();
+
+		$cuenta = $cuenta[0]->nombre;
+
+		$impresion->orden($orden, $cuenta);
 	}
 
 }

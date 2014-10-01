@@ -29,7 +29,7 @@
 		<thead>
 			<tr>
 				<th># Orden</th>
-				<th>Num. Clc</th>
+				<th>Folio Clc</th>
 				<th>Beneficiario</th>
 				<th>Observaciones</th>
 				<th>Concepto</th>

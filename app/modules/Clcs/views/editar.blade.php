@@ -39,18 +39,9 @@
 
 <div class="row col-xs-3">
 	<p class="text-center"><strong>CLC</strong></p>
-	<p class="text-right"><strong>{{$detalle_clc[0]->descripcion}}: </strong>{{$detalle_clc[0]->total}}</p>
-	<p class="text-right"><strong>{{$detalle_clc[1]->descripcion}}: </strong>
-		@if($detalle_clc[1]->signo == '-')
-			{{$detalle_clc[1]->signo}}
-		@endif
-		{{$detalle_clc[1]->total}}</p>
-	<p class="text-right"><strong>{{$detalle_clc[2]->descripcion}}: </strong>
-		@if($detalle_clc[1]->signo == '-')
-			{{$detalle_clc[2]->signo}}
-		@endif
-		{{$detalle_clc[2]->total}}</p>
-	<p class="text-right"><strong>Total: </strong>{{$total_clc[0]->total}}</p>
+		@foreach ($detalle_clc as $element)
+			<p class="text-left"><strong>{{$element->descripcion}}: </strong><span class="text-right">{{$element->total}}</span></p>
+		@endforeach
 </div>
 
 
