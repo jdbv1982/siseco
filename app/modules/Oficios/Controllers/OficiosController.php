@@ -38,8 +38,7 @@ class OficiosController extends \BaseController{
 			if($meta <> ''){
 				$obra = Planeacion::find($id);
 				if(!is_null($obra)){
-					$obra->metaproyecto = $meta;
-					$obra->metaprogramada = $meta;
+					$obra->cantidad = $meta;
 					$obra->save();
 				}
 			}
