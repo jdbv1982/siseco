@@ -22,11 +22,11 @@ class ContratistaController extends \BaseController{
    		$data = Input::all();
    		$contratista = new Contratista;
    		if($contratista->validAndSave($data)){
-   			return Redirect::to('contratistas/listado');			
+   			return Redirect::to('contratistas/listado');
 		}else{
 			return Redirect::to('contratistas/nuevo')->withErrors($contratista->errores)->withInput();
    		}
-   		
+
 	}
 
 	public function editar($id){
