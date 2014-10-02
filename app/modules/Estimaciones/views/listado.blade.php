@@ -9,6 +9,7 @@
         <tr>
         	<th>#</th>
             <th>Numero Obra</th>
+            <th>Contrato</th>
             <th>Nombre</th>
             <th>Estimacion</th>
             <th>Revision</th>
@@ -24,6 +25,7 @@
     <tr>
     	<td>{{ $dato->id }}</td>
         <td>{{ $dato->numeroobra }}</td>
+        <td>{{ $dato->l_contrato }}</td>
         <td>{{ $dato->nombreobra }}</td>
         <td>{{ $dato->nombre }} {{ $dato->numestimacion }}</td>
         <td>{{ $dato->numrevision }}</td>
