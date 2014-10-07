@@ -13,24 +13,25 @@
 			<a href="#" class="btn btn-primary" id="detalleclc">Aceptar</a>
 			<a href="{{ URL::to('clc/guardar') }}" class="btn btn-primary">Cancelar</a>
 		</div>
+		<br>
 	</div>
+
+	<div id="no-encontradas" class="hidden">
+		<legend>Obras no encontradas: </legend>
+	</div>
+
+
 
 </div>
 
-<div class ="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class ="modal-dialog modal-lg">
-		<div class ="modal-content">
-			<div class ="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class  ="modal-title" id="myModalLabel">Procesando archivo...</h4>
-			</div>
-			<div class ="modal-body">
-				<div class ="progress">
-					<div class ="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-						0%
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+ <!-- Small modal -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div>
+                  <img src="../../public/assets/images/loader.gif" alt=""/>
+                  Procesando Informacion....
+              </div>
+            </div>
+          </div>
+        </div>

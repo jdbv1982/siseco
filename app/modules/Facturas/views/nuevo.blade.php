@@ -27,6 +27,7 @@
 			<div class="controls">
 				{{ Form::text('subtotal',$estimacion->importe,array('class'=>'form-control text-right','required')) }}
 			</div>
+			Sin IVA: {{ $valor }}
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
 			{{ Form::label('amtzxant','30% Amortizacion por Anticipo') }}
@@ -36,6 +37,7 @@
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
 			{{ Form::label('supervision','1.5% Gastos de Supervision') }}
+			<br>Monto contratado: {{ $contrato }}
 			<div class="controls">
 				{{ Form::text('supervision',$supervision,array('class'=>'form-control text-right')) }}
 			</div>
@@ -54,9 +56,18 @@
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
 			{{ Form::label('liquido','Liquido') }}
-			<div class="controls">
-				{{ Form::text('liquido',$liquido,array('class'=>'form-control text-right','required')) }}
-			</div>
+
+			<div class="input-group">
+            			{{ Form::text('liquido',$liquido,array('class'=>'form-control text-right','required')) }}
+      			<span class="input-group-btn">
+        				<button class="btn btn-default" type="button" id="suma-montos">
+            				<span class="glyphicon glyphicon-ok"></span>
+        				</button>
+      			</span>
+        			</div>
+
+
+
 		</div>
 
 	</div>

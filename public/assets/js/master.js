@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function(){
 	var rutas = [ "../distritos/", "../municipios/", "../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../subprogramas/","../tipoprogramas/","../subfuentes/","../origenes/","../suborigenes/","../clasificacion/","../financiero/","../meta/" ];
 	var rutas1 = [ "../../distritos/", "../../municipios/", "../../localidades/" ,"../nuevoDistrito/", "../nuevoMunicipio/", "../nuevaLocalidad/", "../nuevoDistrito" , "../nuevoMunicipio", "../nuevaLocalidad","../../subprogramas/","../../tipoprogramas/","../../subfuentes/","../../origenes/","../../suborigenes/","../../clasificacion/","../../financiero/","../../meta/"];
 
@@ -185,6 +185,13 @@ $(document).ready(function() {
 	  	guardaResidencia();
 	});
 
+	$( "body" ).on( "click", "#suma-montos", function(e) {
+		e.preventDefault();
+	  	sumaMontoFactura();
+	});
+
+
+
 
 
 
@@ -210,16 +217,7 @@ $(document).on('click', '.selfactura', function(){
 
 
 $(document).on('click', '#detalleclc', function(){
-	$('#myModal').modal({
-		backdrop:'static',
-  		keyboard: false
-	});
-
-	var progreso = 0;
-	var item = 1;
-
-	$(".progress-bar").html("0%");
-	$(".progress-bar").css("width", "0%");
+	var loader = $(".modal");
 	var inputFileImage = document.getElementById("archivo_clc");
 	var file = inputFileImage.files[0];
 	var data = new FormData();
@@ -236,18 +234,35 @@ $(document).on('click', '#detalleclc', function(){
 	                processData: false,
 	                dataType: "json",
 	                success: function(data){
-	                	var total = data.length;
-	                    	$.each( data, function(key) {
-	                    		$.post( "../insertaregistro",{registro:data[key]}).done(function( data ) {
-					progreso = Math.round((item) * 100 / total);
-			            		$(".progress-bar").html(progreso+"%");
-			            		$(".progress-bar").css("width", progreso+"%");
-			            		item = item + 1;
-				  });;
-			});
+	                	if(data == true){
+	                		insertaDatos(loader, $("#no-encontradas") );
+	                	}else{
+	                		alert("error al subir el archivo.. Intentelo nuevamente");
+	                	}
 	                }
 	});
 });
+
+function insertaDatos(loader, elemento){
+	loader.modal({
+		backdrop: "static",
+        		keyboard: false
+	});
+
+	$.ajax({
+	        type: "POST",
+	        url: "../insertaregistro",
+	        success: function(data){
+	            loader.modal("hide");
+            	elemento.append(data);
+            	elemento.removeClass("hidden");
+	 	elemento.show(3000);
+	        }
+
+	 });
+
+
+}
 
 
 
@@ -301,8 +316,52 @@ $("body").on('focusin',".vervalor",function(){
       $("#valor").text(value);
 });
 
+$("body").on("click", "#get-mensajes", function(){
+	$( "#messages-list" ).slideToggle( "slow" );
+	//$('#mis-mensajes').modal();
+});
+
+$("body").on("click", "#new-message", function(e){
+	e.preventDefault();
+	$('#mis-mensajes').modal();
+});
+
+$("body").on("click","#add-mensaje", function(e){
+	e.preventDefault();
+	enviarMensaje($("#destinatario"), $("#mensaje"));
+});
+
+
+
+
 
 });
+
+//termina la funcion de jquery
+/*
+*
+*Termina la funcion de jquery
+*y empiezan las funciones normales
+*
+*
+*/
+
+/********** funciones para enviar mensajes a diferentes usuarios ***********/
+function enviarMensaje(destinatario, mensaje){
+	var dest = destinatario.val();
+	var msg = mensaje.val();
+	if(msg == ''){
+		alert('Debes enviar un mensaje');
+		mensaje.focus();
+	}else{
+		$.post('../addMensaje',{id: dest, mensaje: msg});
+		mensaje.val('');
+		$('#mis-mensajes').modal("hide");
+	}
+}
+
+
+
 
 
 
@@ -788,4 +847,38 @@ function setNombreResidencia(elemento,idresidencia){
 	$.post( "../../getNombreResidencia/"+idresidencia, function( data ) {
   		elemento.html( data );
 	});
+}
+
+
+function sumaMontoFactura(){
+	var subtotal = 0;
+	var anticipo = 0;
+	var supervision = 0;
+	var secodam = 0;
+	var cmic = 0;
+	var total = 0;
+
+
+	if($('#subtotal').val() != ''){
+		subtotal = parseFloat($('#subtotal').val());
+	}
+
+	if($('#amtzxant').val() != ''){
+		anticipo = parseFloat($('#amtzxant').val());
+	}
+
+	if($('#supervision').val() != ''){
+		supervision = parseFloat($('#supervision').val());
+	}
+
+	if($('#secodam').val() != ''){
+		secodam = parseFloat($('#secodam').val());
+	}
+	if($('#cmic').val() != ''){
+		cmic = parseFloat($('#cmic').val());
+	}
+
+	total = roundToTwo(subtotal - (anticipo + supervision + secodam + cmic));
+	$('#liquido').val(total);
+
 }

@@ -178,10 +178,18 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 @if(Auth::check())
-                <a href="#" id="vernotifi" class="notificacion_bell" title="Ver notificaciones"><span class="count"> {{ Auth::user()->getNumNotificaciones( Auth::user()->id); }}  </span></a>@endif
+                <a href="#" id="vernotifi" class="notificacion_bell" title="Ver notificaciones">
+                    <span class="count"> {{ Auth::user()->getNumNotificaciones( Auth::user()->id) }}  </span>
+                </a>@endif
+            </li>
+            <li>
+                @if(Auth::check())
+                <a href="#" id="get-mensajes" class="glyphicon glyphicon-comment" title="Ver mensajes">
+                    <span class="count"> {{ Auth::user()->getNumMensajes( Auth::user()->id) }}  </span>
+                </a>@endif
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->nombre; }} <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->nombre }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ URL::to('auth/cambiar', Auth::user()->id ) }}">Cambiar Contraseña</a></li>
                     <li class="divider"></li>
@@ -213,3 +221,27 @@
     </div>
 </div>
 @endif
+
+@if(Auth::check())
+<div class="container-list" id="messages-list">
+    @foreach (Auth::user()->getMensajes( Auth::user()->id) as $mensaje)
+    <div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title titulo"><a href="{{ URL::to('notificaciones/vista/')}}/{{$mensaje->mensaje_id}}">Enviado por:{{ $mensaje->nombre }}</a></h3>
+            </div>
+            <div class="panel-body mensaje">
+                {{ $mensaje->mensaje }}
+            </div>
+        </div>
+    </div>
+    @endforeach
+    <div class="text-center">
+        <a class="blanco" href="#"><span class="glyphicon glyphicon-plus" id="new-message"></span></a>
+        <a class="blanco" href="{{ URL::to('notificaciones/todas')}}/{{Auth::user()->id}}"><span class="glyphicon glyphicon-list-alt"></span></a>
+    </div>
+</div>
+@endif
+
+
+@include('layouts.mensajes')

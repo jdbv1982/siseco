@@ -13,8 +13,6 @@
 		{{ $contenido }}
 		@endif
 	</div>
-
-
     @include('layouts.js')
 </body>
 </html>

@@ -118,7 +118,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		if ($cantidad[0]->cantidad > 0){
 			return $cantidad[0]->cantidad;
 		}
-		return '';
+		return '0';
 	}
 
 	public function getNotificaciones($id){
@@ -129,5 +129,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			->take(3)
 			->get();
 
+	}
+
+	public function getNumMensajes($id){
+		$sql = "SELECT COUNT(id) as cantidad
+			FROM mensajes
+			WHERE destinatario = 1
+			AND STATUS = 1";
+
+		$cantidad = DB::select(DB::raw($sql));
+		return $cantidad[0]->cantidad;
+
+		}
+
+	public function getMensajes($id){
+		$sql ="SELECT m.mensaje_id, mensaje, remitente, u.nombre
+			FROM mensajes AS m
+			INNER JOIN users AS u ON m.remitente = u.id";
+
+		return DB::select(DB::raw($sql));
+
+	}
+
+	public function getUsers(){
+		return $users = DB::table('users')->lists('nombre','id');
 	}
 }

@@ -10,38 +10,46 @@ use App\Modules\Clcs\Models\OrdenClc;
 
 use App\Modules\Planeacion\Models\Planeacion;
 
+use App\Modules\Clcs\Repositories\ImportacionRepo;
+
 
 class ClcController extends \BaseController{
 	protected $layout = "layouts.layout";
-
+	protected $importacionRepo;
 	protected $archivo;
+
+	public function __construct(ImportacionRepo $importacionRepo){
+		$this->importacionRepo = $importacionRepo;
+	}
 
 	public function importar(){
 		$this->layout->contenido = View::make('Clcs::importar_clc');
 	}
 
-	public function setClc(){
-		$archivo = '../tmp/clc.xlsx';
-		$datos = array();
-		$objReader = \PHPExcel_IOFactory::createReader('Excel2007');
-		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load($archivo);
-		$objWorksheet = $objPHPExcel->getActiveSheet();
+	public function getRegistro($name){
+	        $archivo = '../tmp/' . $name . '.xlsx';
+	        $datos = array();
+	        $objReader = \PHPExcel_IOFactory::createReader("Excel2007");
+	        $objReader->setReadDataOnly(true);
+	        $objPHPExcel = $objReader->load($archivo);
+	        $objWorksheet = $objPHPExcel->getActiveSheet();
 
-		foreach ($objWorksheet->getRowIterator() as $row) {
-			$registro = array();
-			$cellIterator = $row->getCellIterator();
-			$cellIterator->setIterateOnlyExistingCells(false);
-			foreach ($cellIterator as $cell) {
-				array_push($registro,  $cell->getValue());
-			}
-			array_push($datos, $registro);
-		}
-		return Response::json($datos);
-	}
+	        foreach($objWorksheet->getRowIterator() as $row){
+	            $registro = array();
+	            $cellIterator = $row->getCellIterator();
+	            $cellIterator->setIterateOnlyExistingCells(false);
+	            foreach($cellIterator as $cell){
+	                array_push($registro, $cell->getValue());
+	            }
+	            array_push($datos, $registro);
+	        }
+	        return $datos;
+	    }
 
 	public function getDetalleClc(){
-
+		if(file_exists('../tmp/clc.xlsx')){
+			unlink('../tmp/clc.xlsx');
+		}
 		$upload_dir = '../tmp/';
 		if (isset($_FILES["myfile"])) {
     			if ($_FILES["myfile"]["error"] > 0) {
@@ -50,44 +58,12 @@ class ClcController extends \BaseController{
         				move_uploaded_file($_FILES["myfile"]["tmp_name"], $upload_dir . "clc.xlsx");
     			}
 		}
-		return $this->setClc();
-	}
 
-	public function insertar(){
-		$dato = $_POST['registro'];
-
-		if( $dato[12] == '+'){
-			$signo = 1;
+		if(file_exists('../tmp/clc.xlsx')){
+			return 'true';
 		}else{
-			$signo = -1;
+			return 'false';
 		}
-
-		$datap = array(
-			'no_afectacion' => $dato[1],
-			'no_control'=> $dato[2],
-			'cve_presupuestal'=> $dato[3],
-			'descripcion'=> $dato[4],
-			'referencia'=> $dato[5],
-			'fecha_ref'=> $dato[6],
-			'proveedor'=> $dato[7],
-			'rfc'=> $dato[8],
-			'importe'=> $dato[9],
-			'iva'=> $dato[10],
-			'total'=> $dato[11],
-			'signo'=> $signo,
-			'folio' => $dato[13]
-		);
-
-		$obra = '';
-
-		$clc = new Clc;
-		if($clc->validAndSave($datap)){
-			if($dato[0] <> $obra){
-				$obra = $dato[0];
-				$this->setObraClc($obra, $dato[1], $dato[13]);
-			}
-			return "true";
-		};
 	}
 
 	public function setStatusHistorial($clc, $status,$actualizado){
@@ -199,6 +175,11 @@ class ClcController extends \BaseController{
 			$orden->clc_referencia = $facturas[$i];
 			$orden->save();
 		}
+	}
+
+	public function insertar(){
+		$data = $this->getRegistro('clc');
+		return $this->importacionRepo->insertaRegistros($data);
 	}
 
 

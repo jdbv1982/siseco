@@ -14,21 +14,18 @@ class FacturaController extends \BaseController{
 			$factura = Factura::where('idestimacion','=',$id)->get();
 			$estimacion = Estimacion::find($id);
 
-			if(sizeof($factura) == 0){
-				$licitacion = Licitaciones::find($estimacion->idobra);
-				if ($licitacion->l_anticipo > 0){
-					$anticipo = round($estimacion->importe * .30, 2);
-					$supervision = 0;
-				}else{
-					$anticipo = 0;
-					//return $estimacion->importe;
-					$supervision = round($estimacion->importe *  .015,2);
-				}
+			$valor = $estimacion->importe / 1.16;
+			$valor = round($valor, 2);
+			$contrato = $this->getMontoContrato($estimacion->idobra);
 
-					$secodam = round($estimacion->importe * .05,2);
-					$cmic = round($estimacion->importe * .02, 2);
+
+			if(sizeof($factura) == 0){
+					$anticipo = round($estimacion->importe * .30, 2);
+					$supervision = round($contrato *  .015,2);
+					$secodam = round($valor * .005,2);
+					$cmic = round($valor * .002, 2);
 					$liquido = $estimacion->importe - $anticipo - $supervision - $secodam - $cmic;
-				$this->layout->contenido = View::make('Facturas::nuevo',compact('id', 'estimacion','anticipo','supervision','secodam','cmic','liquido'));
+				$this->layout->contenido = View::make('Facturas::nuevo',compact('id', 'estimacion','anticipo','supervision','secodam','cmic','liquido', 'contrato', 'valor'));
 			}else{
 				$factura = $factura[0];
 				$this->layout->contenido = View::make('Facturas::editar', compact('factura'));
@@ -62,6 +59,11 @@ class FacturaController extends \BaseController{
 		public function listado(){
 			$datos = Factura::all();
 			$this->layout->contenido = View::make('Facturas::listado', compact('datos'));
+		}
+
+		public function getMontoContrato($id){
+			$l = Licitaciones::find($id);
+			return $l->l_montocontratado;
 		}
 
 }

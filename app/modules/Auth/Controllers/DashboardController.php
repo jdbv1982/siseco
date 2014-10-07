@@ -1,6 +1,6 @@
 <?php namespace App\Modules\Auth\Controllers;
 
-use Auth, Redirect, View;
+use Auth, Redirect, View, DB;
 
 class DashboardController extends \BaseController{
 	protected $layout = "layouts.layout";
