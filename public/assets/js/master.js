@@ -331,6 +331,15 @@ $("body").on("click","#add-mensaje", function(e){
 	enviarMensaje($("#destinatario"), $("#mensaje"));
 });
 
+$("body").on("click", "#add-resp", function(e){
+    e.preventDefault();
+    $("#respuesta-mensaje").modal();
+});
+
+    $("body").on("click", "#add-respuesta", function(e){
+        e.preventDefault();
+        enviarRespuesta($("#dest_id").val(), $("#respuesta-msg").val(),$("#mensaje_id").val() );
+    });
 
 
 
@@ -347,6 +356,18 @@ $("body").on("click","#add-mensaje", function(e){
 */
 
 /********** funciones para enviar mensajes a diferentes usuarios ***********/
+function enviarRespuesta(dest, msg, mensaje_id){
+    if(msg == ''){
+        alert('Debes enviar un mensaje');
+        $("#mensaje").focus();
+    }else{
+        $.post('../../addMensaje',{id: dest, mensaje: msg, mensaje_id: mensaje_id});
+        $("#mensaje").val('');
+        $('#mis-mensajes').modal("hide");
+    }
+}
+
+
 function enviarMensaje(destinatario, mensaje){
 	var dest = destinatario.val();
 	var msg = mensaje.val();
@@ -354,7 +375,7 @@ function enviarMensaje(destinatario, mensaje){
 		alert('Debes enviar un mensaje');
 		mensaje.focus();
 	}else{
-		$.post('../addMensaje',{id: dest, mensaje: msg});
+		$.post('../addMensaje',{id: dest, mensaje: msg, mensaje_id: 0});
 		mensaje.val('');
 		$('#mis-mensajes').modal("hide");
 	}

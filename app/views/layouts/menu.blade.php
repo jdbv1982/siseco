@@ -228,7 +228,7 @@
     <div>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title titulo"><a href="{{ URL::to('notificaciones/vista/')}}/{{$mensaje->mensaje_id}}">Enviado por:{{ $mensaje->nombre }}</a></h3>
+                <h3 class="panel-title titulo"><a href="{{ URL::to('mensajes/vista/')}}/{{$mensaje->mensaje_id}}">Enviado por:{{ $mensaje->nombre }}</a></h3>
             </div>
             <div class="panel-body mensaje">
                 {{ $mensaje->mensaje }}

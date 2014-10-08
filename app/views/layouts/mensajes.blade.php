@@ -10,7 +10,9 @@
         <div class="form-group">
         	{{ Form::label('destinatario','Enviar a: ')}}
         	<div class="form-controls">
+            @if (Auth::check())
         		{{ Form::select('destinatario', Auth::User()->getUsers(),null, array('class' => 'form-control', 'id'=>'destinatario')) }}
+            @endif
         	</div>
         </div>
         <div class="form-group">
