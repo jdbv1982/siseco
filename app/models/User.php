@@ -134,7 +134,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getNumMensajes($id){
 		$sql = "SELECT COUNT(id) as cantidad
 			FROM mensajes
-			WHERE destinatario = 1
+			WHERE destinatario = $id
 			AND STATUS = 1";
 
 		$cantidad = DB::select(DB::raw($sql));
@@ -143,9 +143,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		}
 
 	public function getMensajes($id){
-		$sql ="SELECT m.mensaje_id, mensaje, remitente, u.nombre
+		$sql ="SELECT m.mensaje_id, mensaje, remitente, u.nombre, m.status
 			FROM mensajes AS m
-			INNER JOIN users AS u ON m.remitente = u.id";
+			INNER JOIN users AS u ON m.remitente = u.id
+			 WHERE m.destinatario = $id
+			AND m.status = 1 LIMIT 3";
 
 		return DB::select(DB::raw($sql));
 

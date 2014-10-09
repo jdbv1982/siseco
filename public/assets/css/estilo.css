@@ -166,3 +166,11 @@ a.expandAll {
 .blanco{
 	color: white;
 }
+
+.izq{
+    float: left;
+}
+
+.no-leido{
+    color: red;
+}

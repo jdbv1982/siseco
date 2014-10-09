@@ -7,4 +7,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('list_mensajes', ['uses' => 'App\Modules\Mensajes\Controllers\MensajeController@listMensajes']);
 	Route::get('mensajes/vista/{id}', ['uses' => 'App\Modules\Mensajes\Controllers\MensajeController@vistaMensaje']);
 
+    Route::post('change-status/{id}', ['as'=>'change-status', 'uses'=>'App\Modules\Mensajes\Controllers\MensajeController@changeStatus']);
+
+
 });

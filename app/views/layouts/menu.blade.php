@@ -238,7 +238,7 @@
     @endforeach
     <div class="text-center">
         <a class="blanco" href="#"><span class="glyphicon glyphicon-plus" id="new-message"></span></a>
-        <a class="blanco" href="{{ URL::to('notificaciones/todas')}}/{{Auth::user()->id}}"><span class="glyphicon glyphicon-list-alt"></span></a>
+        <!--<a class="blanco" href="{{ URL::to('mensajes/todos')}}/{{Auth::user()->id}}"><span class="glyphicon glyphicon-list-alt"></span></a>-->
     </div>
 </div>
 @endif

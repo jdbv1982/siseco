@@ -19,7 +19,7 @@ class MensajesRepo{
                 (SELECT nombre FROM users WHERE id = m.destinatario) AS nombre_destinatario,
                 remitente,
                 (SELECT nombre FROM users WHERE id = m.remitente) AS nombre_remitente,
-                mensaje, created_at
+                mensaje, created_at, status
                 FROM mensajes m
                 where m.mensaje_id = $id";
 

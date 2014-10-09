@@ -45,8 +45,24 @@ class MensajeController extends \BaseController{
 		return Auth::User()->id;
 	}
 
+
 	public function vistaMensaje($id){
 		$mensajes = $this->mensajesRepo->getMensajes($id);
 		$this->layout->contenido = View::make('Mensajes::mensaje', compact('mensajes'));
 	}
+
+    public function changeStatus($id){
+        $mensaje = Mensaje::find($id);
+
+        if($mensaje->status == 0){
+            $mensaje->status = 1;
+        }else{
+            $mensaje->status = 0;
+        }
+
+        $mensaje->save();
+        $mensaje = Mensaje::find($id);
+        return $mensaje->status;
+
+    }
 }
