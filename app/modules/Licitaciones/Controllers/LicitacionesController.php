@@ -17,7 +17,7 @@ class LicitacionesController extends \BaseController{
 		$id = $id;
 		$planeacion = Planeacion::find($id);
 		$licitacion = Licitaciones::find($id);
-		$empresas = DB::table('contratistas')->lists('razsoc','id');
+		$empresas = DB::table('contratistas')->orderBy('razsoc')->lists('razsoc','id');
 		$estados = DB::table('estados')->lists('nombre','id');
 		$tconvenio = DB::table('ctipos')->where('tipo','=','2')->lists('nombre','id');
 		$tfianza = DB::table('ctipos')->where('tipo','=','1')->lists('nombre','id');
