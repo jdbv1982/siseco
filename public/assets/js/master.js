@@ -217,7 +217,7 @@ $(document).on('click', '.selfactura', function(){
 
 
 $(document).on('click', '#detalleclc', function(){
-	var loader = $(".modal");
+	var loader = $("#import-clc");
 	var inputFileImage = document.getElementById("archivo_clc");
 	var file = inputFileImage.files[0];
 	var data = new FormData();
