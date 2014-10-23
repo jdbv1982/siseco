@@ -75,7 +75,6 @@
                 <ul class="dropdown-menu">
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 4) == 'true') {{--PERMISO PARA SUBIR ARCHIVOS--}}
                     <li><a href="{{ URL::to('contratistas/listado') }}">Contratistas</a></li>
-                    <li><a href="{{ URL::to('graficas/graficas') }}">Graficas</a></li>
                 @endif
                 @if(Auth::user()->verificaPermiso(Auth::user()->id, 19) == 'true')
                     <li><a href="{{ URL::to('oficios/listado') }}">Oficios</a></li>

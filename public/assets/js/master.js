@@ -380,7 +380,8 @@ function enviarRespuesta(dest, msg, mensaje_id){
     }else{
         $.post('../../addMensaje',{id: dest, mensaje: msg, mensaje_id: mensaje_id});
         $("#mensaje").val('');
-        $('#mis-mensajes').modal("hide");
+        $('#respuesta-mensaje').modal("hide");
+         location.reload();
     }
 }
 
