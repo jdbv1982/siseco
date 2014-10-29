@@ -6,6 +6,7 @@ jQuery(document).ready(function($) {
 
 });
 
+
 function getVista(url){
 	$.get( url, function( data ) {
 		$( "#filtros" ).html( data );

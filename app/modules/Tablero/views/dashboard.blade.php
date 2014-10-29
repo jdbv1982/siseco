@@ -109,6 +109,7 @@
       </div>
       <div class="panel-body">
           <li><a class="link" href="{{ URL::to('graficas/barrasxfuente') }}" target="blank">Obras Contratadas por Fuente</a></li>
+          <li><a class="reporte" href="{{ route('porcentaje-captura') }}" target="blank">Porcentaje de Captura</a></li>
       </div>
     </div>
  </div>
