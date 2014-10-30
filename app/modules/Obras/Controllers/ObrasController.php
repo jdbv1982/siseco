@@ -23,7 +23,7 @@ class ObrasController extends \BaseController{
 			(SELECT nombre FROM tipo_obra WHERE id = p.tipo_obra_id ) AS tipo_obra,
 			(SELECT nombre FROM residencias WHERE id = p.idresidencia) AS residencia,
 			(SELECT nombre FROM status_obras WHERE id = p.status_id) AS status_obra,
-			p.nombreobra, l.l_contrato
+			p.numeroobra, p.nombreobra, l.l_contrato
 			FROM planeacion AS p
 			LEFT JOIN licitaciones AS l ON p.id = l.id
 			WHERE p.idfgeneral = $id";

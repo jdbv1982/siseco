@@ -13,6 +13,7 @@
 				<tr>
 					<th>#</th>
 					<th>Oficio Autorizacion</th>
+					<th>Num. Obra</th>
 					<th>Nombre</th>
 					<th>Ftto</th>
 					<th>Contrato</th>
@@ -28,6 +29,7 @@
 					<tr>
 						<td>{{$obra->id}}</td>
 						<td class="upper">{{$obra->numerooficio}}</td>
+						<td>{{$obra->numeroobra}}</td>
 						<td><p>{{$obra->nombreobra}}<p></td>
 						<td>{{$obra->nombre_fuente}}</td>
 						<td>{{$obra->l_contrato}}</td>
