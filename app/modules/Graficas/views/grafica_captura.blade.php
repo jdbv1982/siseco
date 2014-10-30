@@ -14,12 +14,14 @@ var planeacion = '{{ $planeacion }}';
 var licitaciones = '{{ $licitaciones }}';
 var obras = '{{ $obras }}';
 var administracion = '{{ $administracion }}';
+var afisico = '{{ $afisico }}';
 
 var jsseries = [];
 
 jsseries.push({name:'PLANEACION (' + planeacion +') ' + parseInt(planeacion * 100 / total) + '%', data:[parseInt(planeacion * 100 / total)]});
 jsseries.push({name:'LICITACIONES (' + licitaciones + ') ' + parseInt(licitaciones * 100 / total) +'%', data:[parseInt(licitaciones * 100 / total)]});
-jsseries.push({name:'OBRAS (' + obras + ') ' + parseInt(obras * 100 / total) + '%', data:[parseInt(obras * 100 / total)]});
+jsseries.push({name:'OBRAS (ESTIMACIONES) (' + obras + ') ' + parseInt(obras * 100 / total) + '%', data:[parseInt(obras * 100 / total)]});
+jsseries.push({name:'OBRAS (AVANCE FISICO) (' + afisico + ') ' + parseInt(afisico * 100 / total) + '%', data:[parseInt(afisico * 100 / total)]});
 jsseries.push({name:'ADMINISTRACION (' + administracion + ') ' + parseInt(administracion * 100 / total) + '%', data:[parseInt(administracion * 100 / total)]});
 
 
@@ -33,15 +35,10 @@ $(function () {
             text: titulo
         },
         subtitle: {
-            text: 'Total de Obras ' +'('+ planeacion +')'
+            text: 'Total de Obras ' +'('+ total +')'
         },
         xAxis: {
-            categories: [
-                'Planeación',
-                'Licitaciones',
-                'Obras',
-                'Administracion'
-            ]
+            categories: [""]
         },
         yAxis: {
             min: 0,

@@ -43,10 +43,17 @@ Class GraficasRepo {
 			WHERE p.ejercicio $regla $year";
 		$admin = DB::select(DB::raw($sql));
 
+		$sql = "SELECT COUNT(DISTINCT(c.id)) as afisico
+			FROM avances c
+			INNER JOIN planeacion p ON p.id = c.idobra
+			WHERE p.ejercicio $regla $year";
+		$afisico = DB::select(DB::raw($sql));
+
 		array_push($datos, $planeacion[0]->planeacion);
 		array_push($datos, $licitaciones[0]->licitaciones);
 		array_push($datos, $obras[0]->obras);
 		array_push($datos, $admin[0]->administracion);
+		array_push($datos, $afisico[0]->afisico);
 
 
 		return $datos;

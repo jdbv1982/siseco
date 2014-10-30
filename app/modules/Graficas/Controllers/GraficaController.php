@@ -52,7 +52,8 @@ class GraficaController extends \BaseController{
 		$licitaciones = $datos[1];
 		$obras = $datos[2];
 		$administracion = $datos[3];
-		return View::make('Graficas::grafica_captura',compact('titulo','tituloy','titulox','planeacion', 'licitaciones', 'obras','administracion'));
+		$afisico = $datos[4];
+		return View::make('Graficas::grafica_captura',compact('titulo','tituloy','titulox','planeacion', 'licitaciones', 'obras','administracion','afisico'));
 	}
 
 }
