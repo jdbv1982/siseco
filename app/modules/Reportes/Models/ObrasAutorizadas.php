@@ -4,7 +4,7 @@ use DB;
 
 class ObrasAutorizadas extends \Eloquent{
 	public function getObrasAut($r, $d, $m, $l){
-		$sql = "SELECT p.id,p.ejercicio, p.nombreobra, fg.fuentegeneral AS nombrefinanciamiento, of.numerooficio, of.fechaoficio, SUM(est.invfederal)+ SUM(est.investatal) + SUM(est.invmunicipal) + SUM(est.invparticipantes) AS monto
+		$sql = "SELECT p.id,p.ejercicio,p.numeroobra, p.nombreobra, fg.fuentegeneral AS nombrefinanciamiento, of.numerooficio, of.fechaoficio, SUM(est.invfederal)+ SUM(est.investatal) + SUM(est.invmunicipal) + SUM(est.invparticipantes) AS monto
 				FROM planeacion AS p
 				INNER JOIN fuentegeneral AS fg ON fg.id = p.idfgeneral
 				INNER JOIN oficios AS of ON p.id = of.idobra

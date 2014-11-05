@@ -28,6 +28,13 @@
                         <br>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
+                        {{ Form::label('idfondoseguimiento','Fondo') }}
+                        <div class="controls">
+                            {{ Form::select('idfondoseguimiento', $fondos,$planeacion[0]->idfondoseguimiento, array('class' => 'form-control upper')) }}
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
                         {{ Form::label('comentarios','Comentarios') }}
                         <div class="controls">
                             {{ Form::textarea('comentarios', $planeacion[0]->comentarios, array('class'=>'form-control','rows'=>'3') ) }}

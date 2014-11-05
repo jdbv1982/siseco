@@ -77,10 +77,21 @@
 			<tr>
 				<td class="col-lg-1"><strong>Residencia</strong></td>
 				<td id="residenciaok" class="upper col-lg-5">{{ isset($planeacion[0]->residencia) ? $planeacion[0]->residencia : '' }}</td>
+				<td class="col-lg-1"><strong>Fondo Seguimiento</strong></td>
+				<td id="residenciaok" class="upper col-lg-5">{{ isset($planeacion[0]->fondo_seguimiento) ? $planeacion[0]->fondo_seguimiento : '' }}</td>
 			</tr>
 		</tbody>
 	</table>
-
+@if(Auth::user()->verificaPermiso(Auth::user()->id, 38) == 'true')
+	<legend>Anexo VI</legend>
+	{{ Form::open(array('url'=> array('reportes/anexovi', $planeacion[0]->id),'method'=>'get', 'class'=>'target')) }}
+	<div class="input-group col-xs-12 col-sm-6">
+		{{ Form::label('fecha-anexo','Fecha Anexo:') }}
+			{{ Form::text('fecha-anexo',null,array('class'=>'form-control fecha','required')) }}
+			{{ Form::submit('Imprimir',array('class'=>'btn btn-primary')) }}
+	</div>
+	{{ Form::close() }}
+@endif
 
 
 
@@ -88,6 +99,7 @@
     <br>
 @if(Auth::user()->verificaPermiso(Auth::user()->id, 38) == 'true')
     <a href="#" data-toggle="modal" data-target="#seguimiento" class="btn btn-primary">Seguimiento</a>
+
 @endif
 @if(Auth::user()->verificaPermiso(Auth::user()->id, 39) == 'true')
     <a href="#" data-toggle="modal" data-target="#residencia" class="btn btn-primary">Residencia</a>

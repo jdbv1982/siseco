@@ -1,9 +1,11 @@
 <?php namespace App\Modules\Reportes\Servicios;
 
+setlocale(LC_TIME, 'es_ES.UTF-8');
+
 use App\Modules\Reportes\Servicios\Funciones;
 
 class AnexoVI{
-	public function printInformacion($datos, $datos_reporte, $estructura, $programado, $fisico, $financiero, $prorrogas){
+	public function printInformacion($datos, $datos_reporte, $estructura, $programado, $fisico, $financiero, $prorrogas, $fecha_anexo){
 		$styleArray = array(
 			'font' => array(
 				'bold' => true,
@@ -74,13 +76,14 @@ class AnexoVI{
 		$f->mergeCelda($objPHPExcel,'M13','N13','TOTAL','FFC0C0C0','CENTER');
 		$f->mergeCelda($objPHPExcel,'O13','P13','OFICIO DE AUTORIZACION','FFC0C0C0','CENTER');
 
-		$f->mergeCelda($objPHPExcel,'B14','D14',$datos->nombrefinanciamiento,'','CENTER','',90);
+		$f->mergeCelda($objPHPExcel,'B14','D14',$datos->fondo_seguimiento,'','CENTER','',90);
 		$f->mergeCelda($objPHPExcel,'E14','F14',$estructura->federal,'','CENTER','','','','$');
 		$f->mergeCelda($objPHPExcel,'G14','H14',$estructura->estatal,'','CENTER','','','','$');
 		$f->mergeCelda($objPHPExcel,'I14','J14',$estructura->municipal,'','CENTER','','','','$');
 		$f->mergeCelda($objPHPExcel,'K14','L14',$estructura->participantes,'','CENTER','','','','$');
 		$f->mergeCelda($objPHPExcel,'M14','N14',$estructura->total,'FFC0C0C0','CENTER','','','','$');
-		$f->mergeCelda($objPHPExcel,'O14','P14',$datos->numerooficio,'','CENTER');
+		$f->mergeCelda($objPHPExcel,'O14','P14',$datos->numerooficio,'','CENTER','','','S');
+
 
 		//DATOS DE EJECUCIÓN DE LA ACCIÓN
 		$f->mergeCelda($objPHPExcel,'B16','P16','DATOS DE EJECUCIÓN DE LA ACCIÓN','FFC0C0C0','CENTER');
@@ -110,9 +113,11 @@ class AnexoVI{
 		if(isset($prorrogas[0]->finicio)){$finicio1 = $f->get_fecha($prorrogas[0]->finicio);}else{$finicio1='';};
 		if(isset($prorrogas[0]->ffinal)){$ffinal1 = $f->get_fecha($prorrogas[0]->ffinal);}else{$ffinal1='';};
 		if(isset($prorrogas[1]->finicio)){$finicio2 = $f->get_fecha($prorrogas[1]->finicio);}else{$finicio2='';};
-		if(isset($prorrogas[1]->ffinal)){$ffinal2 = $f->get_fecha($prorrogas[1]->ffinal);}else{$ffianl2='';};
+		if(isset($prorrogas[1]->ffinal)){$ffinal2 = $f->get_fecha($prorrogas[1]->ffinal);}else{$ffinal2='';};
 		if(isset($prorrogas[2]->finicio)){$finicio3 = $f->get_fecha($prorrogas[2]->finicio);}else{$finicio3='';};
 		if(isset($prorrogas[2]->ffinal)){$ffinal3 = $f->get_fecha($prorrogas[2]->ffinal);}else{$ffinal3='';};
+
+
 
 		$f->mergeCelda($objPHPExcel,'C24','E24',$finicio1,'','CENTER');
 		$f->mergeCelda($objPHPExcel,'F24','H24',$ffinal1,'','CENTER' );
@@ -247,7 +252,7 @@ class AnexoVI{
 		$f->mergeCelda($objPHPExcel,'C48','H48','____________________________________________________','','CENTER','NO');
 		$f->mergeCelda($objPHPExcel,'C49','H49','Nombre y Firma del Servidor Publico Autorizado','','CENTER','NO');
 
-		$f->mergeCelda($objPHPExcel,'K47','O47','Oaxaca de Juarez, Oaxaca a ' . strftime("%d de %B %Y"),'','CENTER','NO');
+		$f->mergeCelda($objPHPExcel,'K47','O47','Oaxaca de Juarez, Oaxaca a ' . strftime("%d de %B %Y" , strtotime($fecha_anexo)),'','CENTER','NO');
 		$f->mergeCelda($objPHPExcel,'K48','O48','______________________________________','','CENTER','NO');
 		$f->mergeCelda($objPHPExcel,'K49','O49','Lugar y Fecha','','CENTER','NO');
 

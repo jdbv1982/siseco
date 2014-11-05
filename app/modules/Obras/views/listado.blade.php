@@ -62,7 +62,7 @@
 									<a class="btn btn-primary" href="{{ URL::to('avance/timeline/'.$obra->id) }}"><span class="glyphicon glyphicon-random"></span></a>
 								@endif
 								@if(Auth::user()->verificaPermiso(Auth::user()->id, 32) == 'true') {{--PERMISO PARA IMPRIMIR EL ANEXO VI--}}
-									<a class="btn btn-primary" href="{{ URL::to('reportes/anexovi/'.$obra->id) }}">VI</a>
+									<a class="btn btn-primary" href="{{ URL::to('obras/estatus/'.$obra->id) }}">VI</a>
 								@endif
 						</td>
 					</tr>

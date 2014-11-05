@@ -1,10 +1,15 @@
 <?php namespace App\Modules\Reportes\Controllers;
 
+setlocale(LC_ALL,'es_ES');
+
+use Input;
+
 use App\Modules\Reportes\Servicios\AnexoVI;
 use App\Modules\Reportes\Models\Anexos;
 
 class SeguimientoController extends \BaseController{
 	public function AnexoVI($id){
+		$fecha_anexo = Input::get('fecha-anexo');
 		$anexo = new AnexoVI;
 		$info = new Anexos;
 
@@ -18,7 +23,8 @@ class SeguimientoController extends \BaseController{
 
 
 
-		return $anexo->printInformacion($datos,$datos_reporte, $estructura, $programado, $fisico, $financiero, $prorrogas);
+
+		return $anexo->printInformacion($datos,$datos_reporte, $estructura, $programado, $fisico, $financiero, $prorrogas, $fecha_anexo);
 	}
 
 	public function invFuenteClasificacion(){

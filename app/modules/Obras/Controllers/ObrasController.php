@@ -198,7 +198,8 @@ class ObrasController extends \BaseController{
 		$clasificadores = DB::table('classeguimiento')->lists('nombre','id');
 		$subclasificadores = DB::table('subclasseguimiento')->lists('nombre','id');
 		$residencias = DB::table('residencias')->lists('nombre','id');
-		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias','clasificadores','subclasificadores'));
+		$fondos = DB::table('fondo_seguimiento')->lists('nombre','id');
+		$this->layout->contenido = View::make('Obras::estatus', compact('planeacion','residencias','clasificadores','subclasificadores','fondos'));
 	}
 
 	public function seguimiento(){

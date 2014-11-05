@@ -8,6 +8,7 @@ class Anexos extends \Eloquent{
 			(SELECT UPPER(nombre_municipio) FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
 			(SELECT UPPER(nombre_localidad) FROM localidades WHERE id = p.idlocalidad) AS nombre_localidad,
 			(SELECT nombremodalidad FROM modalidad WHERE id = p.idmodalidad) AS nombremodalidad,
+			(SELECT nombre FROM fondo_seguimiento WHERE id = p.idfondoseguimiento) AS fondo_seguimiento,
 			(SELECT nombrefinanciamiento FROM financiamiento WHERE id = p.idcvefin) AS nombrefinanciamiento,
 			(SELECT UPPER(numerooficio) FROM oficios WHERE idobra = p.id AND nombreoficio = 'AUTORIZACION') AS numerooficio
 			FROM planeacion AS p
@@ -36,17 +37,17 @@ class Anexos extends \Eloquent{
 
 	public function get_programado($id){
 		$programado = DB::select(DB::raw("SELECT 	SUM(enero) AS enero,
-			SUM(enero) + SUM(febrero) AS febrero,
-			SUM(enero) + SUM(febrero) + SUM(marzo) AS marzo,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) AS abril,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) AS mayo,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) AS junio,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) AS julio,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) AS agosto,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) + SUM(septiembre) AS septiembre,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) + SUM(septiembre) + SUM(octubre) AS octubre,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) + SUM(septiembre) + SUM(octubre) + SUM(noviembre) AS noviembre,
-			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) + SUM(septiembre) + SUM(octubre) + SUM(noviembre) + SUM(diciembre) AS diciembre,
+			SUM(febrero) AS febrero,
+			SUM(marzo) AS marzo,
+			SUM(abril) AS abril,
+			SUM(mayo) AS mayo,
+			SUM(junio) AS junio,
+			SUM(julio) AS julio,
+			SUM(agosto) AS agosto,
+			SUM(septiembre) AS septiembre,
+			SUM(octubre) AS octubre,
+			SUM(noviembre) AS noviembre,
+			SUM(diciembre) AS diciembre,
 			SUM(enero) + SUM(febrero) + SUM(marzo) + SUM(abril) + SUM(mayo) + SUM(junio) + SUM(julio) + SUM(agosto) + SUM(septiembre) + SUM(octubre) +SUM(noviembre) + SUM(diciembre) AS total
 		FROM calendarizacion
 			WHERE idobra = $id
@@ -92,17 +93,17 @@ class Anexos extends \Eloquent{
 		"));
 		$prg = array();
 		array_push($prg,$p[0]->enero ,
-			$p[0]->enero + $p[0]->febrero ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio + $p[0]->agosto ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio + $p[0]->agosto + $p[0]->septiembre ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio + $p[0]->agosto + $p[0]->septiembre  + $p[0]->octubre ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio + $p[0]->agosto + $p[0]->septiembre  + $p[0]->octubre  + $p[0]->noviembre ,
-			$p[0]->enero + $p[0]->febrero + $p[0]->marzo + $p[0]->abril + $p[0]->mayo + $p[0]->junio + $p[0]->julio + $p[0]->agosto + $p[0]->septiembre  + $p[0]->octubre  + $p[0]->noviembre  + $p[0]->diciembre ,
+			$p[0]->febrero ,
+			$p[0]->marzo ,
+			$p[0]->abril ,
+			$p[0]->mayo ,
+			$p[0]->junio ,
+			$p[0]->julio ,
+			$p[0]->agosto ,
+			$p[0]->septiembre ,
+			$p[0]->octubre ,
+			$p[0]->noviembre ,
+			$p[0]->diciembre ,
 			$p[0]->total);
 
 		return $prg;
@@ -111,6 +112,7 @@ class Anexos extends \Eloquent{
 	public function get_prorrogas($id){
 		$prorrogas = DB::table('convenios')
 			->select('finicio','ffinal')
+			->where('idobra','=',$id)
 			->get();
 
 		return $prorrogas;

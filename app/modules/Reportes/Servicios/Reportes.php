@@ -31,34 +31,37 @@ class Reportes{
 		$objPHPExcel->getActiveSheet()
 		            ->setCellValue('B3', 'NUMERO')
 		            ->setCellValue('C3', 'EJERCICIO')
-		            ->setCellValue('D3','NOMBRE DE LA OBRA')
-		            ->setCellValue('E3','MONTO')
-		            ->setCellValue('F3','NO. OFICIO')
-		            ->setCellValue('G3','FECHA')
-		            ->setCellValue('H3','FUENTE FINANCIAMIENTO');
+		            ->setCellValue('D3','NUMERO DE OBRA')
+		            ->setCellValue('E3','NOMBRE DE LA OBRA')
+		            ->setCellValue('R3','MONTO')
+		            ->setCellValue('G3','NO. OFICIO')
+		            ->setCellValue('H3','FECHA')
+		            ->setCellValue('I3','FUENTE FINANCIAMIENTO');
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getStyle('B3:H3')->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getStyle('B3:I3')->applyFromArray($styleArray);
 
 		$i=4;
 			foreach ($obras as $key => $obra) {
 				$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $obra->id);
 				$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $obra->ejercicio);
-				$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $obra->nombreobra);
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->monto);
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->numerooficio);
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->fechaoficio);
-				$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $obra->nombrefinanciamiento);
-				$objPHPExcel->getActiveSheet()->getStyle('D'.$i)->getAlignment()->setWrapText(true);
-				$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getAlignment()->setWrapText(true);
+				$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $obra->numeroobra);
+				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->nombreobra);
+				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->monto);
+				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->numerooficio);
+				$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $obra->fechaoficio);
+				$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $obra->nombrefinanciamiento);
+				$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getAlignment()->setWrapText(true);
+				$objPHPExcel->getActiveSheet()->getStyle('G'.$i)->getAlignment()->setWrapText(true);
 				$objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(60);
-				$objPHPExcel->getActiveSheet()->getStyle('E'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('F'.$i)->getNumberFormat()->setFormatCode('#,##0.00');
 				$i++;
 		}
 

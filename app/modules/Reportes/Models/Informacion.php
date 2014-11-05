@@ -6,7 +6,7 @@ class Informacion extends \Eloquent{
 	public function getInformacion(){
 		return DB::select( DB::raw("SELECT
 	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas,
-	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,
+	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,p.idfondoseguimiento,
 	(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 	(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 	(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
@@ -22,6 +22,7 @@ class Informacion extends \Eloquent{
 	(SELECT nombrefinanciamiento FROM financiamiento WHERE id = p.idcvefin) AS nombrefinanciamiento,
 	(SELECT nombresituacion FROM situacion WHERE id = p.idsituacion) AS nombresituacion,
 	(SELECT nombremedida FROM medidas WHERE id = p.idunidadmedida) AS nombremedida,
+	(SELECT nombre FROM fondo_seguimiento WHERE id = p.idfondoseguimiento) AS fondo_seguimiento,
 	(SELECT nombremeta FROM metas WHERE id = p.idmeta) AS nombremeta,
 	(SELECT nombrepoblacion FROM poblacion WHERE id = p.idpoblacion) AS nombrepoblacion,
 	(SELECT nombremodalidad FROM modalidad WHERE id = p.idmodalidad) AS nombremodalidad,
@@ -44,7 +45,7 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	public function getInformacionId($id){
 		$datos = DB::select( DB::raw("SELECT
 	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas,
-	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,
+	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,p.idfondoseguimiento,
 	(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 	(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 	(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
@@ -64,6 +65,7 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	(SELECT nombrepoblacion FROM poblacion WHERE id = p.idpoblacion) AS nombrepoblacion,
 	(SELECT nombremodalidad FROM modalidad WHERE id = p.idmodalidad) AS nombremodalidad,
 	(SELECT fuentegeneral FROM fuentegeneral WHERE id = p.idfgeneral) AS fuentegeneral,
+	(SELECT nombre FROM fondo_seguimiento WHERE id = p.idfondoseguimiento) AS fondo_seguimiento,
 	(SELECT razsoc FROM contratistas WHERE id = lic.l_idempresa) AS razsoc,
 	(SELECT nombre FROM estados WHERE id = lic.l_origen) AS estado,
 	(SELECT nombre FROM eventos WHERE id = o.idevento) AS evento,
