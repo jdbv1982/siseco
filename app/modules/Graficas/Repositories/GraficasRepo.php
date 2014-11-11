@@ -31,7 +31,7 @@ Class GraficasRepo {
 
 		$licitaciones = DB::select(DB::raw($sql));
 
-		$sql = "SELECT COUNT(DISTINCT(p.idobra)) as obras
+		$sql = "SELECT COUNT(DISTINCT(p.id)) as obras
 			FROM estimaciones e
 			INNER JOIN planeacion p ON p.id = e.idobra
 			WHERE p.ejercicio $regla $year";
