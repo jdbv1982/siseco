@@ -50,10 +50,10 @@
  <div class="row col-xs-12 col-sm-4 col-sm-offset-0">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Reportes</h3>
+        <h3 class="panel-title">Reportes de Obras</h3>
       </div>
       <div class="panel-body">
-        En Construcción...
+        <li><a href="{{ URL::to('reportes/obras_afisico') }}">Obras con avance fisico</a></li>
       </div>
     </div>
  </div>

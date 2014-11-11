@@ -51,7 +51,7 @@ class AvanceController extends \BaseController{
 
 	public function getTimeline($id){
 		$obra = Planeacion::find($id);
-		$time = DB::table('avances')->get();
+		$time = DB::table('avances')->where('idobra','=',$obra->id)->get();
 		$this->layout->contenido = View::make('Avances::timeline', compact('time','obra'));
 	}
 
