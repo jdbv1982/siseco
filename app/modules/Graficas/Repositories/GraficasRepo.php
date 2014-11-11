@@ -24,26 +24,26 @@ Class GraficasRepo {
 			WHERE p.ejercicio $regla $year";
 		$planeacion = DB::select(DB::raw($sql));
 
-		$sql = "SELECT COUNT(l.id) as licitaciones
+		$sql = "SELECT COUNT(p.id) as licitaciones
 			FROM licitaciones l
 			INNER JOIN planeacion p ON l.id = p.id
 			WHERE p.ejercicio $regla $year";
 
 		$licitaciones = DB::select(DB::raw($sql));
 
-		$sql = "SELECT COUNT(DISTINCT(e.idobra)) as obras
+		$sql = "SELECT COUNT(DISTINCT(p.idobra)) as obras
 			FROM estimaciones e
 			INNER JOIN planeacion p ON p.id = e.idobra
 			WHERE p.ejercicio $regla $year";
 		$obras = DB::select(DB::raw($sql));
 
-		$sql = "SELECT COUNT(DISTINCT(c.id)) as administracion
+		$sql = "SELECT COUNT(DISTINCT(p.id)) as administracion
 			FROM obra_clc c
 			INNER JOIN planeacion p ON p.id = c.idobra
 			WHERE p.ejercicio $regla $year";
 		$admin = DB::select(DB::raw($sql));
 
-		$sql = "SELECT COUNT(DISTINCT(c.id)) as afisico
+		$sql = "SELECT COUNT(DISTINCT(p.id)) as afisico
 			FROM avances c
 			INNER JOIN planeacion p ON p.id = c.idobra
 			WHERE p.ejercicio $regla $year";
