@@ -1,8 +1,8 @@
 <?php namespace App\Modules\Reportes\Servicios;
 
-class Avances{
+class EstimacionesRep{
 	public function printInformacion($datos){
-		$styleArray = array(
+				$styleArray = array(
 			'font' => array(
 				'bold' => true,
 			),
@@ -19,19 +19,19 @@ class Avances{
 		$objDrawing->setHeight(45);
 		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
 
-		$f->mergeCelda($objPHPExcel,'B2','J2','REPORTE DE OBRAS CON AVANCE FISICO Y FINANCIERO','','CENTER','NO');
+		$f->mergeCelda($objPHPExcel,'B2','J2','REPORTE DE OBRAS CON ESTIMACIONES','','CENTER','NO');
 
 		$objPHPExcel->getActiveSheet()
 		            ->setCellValue('A4', '#')
 		            ->setCellValue('B4','Numero')
 		            ->setCellValue('C4','Nombre')
 		            ->setCellValue('D4','Ejercicio')
-		            ->setCellValue('E4','Region')
-		            ->setCellValue('F4','Municipio')
-		            ->setCellValue('G4','Residencia')
-		            ->setCellValue('H4','# de avances')
-		            ->setCellValue('I4','Fisico')
-		            ->setCellValue('J4','Financiero');
+		            ->setCellValue('E4','Fuente')
+		            ->setCellValue('F4','Region')
+		            ->setCellValue('G4','Municipio')
+		            ->setCellValue('H4','Residencia')
+		            ->setCellValue('I4','# de Estimaciones')
+		            ->setCellValue('J4','importe');
 
 		            $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 		            $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
@@ -53,13 +53,15 @@ class Avances{
 				$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $obra->numeroobra);
 				$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $obra->nombreobra);
 				$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $obra->ejercicio);
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->region);
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->municipio);
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->residencia);
-				$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $obra->num_avances);
-				$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $obra->fisico . "%");
-				$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $obra->financiero. "%");
+				$objPHPExcel->getActiveSheet()->setCellValue('E'.$i, $obra->fuente);
+				$objPHPExcel->getActiveSheet()->setCellValue('F'.$i, $obra->region);
+				$objPHPExcel->getActiveSheet()->setCellValue('G'.$i, $obra->municipio);
+				$objPHPExcel->getActiveSheet()->setCellValue('H'.$i, $obra->residencia);
+				$objPHPExcel->getActiveSheet()->setCellValue('I'.$i, $obra->num_estimaciones);
+				$objPHPExcel->getActiveSheet()->setCellValue('J'.$i, $obra->importe);
+
 				$objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(40);
+				$objPHPExcel->getActiveSheet()->getStyle('J'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
 
 			$i++;
 			}
@@ -69,7 +71,7 @@ class Avances{
 
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename=Obras con avance fisico.xlsx');
+		header('Content-Disposition: attachment;filename=Obras con estimaciones.xlsx');
 		$objWriter =  \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->save('php://output');
 	}
