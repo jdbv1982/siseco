@@ -18,8 +18,8 @@
 	{{ Form::select('id_status', $status,null, array('class' => 'form-control')) }}
 </div>
 <div class="form-group col-xs-2">
-	{{ Form::label('num_spei','Numero de spei') }}
-	{{ Form::text('num_spei', null, array('class' => 'form-control')) }}
+	{{ Form::label('num_spei','Fecha de spei') }}
+	{{ Form::text('num_spei', null, array('class' => 'form-control fecha')) }}
 </div>
 </div>
 <br>
