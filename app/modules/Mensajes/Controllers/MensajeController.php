@@ -18,7 +18,7 @@ class MensajeController extends \BaseController{
 		$remitente = Auth::User()->id;
 		$destinatario = $_POST['id'];
 		$msg = $_POST['mensaje'];
-        $mensaje_id = $_POST['mensaje_id'];
+        		$mensaje_id = $_POST['mensaje_id'];
 
 		$data = array(
 				'mensaje_id'	=> $mensaje_id,

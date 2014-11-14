@@ -3,12 +3,12 @@
 {{ Form::open(array('url'=> array('permisos/editar',$usuario->id),'method'=>'POST')) }}
 <div class="row">
 	<div class="col-lg-6">
-		
+
 	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
 	<a href="{{ URL::to('usuarios/listado') }}" class="btn btn-default"><span class="glyphicon glyphicon-floppy-remove"></a>
 	</div>
 	<div class="col-lg-6 text-right">
-		<input type="checkbox" id="selecctall"> Todos los Permisos		
+		<input type="checkbox" id="selecctall"> Todos los Permisos
 	</div>
 </div>
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
@@ -32,7 +32,7 @@
 	</tbody>
 </table>
 
-<p>		
+<p>
 	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
 	<a href="{{ URL::to('usuarios/listado') }}" class="btn btn-default"><span class="glyphicon glyphicon-floppy-remove"></a>
 </p>

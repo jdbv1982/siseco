@@ -1,3 +1,4 @@
+{{ Form::hidden('nivel', '../../', ['id'=>'nivel']) }}
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<legend align="left">Planeacion</legend>

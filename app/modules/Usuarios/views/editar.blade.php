@@ -1,10 +1,9 @@
 <div class="well col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2  col-lg-6 col-lg-offset-3">
 
 <h2>Editar Usuario</h2>
-
 {{ Form::model($usuario, array('url'=> array('usuarios/editar',$usuario->id),'method'=>'POST','class'=>'form-horizontal')) }}
 
-	@include('layouts/errores')	
+	@include('layouts/errores')
 
 	<div class="row">
 	<div class="input-group col-xs-8 col-xs-offset-2">
@@ -39,7 +38,7 @@
 		{{ Form::label('status', 'Activo')}}
 		{{ Form::checkbox('status',1)}}
 	</div>
-</div>	
+</div>
 	<br>
 	<div class="form-group ">
 		{{ Form::submit('Guardar',array('class'=>'btn btn-success col-xs-4 col-xs-offset-1')) }}
