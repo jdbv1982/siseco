@@ -101,8 +101,8 @@
             <dd class="col-xs-12 col-sm-8 col-md-7 col-lg-8 moneda">{{ isset($obras->observaciones) ? $obras->observaciones : '' }}</dd>
             <br>
         @endif
-        <dt class="col-xs-12 col-sm-4 col-md-5 col-lg-4">Avance Fisico</dt>
-        <dd class="col-xs-12 col-sm-8 col-md-7 col-lg-8 moneda">{{ isset($avances->afisico) ? $avances->afisico : '' }} %</dd>
+        <dt class="col-xs-12 col-sm-4 col-md-5 col-lg-4">Avance Fisico </dt>
+        <dd class="col-xs-12 col-sm-8 col-md-7 col-lg-8 moneda">{{ isset($avances[0]->afisico) ? $avances[0]->afisico : '' }} %</dd>
     </dl>
 
     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
@@ -137,7 +137,7 @@
     <legend align="left">Administracion</legend>
     <dl>
         <dt class="col-xs-12 col-sm-4 col-md-5 col-lg-4">Avance Financiero</dt>
-        <dd class="col-xs-12 col-sm-8 col-md-7 col-lg-8 moneda">{{ isset($avances->afinanciero) ? $avances->afinanciero : '' }} %</dd>
+        <dd class="col-xs-12 col-sm-8 col-md-7 col-lg-8 moneda">{{ isset($avances[0]->afinanciero) ? $avances[0]->afinanciero : '' }} %</dd>
     </dl>
     <br>
     @if($administracion)

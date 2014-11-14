@@ -144,7 +144,7 @@ class ObrasController extends \BaseController{
 		$oficio = DB::table('oficios')->where('idobra','=',$id)->first();
 
 		$mobras = new Obras;
-        $avances = $mobras->getAvance($id);
+        		$avances = $mobras->getAvance($id);
 		$this->layout->contenido = View::make('Obras::resumenobra', compact('licitaciones','empresa', 'tipoempresa','cmic','administracion','oficio','obras','avances','estimaciones'))->with('planeacion', $planeacion);
 	}
 

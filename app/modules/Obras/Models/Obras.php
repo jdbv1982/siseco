@@ -61,7 +61,11 @@ class Obras extends \Eloquent{
 	}
 
 	public function getAvance($id){
-		return  Avance::orderBy('id', 'DESC')->first();
+		$sql = "SELECT SUM(afisico) as afisico, SUM(afinanciero) as afinanciero
+			FROM avances
+			WHERE idobra = 242";
+
+		return DB::select(DB::raw($sql));
 	}
 
 }
