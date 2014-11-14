@@ -237,6 +237,7 @@
     @endforeach
     <div class="text-center">
         <a class="blanco" href="#"><span class="glyphicon glyphicon-plus" id="new-message"></span></a>
+        <a class="blanco" href="{{ route('view-mensajes') }}"><span class="glyphicon glyphicon-list"></span></a>
         <!--<a class="blanco" href="{{ URL::to('mensajes/todos')}}/{{Auth::user()->id}}"><span class="glyphicon glyphicon-list-alt"></span></a>-->
     </div>
 </div>

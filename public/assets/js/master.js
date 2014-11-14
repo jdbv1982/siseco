@@ -389,13 +389,16 @@ function enviarRespuesta(dest, msg, mensaje_id){
 function enviarMensaje(destinatario, mensaje){
 	var urlactual = location.href;
 	var element = urlactual.split('/');
-	alert(element.length);
     var nivel = $('#nivel').val();
     if(nivel == undefined){
         nivel = '../';
     }
 
-    	if(element.length = 8){
+    	if(element.length == 6){
+    		nivel = '../';
+    	}
+
+    	if(element.length == 8){
     		nivel = '../../';
     	}
 	var dest = destinatario.val();

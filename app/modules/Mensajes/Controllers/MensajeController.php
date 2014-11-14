@@ -65,4 +65,9 @@ class MensajeController extends \BaseController{
         return $mensaje->status;
 
     }
+
+    public function listAllMensajes(){
+    	$mensajes = $this->mensajesRepo->getAllMessages(Auth::User()->id);
+    	$this->layout->contenido = View::make('Mensajes::list_all_mensajes', compact('mensajes'));
+    }
 }

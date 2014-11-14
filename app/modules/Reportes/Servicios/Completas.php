@@ -19,7 +19,7 @@ class Completas{
 		$objDrawing->setHeight(45);
 		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
 
-		$objPHPExcel->getActiveSheet()->mergeCells('B1:BO1');
+		$objPHPExcel->getActiveSheet()->mergeCells('B1:BS1');
 		$objPHPExcel->getActiveSheet()->setCellValue('B1', 'REPORTE DE OBRAS CON LA INFORMACION DE TODOS LOS DEPARTAMENTOS');
 		$objPHPExcel->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
 		$objPHPExcel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -31,7 +31,7 @@ class Completas{
 		$objPHPExcel->getActiveSheet()->setCellValue('AJ3', 'INFORMACION DE LICITACIONES');
 		$objPHPExcel->getActiveSheet()->mergeCells('AW3:AZ3');
 		$objPHPExcel->getActiveSheet()->setCellValue('AW3', 'INFORMACION DE FONDEN');
-		$objPHPExcel->getActiveSheet()->mergeCells('BA3:BQ3');
+		$objPHPExcel->getActiveSheet()->mergeCells('BA3:BS3');
 		$objPHPExcel->getActiveSheet()->setCellValue('BA3', 'INFORMACION DE ADMINISTRACION');
 
 		$objPHPExcel->getActiveSheet()->getStyle('B3')->applyFromArray($styleArray);
@@ -56,7 +56,7 @@ class Completas{
 		$objPHPExcel->getActiveSheet()->getStyle('AW3:AZ3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FF00CCFF');
-		$objPHPExcel->getActiveSheet()->getStyle('BA3:BQ3')->getFill()
+		$objPHPExcel->getActiveSheet()->getStyle('BA3:BS3')->getFill()
 			->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
 			->getStartColor()->setARGB('FFFF9900');
 
@@ -131,7 +131,10 @@ class Completas{
 		            ->setCellValue('BN4','FECHA CHEQUE')
 		            ->setCellValue('BO4','MONTO PAGADO')
 		            ->setCellValue('BP4','AMORTIZACION DE CREDITO PUENTE')
-		            ->setCellValue('BQ4','AVANCE FINANCIERO');
+		            ->setCellValue('BQ4','AVANCE FINANCIERO')
+		            ->setCellValue('BR4','EJERCICIO')
+		            ->setCellValue('BS4','OFICIO DE AUTORIZACION')
+		            ->setCellValue('BT4','INVERSION AUTORIZADA');
 			$i=5;
 			foreach ($datos as $key => $dato) {
 				$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $dato->id);
@@ -203,6 +206,9 @@ class Completas{
 				$objPHPExcel->getActiveSheet()->setCellValue('BO'.$i, "");
 				$objPHPExcel->getActiveSheet()->setCellValue('BP'.$i, $dato->amort_cred_pte);
 				$objPHPExcel->getActiveSheet()->setCellValue('BQ'.$i, $dato->afinanciero.'%');
+				$objPHPExcel->getActiveSheet()->setCellValue('BR'.$i, $dato->ejercicio);
+				$objPHPExcel->getActiveSheet()->setCellValue('BS'.$i, $dato->oficio_autorizacion);
+				$objPHPExcel->getActiveSheet()->setCellValue('BT'.$i, $dato->inversion);
 
 				$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 
@@ -214,6 +220,7 @@ class Completas{
 				$objPHPExcel->getActiveSheet()->getStyle('BJ'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
 				$objPHPExcel->getActiveSheet()->getStyle('BN'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
 				$objPHPExcel->getActiveSheet()->getStyle('BO'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
+				$objPHPExcel->getActiveSheet()->getStyle('BT'.$i)->getNumberFormat()->setFormatCode('$#,##0.00');
 				$i++;
 		}
 

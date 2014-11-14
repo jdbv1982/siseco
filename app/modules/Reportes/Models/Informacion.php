@@ -4,9 +4,7 @@ use DB;
 
 class Informacion extends \Eloquent{
 	public function getInformacion(){
-		return DB::select( DB::raw("SELECT
-	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas,
-	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,p.idfondoseguimiento,
+		return DB::select( DB::raw("SELECT 	p.id, p.ppi, p.nombreppi, p.numeroobra,p.nombreobra, p.ejercicio, p.depejecutora, p.nombreaccion, p.cantidad, p.total, p.bmujeres, p.bhombres, p.bjornales, p.caracteristicas, 	p.comentarios, p.concejecutar, p.observaciones, p.codigoaccion, p.observacionesseg, p.ninforme,p.idclasseguimiento,p.idsubclasseguimiento,p.idfondoseguimiento,
 	(SELECT nombre_region FROM regiones WHERE id = p.idregion) AS nombre_region,
 	(SELECT nombre FROM distritos WHERE id = p.iddistrito) AS nombre_distrito,
 	(SELECT nombre_municipio FROM municipios WHERE id = p.idmunicipio) AS nombre_municipio,
@@ -34,7 +32,9 @@ class Informacion extends \Eloquent{
 	(SELECT SUM(afinanciero) FROM avances WHERE idobra = p.id) AS afinanciero,
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,o.observaciones,
-	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte
+	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte,
+	(SELECT numerooficio FROM oficios WHERE nombreoficio = 'AUTORIZACION' AND idobra = p.id) AS oficio_autorizacion,
+	(SELECT ROUND(SUM(invfederal)+ SUM(investatal) + SUM(invmunicipal) + SUM(invparticipantes),2) FROM estructura WHERE idobra = p.id) AS inversion
 FROM planeacion AS p
 LEFT JOIN licitaciones AS lic ON p.id = lic.id
 LEFT JOIN obras AS o ON p.id = o.id
@@ -74,7 +74,9 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	(SELECT nombre FROM residencias WHERE id = p.idresidencia) AS residencia,
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,p.observaciones,
-	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte
+	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte,
+	(SELECT numerooficio FROM oficios WHERE nombreoficio = 'AUTORIZACION' AND idobra = p.id) AS oficio_autorizacion
+	(SELECT ROUND(SUM(invfederal)+ SUM(investatal) + SUM(invmunicipal) + SUM(invparticipantes),2) FROM estructura WHERE idobra = p.id) AS inversion
 FROM planeacion AS p
 LEFT JOIN licitaciones AS lic ON p.id = lic.id
 LEFT JOIN obras AS o ON p.id = o.id
