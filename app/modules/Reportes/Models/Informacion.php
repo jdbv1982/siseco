@@ -75,7 +75,7 @@ LEFT JOIN administracion AS a ON p.id = a.idobra") );
 	lic.l_procedimiento,lic.l_contrato,lic.l_montocontratado,lic.l_anticipo,lic.l_fecha,lic.l_ndias,lic.l_finicio,lic.l_ffinal,lic.l_cmic,lic.l_modcontrato,
 	o.poa,p.observaciones,
 	a.clc,a.felab,a.frecp,a.numfactura,a.concepto,a.fianza,a.ministrado,a.porc5,a.porc2,a.radicado,a.orden,a.amort_cred_pte,
-	(SELECT numerooficio FROM oficios WHERE nombreoficio = 'AUTORIZACION' AND idobra = p.id) AS oficio_autorizacion
+	(SELECT numerooficio FROM oficios WHERE nombreoficio = 'AUTORIZACION' AND idobra = p.id) AS oficio_autorizacion,
 	(SELECT ROUND(SUM(invfederal)+ SUM(investatal) + SUM(invmunicipal) + SUM(invparticipantes),2) FROM estructura WHERE idobra = p.id) AS inversion
 FROM planeacion AS p
 LEFT JOIN licitaciones AS lic ON p.id = lic.id
