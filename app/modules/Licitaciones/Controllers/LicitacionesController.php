@@ -221,4 +221,6 @@ class LicitacionesController extends \BaseController{
 			return $diferimiento->errores;
 		}
 	}
+
+
 }

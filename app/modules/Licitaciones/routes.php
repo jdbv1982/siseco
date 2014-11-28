@@ -25,4 +25,9 @@ Route::group(array('before'=>'auth'), function(){
 	Route::post('agregaadendo/{id}', array('uses'=>'App\Modules\Licitaciones\Controllers\LicitacionesController@agregaAdendo'));
 	Route::post('agregadiferimiento/{id}', array('uses'=>'App\Modules\Licitaciones\Controllers\LicitacionesController@agregaDiferimiento'));
 
+
+
+
+	Route::post('licitaciones/ad/{id}', array('uses'=>'App\Modules\Licitaciones\Controllers\ADController@setAD'));
+
 });

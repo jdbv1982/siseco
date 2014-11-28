@@ -32,7 +32,6 @@ class ImportacionRepo {
 					$folio = $dato[13];
 				}
 			}
-
 			if(($this->obraExiste == true) and ($this->existe == false)){
 				$this->insertaClc($dato);
 			}
@@ -91,7 +90,7 @@ class ImportacionRepo {
 	public function validaNumero($numero){
 		$obra = DB::table('obra_clc')->where('no_afectacion','=',$numero)->get();
 
-		if(empty($obra)){
+		if(empty($obra) or is_null($obra)){
 			return false;
 		}
 			return true;

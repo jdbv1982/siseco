@@ -64,6 +64,9 @@
                         @if(Auth::user()->verificaPermiso(Auth::user()->id, 37) == 'true')
                             <li><a href="{{ URL::to('obras/listado') }}">Todas</a></li>
                         @endif
+                          @if(Auth::user()->verificaPermiso(Auth::user()->id, 59) == 'true')
+                            <li><a href="{{ URL::to('obras/administracion-directa') }}">Administracion Directa 2014</a></li>
+                        @endif
 
                 </ul>
             </li>

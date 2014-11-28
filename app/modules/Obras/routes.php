@@ -18,6 +18,12 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('agregaresidencia', array('uses'=>'App\Modules\Obras\Controllers\ObrasController@residencia'));
 	Route::post('getNombreResidencia/{id}', array('uses'=>'App\Modules\Obras\Controllers\ObrasController@getNombreResidencia'));
 
+	Route::get('obras/administracion-directa', ['as'=>'obras-ad', 'uses'=>'App\Modules\Obras\Controllers\ListadoController@listadoAD']);
+
+	Route::get('obras/actualizar-ad/{id}', ['as'=>'actualizar-ad', 'uses'=>'App\Modules\Obras\Controllers\ListadoController@updateAD']);
+
+
+
 
 
 });
