@@ -7,7 +7,8 @@
    <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
     <thead>
         <tr>
-        	<th>#</th>
+            <th>#</th>
+        	<th>Fuente</th>
             <th>Numero Obra</th>
             <th>Contrato</th>
             <th>Nombre</th>
@@ -24,6 +25,7 @@
     @foreach ($datos as $dato)
     <tr>
     	<td>{{ $dato->id }}</td>
+        <td>{{ $dato->fuente }}</td>
         <td>{{ $dato->numeroobra }}</td>
         <td>{{ $dato->l_contrato }}</td>
         <td>{{ $dato->nombreobra }}</td>

@@ -33,11 +33,15 @@ class Estimacion extends \Eloquent{
 	}
 
 	public function getEstimaciones(){
-		return DB::table('planeacion as p')
-			->join('licitaciones as l','l.id','=','p.id')
-			->leftjoin('estimaciones as es','es.idobra','=','p.id')
-			->leftjoin('eststatus as e','es.estatus','=','e.id')
-			->select('p.id','p.numeroobra','l.l_contrato', 'p.nombreobra', 'es.nombre', 'es.numrevision','es.numestimacion','es.festimacion','es.observacion','es.fdevolucion','es.importe','es.finicio_est','es.ftermino_est', 'es.estatus','e.nombre as estatus','es.id as idestimacion')
-			->get();
+		$sql = "SELECT p.id, p.numeroobra, l.l_contrato, p.nombreobra, es.nombre, es.numrevision, es.numestimacion,
+			es.festimacion, es.observacion, es.fdevolucion, es.importe, es.finicio_est, es.ftermino_est,
+			es.estatus, e.nombre AS estatus, es.id AS idestimacion,
+			(SELECT fuentegeneral FROM fuentegeneral WHERE id = p.idfgeneral ) AS fuente
+			FROM planeacion AS p
+			INNER JOIN licitaciones AS l ON l.id = p.id
+			LEFT JOIN estimaciones AS es ON es.idobra = p.id
+			LEFT JOIN eststatus AS e ON es.estatus = e.id";
+		return DB::select(DB::raw($sql));
+
 	}
 }
