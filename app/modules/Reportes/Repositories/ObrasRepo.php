@@ -44,4 +44,13 @@ class ObrasRepo {
 
 		return DB::select(DB::raw($sql));
 	}
+
+	public function getObrasEstatus(){
+		$sql ="SELECT p.id, p.ejercicio, p.numeroobra, p.nombreobra,
+			(SELECT fuentegeneral FROM fuentegeneral WHERE id = p.idfgeneral  ) AS fuente
+			FROM planeacion AS p
+			WHERE p.status_id = 3";
+
+		return DB::select(DB::raw($sql));
+	}
 }

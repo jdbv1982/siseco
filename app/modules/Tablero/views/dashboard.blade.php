@@ -56,6 +56,7 @@
         <li><a href="{{ URL::to('reportes/obras_afisico') }}">Obras con avance fisico</a></li>
         <li><a href="{{ URL::to('reportes/obras_estimacion') }}">Obras con estimaciones</a></li>
         <li><a href="{{ URL::to('reportes/obras_clcs') }}">Obras con Clcs</a></li>
+        <li><a href="{{ URL::to('reportes/obras_estatus') }}">Obras Canceladas</a></li>
       </div>
     </div>
  </div>
