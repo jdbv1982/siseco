@@ -32,4 +32,5 @@ class ObrasInfoRepo {
 		$dato = DB::select(DB::raw($sql));
 		return $dato[0]->monto;
 	}
+
 }

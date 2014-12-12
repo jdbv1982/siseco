@@ -67,6 +67,9 @@
                           @if(Auth::user()->verificaPermiso(Auth::user()->id, 59) == 'true')
                             <li><a href="{{ URL::to('obras/administracion-directa') }}">Administracion Directa 2014</a></li>
                         @endif
+                        @if(Auth::user()->verificaPermiso(Auth::user()->id, 60) == 'true')
+                            <li><a href="{{ URL::to('obras/listado/12') }}">Suficiencia Presupestaria</a></li>
+                        @endif
 
                 </ul>
             </li>

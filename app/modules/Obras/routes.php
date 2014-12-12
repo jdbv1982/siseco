@@ -22,6 +22,7 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('obras/actualizar-ad/{id}', ['as'=>'actualizar-ad', 'uses'=>'App\Modules\Obras\Controllers\ListadoController@updateAD']);
 
+	Route::get('obras/suficiencia', ['as'=>'obras-suficiencia', 'uses'=>'App\Modules\Obras\Controllers\ListadoController@listadoSuficiencia']);
 
 
 
